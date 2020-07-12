@@ -44,9 +44,12 @@ public class FenSerialization {
         let board = self.fen(from: position.board)
         let turn = position.turn == .white ? "w" : "b"
         
-        let castling = position.castlings
+        var castling = position.castlings
             .map { "\($0)" }
             .reduce("") { $0 + $1 }
+        if castling == "" {
+            castling = "-"
+        }
         
         let enPasant = position.enPasant != nil ? "\(position.enPasant!)" : "-"
         
@@ -118,6 +121,9 @@ public class FenSerialization {
     }
     
     private func castlings(from sequence: String.SubSequence) -> [Piece] {
+        if sequence == "-" {
+            return []
+        }
         return sequence.map { Piece(character: $0)! }
     }
     
