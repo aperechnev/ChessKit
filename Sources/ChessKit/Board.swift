@@ -26,6 +26,9 @@ public class Board {
         self.fileCoordinates.count * self.rankCoordinates.count
     }
     
+    /**
+     Initializes board with empty squares.
+     */
     public init() {
         self.squares = [Piece?](repeating: nil, count: Board.squaresCount)
     }
