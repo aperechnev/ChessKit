@@ -30,9 +30,7 @@ public struct Square {
     }
     
     /// Indicates whether if square is valid.
-    public var isValid: Bool {
-        return (Int.zero..<Board.squaresCount).contains(self.index)
-    }
+    private(set) var isValid: Bool
     
     // MARK: Initializers
     
@@ -44,6 +42,7 @@ public struct Square {
      */
     public init(index: Int) {
         self.index = index
+        self.isValid = (Int.zero..<Board.squaresCount).contains(self.index)
     }
     
     /**
@@ -55,6 +54,7 @@ public struct Square {
      */
     public init(file: Int, rank: Int) {
         self.init(index: file * Board.rankCoordinates.count + rank)
+        self.isValid = (Int.zero...7).contains(file) && (Int.zero...7).contains(rank)
     }
     
     /**
