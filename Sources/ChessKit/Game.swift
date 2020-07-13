@@ -17,13 +17,24 @@ public class Game {
     // MARK: Initialization
     
     /**
+    Initialize game with given position.
+    
+    - Parameters:
+       - position: Initial game position.
+    */
+    public init(position: Position) {
+        self.position = position
+        self.rules = StandardRules()
+    }
+    
+    /**
      Initialize game with given position and rules.
      
      - Parameters:
         - position: Initial game position.
         - rules: Game rules.
      */
-    public init(position: Position, rules: Rules) {
+    internal init(position: Position, rules: Rules) {
         self.position = position
         self.rules = rules
     }
