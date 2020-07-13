@@ -6,17 +6,12 @@
 //  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
-class LongRangeMoving: PieceMoving {
+class LongRangeMoving: RangeMoving {
     
     private let translations: [(Int, Int)]
     
     init(translations: [(Int, Int)]) {
         self.translations = translations
-    }
-    
-    func moves(from square: Square, in position: Position) -> [Move] {
-        return self.coveredSquares(from: square, in: position)
-            .map { Move(from: square, to: $0) }
     }
     
     func coveredSquares(from square: Square, in position: Position) -> [Square] {
