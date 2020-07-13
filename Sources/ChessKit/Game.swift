@@ -71,10 +71,14 @@ public class Game {
         let isEnPassant = self.position.board[move.from]?.kind == .pawn &&
             move.to == self.position.state.enPasant
         
+        let isPawnPromotion = move.promotion != nil
+        
         if isCastling {
             self.performCastling(move: move)
         } else if isEnPassant {
             self.performEnPassant(move: move)
+        } else if isPawnPromotion {
+            self.performPawnPromotion(move: move)
         } else {
             self.performSimple(move: move)
         }
@@ -106,6 +110,15 @@ public class Game {
         
         let rank = self.position.state.turn == .white ? 4 : 3
         self.position.board[Square(file: enPassant.file, rank: rank)] = nil
+    }
+    
+    private func performPawnPromotion(move: Move) {
+        self.performSimple(move: move)
+        
+        guard let kind = move.promotion else {
+            return
+        }
+        self.position.board[move.to] = Piece(kind: kind, color: self.position.state.turn)
     }
     
     private func updateCounters(for move: Move) {
