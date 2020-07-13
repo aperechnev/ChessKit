@@ -8,20 +8,25 @@
 
 public struct Position {
     
+    public struct State {
+        public var turn: PieceColor
+        public var castlings: [Piece]
+        public var enPasant: Square?
+    }
+    
+    public struct Counter {
+        public var halfMoves: Int
+        public var fullMoves: Int
+    }
+    
     public var board: Board
-    public var turn: PieceColor
-    public var castlings: [Piece]
-    public var enPasant: Square?
-    public var halfMovesCount: Int
-    public var fullMovesCount: Int
+    public var state: State
+    public var counter: Counter
     
     func deepCopy() -> Position {
         return Position(board: self.board.deepCopy(),
-                        turn: self.turn,
-                        castlings: self.castlings,
-                        enPasant: self.enPasant,
-                        halfMovesCount: self.halfMovesCount,
-                        fullMovesCount: self.fullMovesCount)
+                        state: self.state,
+                        counter: self.counter)
     }
     
 }

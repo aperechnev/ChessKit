@@ -18,7 +18,7 @@ class ShortRangeMoving: RangeMoving {
         return self.translations
             .map { square.translate(file: $0.0, rank: $0.1) }
             .filter { $0.isValid }
-            .filter { position.board[$0]?.color != position.turn }
+            .filter { position.board[$0]?.color != position.state.turn }
     }
     
 }

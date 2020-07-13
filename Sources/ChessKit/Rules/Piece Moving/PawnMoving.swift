@@ -21,7 +21,7 @@ class PawnMoving: PieceMoving {
     }
     
     private func oneSquareMoves(from square: Square, in position: Position) -> [Square] {
-        let direction = position.turn == .white ? 1 : -1
+        let direction = position.state.turn == .white ? 1 : -1
         let destination = square.translate(file: 0, rank: direction)
         if destination.isValid {
             if position.board[destination] == nil {
@@ -32,12 +32,12 @@ class PawnMoving: PieceMoving {
     }
     
     private func twoSquareMoves(from square: Square, in position: Position) -> [Square] {
-        let initialRank = position.turn == .white ? 1 : 6
+        let initialRank = position.state.turn == .white ? 1 : 6
         guard square.rank == initialRank else {
             return []
         }
         
-        let translation = position.turn == .white ? 1 : -1
+        let translation = position.state.turn == .white ? 1 : -1
         let isPathClear = position.board[square.translate(file: 0, rank: translation)] == nil &&
             position.board[square.translate(file: 0, rank: translation * 2)] == nil
         guard isPathClear else {
@@ -48,7 +48,7 @@ class PawnMoving: PieceMoving {
     }
     
     private func takingMoves(from square: Square, in position: Position) -> [Square] {
-        let direction = position.turn == .white ? 1 : -1
+        let direction = position.state.turn == .white ? 1 : -1
         
         var destinations = [Square]()
         
@@ -57,7 +57,7 @@ class PawnMoving: PieceMoving {
             if !takingSquare.isValid {
                 continue
             }
-            if position.board[takingSquare]?.color.negotiated == position.turn {
+            if position.board[takingSquare]?.color.negotiated == position.state.turn {
                 destinations.append(takingSquare)
             }
         }
@@ -66,11 +66,11 @@ class PawnMoving: PieceMoving {
     }
     
     private func enPassantMoves(from square: Square, in position: Position) -> [Square] {
-        guard let enPassantSquare = position.enPasant else {
+        guard let enPassantSquare = position.state.enPasant else {
             return []
         }
         
-        let direction = position.turn == .white ? 1 : -1
+        let direction = position.state.turn == .white ? 1 : -1
         
         for takingTranslation in MovingTranslations.default.pawnTaking {
             let takingSquare = square.translate(file: takingTranslation.0, rank: takingTranslation.1 * direction)
@@ -83,7 +83,7 @@ class PawnMoving: PieceMoving {
     }
     
     private func promotedMoves(from square: Square, in position: Position, destinations: [Square]) -> [Move] {
-        let promotionRank = position.turn == .white ? 7 : 0
+        let promotionRank = position.state.turn == .white ? 7 : 0
         let promotions = destinations.filter { $0.rank == promotionRank }
         let destinations = destinations.filter { $0.rank != promotionRank }
 
@@ -93,7 +93,7 @@ class PawnMoving: PieceMoving {
              "\(square)\($0)B",
              "\(square)\($0)N"]
         }
-        if position.turn == .black {
+        if position.state.turn == .black {
             promotionMoves = promotionMoves.map { $0.lowercased() }
         }
 

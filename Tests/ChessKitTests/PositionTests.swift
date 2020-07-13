@@ -17,11 +17,11 @@ class PositionTests: XCTestCase {
         
         var positionCopy = position.deepCopy()
         positionCopy.board["e4"] = nil
-        positionCopy.castlings = []
-        positionCopy.enPasant = Square(coordinate: "e4")
-        positionCopy.fullMovesCount = 100
-        positionCopy.halfMovesCount = 200
-        positionCopy.turn = .black
+        positionCopy.state.castlings = []
+        positionCopy.state.enPasant = Square(coordinate: "e4")
+        positionCopy.state.turn = .black
+        positionCopy.counter.fullMoves = 100
+        positionCopy.counter.halfMoves = 200
         
         XCTAssertEqual(FenSerialization.default.serialize(position: position), initialFen)
     }

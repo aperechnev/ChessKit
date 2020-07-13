@@ -26,7 +26,7 @@ public class StandardRules: Rules {
         guard let piece = position.board[square] else {
             return []
         }
-        guard piece.color == position.turn else {
+        guard piece.color == position.state.turn else {
             return []
         }
         guard let moving = self.movings[piece.kind] else {
@@ -47,7 +47,7 @@ public class StandardRules: Rules {
         guard let piece = position.board[square] else {
             return []
         }
-        guard piece.color == position.turn else {
+        guard piece.color == position.state.turn else {
             return []
         }
         guard let moving = self.movings[piece.kind] else {
@@ -65,9 +65,9 @@ public class StandardRules: Rules {
             var nextPosition = position.deepCopy()
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
-            nextPosition.turn = nextPosition.turn.negotiated
+            nextPosition.state.turn = nextPosition.state.turn.negotiated
             
-            guard let kingSquare = self.kingSquare(in: nextPosition, color: position.turn) else {
+            guard let kingSquare = self.kingSquare(in: nextPosition, color: position.state.turn) else {
                 return true
             }
             
@@ -83,7 +83,7 @@ public class StandardRules: Rules {
     
     private func enumeratedPieces(for position: Position) -> [(Square, Piece)] {
         return position.board.enumeratedPieces()
-            .filter { $0.1.color == position.turn }
+            .filter { $0.1.color == position.state.turn }
     }
     
     private func kingSquare(in position: Position, color: PieceColor) -> Square? {
@@ -115,7 +115,7 @@ public class StandardRules: Rules {
         var nextPosition = position.deepCopy()
         nextPosition.board[squareBetween] = nextPosition.board[move.from]
         nextPosition.board[move.from] = nil
-        nextPosition.turn = nextPosition.turn.negotiated
+        nextPosition.state.turn = nextPosition.state.turn.negotiated
 
         if self.coveredSquares(in: nextPosition).contains(squareBetween) {
             return true
@@ -126,7 +126,7 @@ public class StandardRules: Rules {
     
     private func isCatslingToCheck(move: Move, position: Position) -> Bool {
         var nextPosition = position.deepCopy()
-        nextPosition.turn = nextPosition.turn.negotiated
+        nextPosition.state.turn = nextPosition.state.turn.negotiated
         if self.coveredSquares(in: nextPosition).contains(move.from) {
             return true
         }

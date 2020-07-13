@@ -29,10 +29,10 @@ class LongRangeMoving: RangeMoving {
                 break
             }
             
-            if position.board[destination]?.color == position.turn {
+            if position.board[destination]?.color == position.state.turn {
                 break
             }
-            if position.board[destination]?.color != nil && position.board[destination]?.color != position.turn {
+            if position.board[destination]?.color != nil && position.board[destination]?.color != position.state.turn {
                 destinations.append("\(destination)")
                 break
             }

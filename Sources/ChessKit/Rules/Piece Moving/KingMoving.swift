@@ -19,7 +19,7 @@ class KingMoving: ShortRangeMoving {
     
     private func filterOppositeKingSquares(destinations: [Square], in position: Position) -> [Square] {
         guard let (square, _) = position.board.enumeratedPieces()
-            .filter({ $1 == Piece(kind: .king, color: position.turn.negotiated) })
+            .filter({ $1 == Piece(kind: .king, color: position.state.turn.negotiated) })
             .first else {
                 return destinations
         }
@@ -29,11 +29,11 @@ class KingMoving: ShortRangeMoving {
     }
     
     private func castlingSquares(in position: Position) -> [Square] {
-        let castlings = position.castlings.filter { $0.color == position.turn }
+        let castlings = position.state.castlings.filter { $0.color == position.state.turn }
         
         var squares = [Square]()
 
-        let rank = position.turn == .white ? "1" : "8"
+        let rank = position.state.turn == .white ? "1" : "8"
         
         let shouldBeEmpty: [PieceKind:[String]] = [
             .king: ["f", "g"],
