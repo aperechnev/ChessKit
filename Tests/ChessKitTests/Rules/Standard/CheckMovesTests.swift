@@ -74,4 +74,10 @@ class CheckMovesTests: MovesTests {
                     at: "e1")
     }
     
+    func testCastlingBehindOppositeKing() throws {
+        self.assert(fen: "8/8/8/8/8/8/2k5/R3K3 w Q - 0 1",
+                    targets: "e2 f2 f1",
+                    at: "e1")
+    }
+    
 }

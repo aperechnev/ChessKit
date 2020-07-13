@@ -13,9 +13,8 @@ class KingMoving: ShortRangeMoving {
     }
     
     override func coveredSquares(from square: Square, in position: Position) -> [Square] {
-        var destinations = super.coveredSquares(from: square, in: position)
-        destinations = self.filterOppositeKingSquares(destinations: destinations, in: position)
-        return destinations + self.castlingSquares(in: position)
+        let destinations = super.coveredSquares(from: square, in: position) + self.castlingSquares(in: position)
+        return self.filterOppositeKingSquares(destinations: destinations, in: position)
     }
     
     private func filterOppositeKingSquares(destinations: [Square], in position: Position) -> [Square] {

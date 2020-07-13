@@ -39,6 +39,7 @@ public class StandardRules: Rules {
     
     private func coveredSquares(in position: Position) -> [Square] {
         return self.enumeratedPieces(for: position)
+            .filter { $0.1.kind != .king }
             .flatMap { self.coveredSquaresForPiece(at: $0.0, in: position) }
     }
     
@@ -50,6 +51,9 @@ public class StandardRules: Rules {
             return []
         }
         guard let moving = self.movings[piece.kind] else {
+            return []
+        }
+        if moving is KingMoving {
             return []
         }
         
