@@ -74,13 +74,16 @@ class PawnMoving: PieceMoving {
     }
     
     private func enPassantMoves(from square: Square, in position: Position) -> [Square] {
+        guard let enPassantSquare = position.enPasant else {
+            return []
+        }
+        
         let direction = position.turn == .white ? 1 : -1
         
-        if let enPasantSquare = position.enPasant {
-            for takingTranslation in MovingTranslations.default.pawnTaking {
-                if square.translate(file: takingTranslation.0, rank: takingTranslation.1 * direction) == enPasantSquare {
-                    return [enPasantSquare]
-                }
+        for takingTranslation in MovingTranslations.default.pawnTaking {
+            let takingSquare = square.translate(file: takingTranslation.0, rank: takingTranslation.1 * direction)
+            if takingSquare == enPassantSquare {
+                return [enPassantSquare]
             }
         }
         
