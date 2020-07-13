@@ -8,7 +8,7 @@
 
 class PawnMoving: PieceMoving {
     
-    func moves(from square: Square, in position: Position) -> [String] {
+    func moves(from square: Square, in position: Position) -> [Move] {
         let destinations: [Square] = self.oneSquareMoves(from: square, in: position) +
             self.twoSquareMoves(from: square, in: position) +
             self.takingMoves(from: square, in: position) +
@@ -79,7 +79,7 @@ class PawnMoving: PieceMoving {
         return []
     }
     
-    private func promotedMoves(from square: Square, in position: Position, destinations: [Square]) -> [String] {
+    private func promotedMoves(from square: Square, in position: Position, destinations: [Square]) -> [Move] {
         let promotionRank = position.turn == .white ? 7 : 0
         let promotions = destinations.filter { $0.rank == promotionRank }
         let destinations = destinations.filter { $0.rank != promotionRank }
@@ -94,7 +94,7 @@ class PawnMoving: PieceMoving {
             promotionMoves = promotionMoves.map { $0.lowercased() }
         }
         
-        return destinations.map { "\(square)\($0)" } + promotionMoves
+        return destinations.map { Move(from: square, to: $0) } + promotionMoves.map { Move(string: $0) }
     }
     
 }

@@ -61,7 +61,12 @@ class PawnMovesTests: XCTestCase {
         let square = Square(coordinate: coordinate)
         let moves = moves.split(separator: " ").map { "\($0)" }
         let testMoves = StandardRules().movesForPiece(at: square, in: position)
-        XCTAssertEqual(moves.sorted(), testMoves.sorted(), "Position: \(fen)")
+        
+        XCTAssertEqual(
+            moves.map({ $0.lowercased() }).sorted(),
+            testMoves.map({ $0.description.lowercased() }).sorted(),
+            "Position: \(fen)"
+        )
     }
 
 }

@@ -7,5 +7,5 @@
 //
 
 protocol PieceMoving {
-    func moves(from square: Square, in position: Position) -> [String]
+    func moves(from square: Square, in position: Position) -> [Move]
 }

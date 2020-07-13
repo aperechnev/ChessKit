@@ -16,14 +16,14 @@ class MovesTests: XCTestCase {
         let square = Square(coordinate: coordinate)
         let moves = targets.split(separator: " ").map { "\(square)\($0)" }
         let testMoves = StandardRules().movesForPiece(at: square, in: position)
-        XCTAssertEqual(moves.sorted(), testMoves.sorted(), "Position: \(fen)")
+        XCTAssertEqual(moves.sorted(), testMoves.map({ $0.description }).sorted(), "Position: \(fen)")
     }
     
     func assert(fen: String, testMoves: String) {
         let position = FenSerialization.default.deserialize(fen: fen)
         let testMoves = testMoves.split(separator: " ").map { "\($0)" }
         let legalMoves = StandardRules().legalMoves(in: position)
-        XCTAssertEqual(legalMoves.sorted(), testMoves.sorted())
+        XCTAssertEqual(legalMoves.map({ $0.description }).sorted(), testMoves.sorted())
     }
 
 }

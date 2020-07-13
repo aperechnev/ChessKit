@@ -17,7 +17,7 @@ public class StandardRules: Rules {
         .pawn: PawnMoving()
     ]
     
-    public func movesForPiece(at square: Square, in position: Position) -> [String] {
+    public func movesForPiece(at square: Square, in position: Position) -> [Move] {
         guard let piece = position.board[square] else {
             return []
         }
@@ -30,7 +30,7 @@ public class StandardRules: Rules {
         return moving.moves(from: square, in: position)
     }
     
-    public func legalMoves(in position: Position) -> [String] {
+    public func legalMoves(in position: Position) -> [Move] {
         return position
             .board.enumeratedPieces()
             .filter { $0.1.color == position.turn }

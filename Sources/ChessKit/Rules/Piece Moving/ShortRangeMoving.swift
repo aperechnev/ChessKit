@@ -14,9 +14,9 @@ class ShortRangeMoving: PieceMoving {
         self.translations = translations
     }
     
-    func moves(from square: Square, in position: Position) -> [String] {
+    func moves(from square: Square, in position: Position) -> [Move] {
         return self.destinations(from: square, in: position)
-            .map { "\(square)\($0)" }
+            .map { Move(from: square, to: $0) }
     }
     
     func destinations(from square: Square, in position: Position) -> [Square] {

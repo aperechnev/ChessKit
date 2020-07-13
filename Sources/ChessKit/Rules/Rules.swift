@@ -7,6 +7,6 @@
 //
 
 public protocol Rules {
-    func movesForPiece(at square: Square, in position: Position) -> [String]
-    func legalMoves(in position: Position) -> [String]
+    func movesForPiece(at square: Square, in position: Position) -> [Move]
+    func legalMoves(in position: Position) -> [Move]
 }
