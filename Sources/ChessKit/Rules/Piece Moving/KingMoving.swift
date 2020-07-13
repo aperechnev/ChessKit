@@ -29,18 +29,26 @@ class KingMoving: ShortRangeMoving {
     }
     
     private func castlingSquares(in position: Position) -> [Square] {
-        var squares = [Square]()
+        let castlings = position.castlings.filter { $0.color == position.turn }
         
-        if position.castlings.contains(Piece(kind: .king, color: position.turn)) {
-            let rank = position.turn == .white ? "1" : "8"
-            if position.board["f" + rank] == nil && position.board["g" + rank] == nil {
-                squares.append(Square(coordinate: "g" + rank))
-            }
-        }
-        if position.castlings.contains(Piece(kind: .queen, color: position.turn)) {
-            let rank = position.turn == .white ? "1" : "8"
-            if position.board["d" + rank] == nil && position.board["c" + rank] == nil && position.board["b" + rank] == nil {
-                squares.append(Square(coordinate: "c" + rank))
+        var squares = [Square]()
+
+        let rank = position.turn == .white ? "1" : "8"
+        
+        let shouldBeEmpty: [PieceKind:[String]] = [
+            .king: ["f", "g"],
+            .queen: ["b", "c", "d"]
+        ]
+        
+        for castling in castlings {
+            let isEmpty = shouldBeEmpty[castling.kind]!
+                .map { position.board[$0 + rank] == nil }
+                .reduce(true) { $0 && $1 }
+            
+            if isEmpty {
+                let file = castling.kind == .queen ? "c" : "g"
+                let square = Square(coordinate: file + rank)
+                squares.append(square)
             }
         }
         
