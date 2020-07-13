@@ -6,7 +6,7 @@
 //  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
-public protocol Rules {
+protocol Rules {
     func movesForPiece(at square: Square, in position: Position) -> [Move]
     func legalMoves(in position: Position) -> [Move]
 }
