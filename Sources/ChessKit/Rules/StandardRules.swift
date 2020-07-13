@@ -23,8 +23,17 @@ public class StandardRules: Rules {
     }
     
     public func movesForPiece(at square: Square, in position: Position) -> [Move] {
-        let moves = self.coveredSquaresForPiece(at: square, in: position)
-            .map { Move(from: square, to: $0) }
+        guard let piece = position.board[square] else {
+            return []
+        }
+        guard piece.color == position.turn else {
+            return []
+        }
+        guard let moving = self.movings[piece.kind] else {
+            return []
+        }
+        
+        let moves = moving.moves(from: square, in: position)
         return self.filterIllegal(moves: moves, for: position)
     }
     

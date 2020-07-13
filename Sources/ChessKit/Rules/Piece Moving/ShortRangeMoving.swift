@@ -14,6 +14,11 @@ class ShortRangeMoving: PieceMoving {
         self.translations = translations
     }
     
+    func moves(from square: Square, in position: Position) -> [Move] {
+        return self.coveredSquares(from: square, in: position)
+            .map { Move(from: square, to: $0) }
+    }
+    
     func coveredSquares(from square: Square, in position: Position) -> [Square] {
         return self.translations
             .map { square.translate(file: $0.0, rank: $0.1) }
