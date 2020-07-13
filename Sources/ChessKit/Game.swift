@@ -41,6 +41,11 @@ public class Game {
     
     // MARK: Making moves
     
+    /// List of legal moves in current game position.
+    public var legalMoves: [Move] {
+        return self.rules.legalMoves(in: self.position)
+    }
+    
     /**
      Make move.
      
