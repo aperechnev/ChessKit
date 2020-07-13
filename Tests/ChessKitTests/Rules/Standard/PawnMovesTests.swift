@@ -16,6 +16,9 @@ class PawnMovesTests: XCTestCase {
         self.assert(fen: "8/5p2/8/8/8/8/8/8 b - - 0 1", moves: "f7f6 f7f5", coordinate: "f7")
         self.assert(fen: "8/8/8/4P3/8/8/8/8 w - - 0 1", moves: "e5e6", coordinate: "e5")
         self.assert(fen: "8/8/8/2p5/8/8/8/8 b - - 0 1", moves: "c5c4", coordinate: "c5")
+        
+        self.assert(fen: "8/8/8/8/8/5N2/5P2/8 w - - 0 1", moves: "", coordinate: "f2")
+        self.assert(fen: "8/2p5/2q5/8/8/8/8/8 b - - 0 1", moves: "", coordinate: "c7")
     }
     
     func testPieceTaking() throws {

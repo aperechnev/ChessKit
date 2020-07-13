@@ -43,16 +43,19 @@ class PawnMoving: PieceMoving {
     }
     
     private func twoSquareMoves(from square: Square, in position: Position) -> [Square] {
-        var destinations = [Square]()
-        
-        if position.turn == .white && square.rank == 1 {
-            destinations.append(square.translate(file: 0, rank: 2))
-        }
-        if position.turn == .black && square.rank == 6 {
-            destinations.append(square.translate(file: 0, rank: -2))
+        let initialRank = position.turn == .white ? 1 : 6
+        guard square.rank == initialRank else {
+            return []
         }
         
-        return destinations
+        let translation = position.turn == .white ? 1 : -1
+        let isPathClear = position.board[square.translate(file: 0, rank: translation)] == nil &&
+            position.board[square.translate(file: 0, rank: translation * 2)] == nil
+        guard isPathClear else {
+            return []
+        }
+        
+        return [square.translate(file: 0, rank: translation * 2)]
     }
     
     private func takingMoves(from square: Square, in position: Position) -> [Square] {
