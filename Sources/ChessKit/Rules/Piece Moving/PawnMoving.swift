@@ -9,26 +9,12 @@
 class PawnMoving: PieceMoving {
     
     func moves(from square: Square, in position: Position) -> [String] {
-        var destinations: [Square] = self.oneSquareMoves(from: square, in: position) +
+        let destinations: [Square] = self.oneSquareMoves(from: square, in: position) +
             self.twoSquareMoves(from: square, in: position) +
             self.takingMoves(from: square, in: position) +
             self.enPassantMoves(from: square, in: position)
         
-        // Promotions
-        let promotionRank = position.turn == .white ? 7 : 0
-        let promotions = destinations.filter { $0.rank == promotionRank }
-        destinations = destinations.filter { $0.rank != promotionRank }
-        var promotionMoves = promotions.flatMap {
-            ["\(square)\($0)Q",
-             "\(square)\($0)R",
-             "\(square)\($0)B",
-             "\(square)\($0)N"]
-        }
-        if position.turn == .black {
-            promotionMoves = promotionMoves.map { $0.lowercased() }
-        }
-        
-        return destinations.map { "\(square)\($0)" } + promotionMoves
+        return self.promotedMoves(from: square, in: position, destinations: destinations)
     }
     
     private func oneSquareMoves(from square: Square, in position: Position) -> [Square] {
@@ -91,6 +77,24 @@ class PawnMoving: PieceMoving {
         }
         
         return []
+    }
+    
+    private func promotedMoves(from square: Square, in position: Position, destinations: [Square]) -> [String] {
+        let promotionRank = position.turn == .white ? 7 : 0
+        let promotions = destinations.filter { $0.rank == promotionRank }
+        let destinations = destinations.filter { $0.rank != promotionRank }
+        
+        var promotionMoves = promotions.flatMap {
+            ["\(square)\($0)Q",
+             "\(square)\($0)R",
+             "\(square)\($0)B",
+             "\(square)\($0)N"]
+        }
+        if position.turn == .black {
+            promotionMoves = promotionMoves.map { $0.lowercased() }
+        }
+        
+        return destinations.map { "\(square)\($0)" } + promotionMoves
     }
     
 }
