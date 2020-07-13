@@ -33,11 +33,19 @@ public class StandardRules: Rules {
         case .king:
             return self.kingMoves(at: square, in: position)
         case .queen:
-            return self.queenMoves(at: square, in: position)
+            return self.longRangeMoves(
+                at: square,
+                in: position,
+                translations: self.crossTranlations + self.diagonalTranlations
+            )
         case .rook:
-            return self.rookMoves(at: square, in: position)
+            return self.longRangeMoves(at: square,
+                                       in: position,
+                                       translations: self.crossTranlations)
         case .bishop:
-            return self.bishopMoves(at: square, in: position)
+            return self.longRangeMoves(at: square,
+                                       in: position,
+                                       translations: self.diagonalTranlations)
         case .knight:
             return self.knightMoves(at: square, in: position)
         case .pawn:
@@ -51,19 +59,6 @@ public class StandardRules: Rules {
             .filter { $0.isValid }
             .filter { position.board[$0]?.color != position.turn }
             .map { "\(square)\($0)" }
-    }
-    
-    private func queenMoves(at square: Square, in position: Position) -> [String] {
-        let translations = self.crossTranlations + self.diagonalTranlations
-        return self.longRangeMoves(at: square, in: position, translations: translations)
-    }
-    
-    private func rookMoves(at square: Square, in position: Position) -> [String] {
-        return self.longRangeMoves(at: square, in: position, translations: self.crossTranlations)
-    }
-    
-    private func bishopMoves(at square: Square, in position: Position) -> [String] {
-        return self.longRangeMoves(at: square, in: position, translations: self.diagonalTranlations)
     }
     
     private func knightMoves(at square: Square, in position: Position) -> [String] {
