@@ -17,7 +17,7 @@
     <a title="Position Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (79% documented)</p>
+        <p><a href="../index.html"> Docs</a> (90% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -47,6 +47,9 @@
               <li class="nav-group-task">
                 <a href="../Classes/Game.html">Game</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Classes/StandardRules.html">StandardRules</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -61,13 +64,30 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Rules.html">Rules</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Move.html">Move</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Structs/Piece.html">Piece</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Position.html">Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Position/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Position/Counter.html">– Counter</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Square.html">Square</a>
@@ -87,12 +107,68 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Game position.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChessKit8PositionV5StateV"></a>
+                    <a name="//apple_ref/swift/Struct/State" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChessKit8PositionV5StateV">State</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Position state.</p>
+
+                        <a href="../Structs/Position/State.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">State</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChessKit8PositionV7CounterV"></a>
+                    <a name="//apple_ref/swift/Struct/Counter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChessKit8PositionV7CounterV">Counter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Position counter.</p>
+
+                        <a href="../Structs/Position/Counter.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Counter</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -106,7 +182,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Board with pieces that represents current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -123,9 +199,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8ChessKit8PositionV4turnAA10PieceColorOvp"></a>
-                    <a name="//apple_ref/swift/Property/turn" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit8PositionV4turnAA10PieceColorOvp">turn</a>
+                    <a name="/s:8ChessKit8PositionV5stateAC5StateVvp"></a>
+                    <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChessKit8PositionV5stateAC5StateVvp">state</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -133,14 +209,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Position state.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">turn</span><span class="p">:</span> <span class="kt"><a href="../Enums/PieceColor.html">PieceColor</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Structs/Position/State.html">State</a></span></code></pre>
 
                         </div>
                       </div>
@@ -150,9 +226,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8ChessKit8PositionV9castlingsSayAA5PieceVGvp"></a>
-                    <a name="//apple_ref/swift/Property/castlings" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit8PositionV9castlingsSayAA5PieceVGvp">castlings</a>
+                    <a name="/s:8ChessKit8PositionV7counterAC7CounterVvp"></a>
+                    <a name="//apple_ref/swift/Property/counter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChessKit8PositionV7counterAC7CounterVvp">counter</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -160,95 +236,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Position counters.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">castlings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Piece.html">Piece</a></span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8ChessKit8PositionV8enPasantAA6SquareVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/enPasant" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit8PositionV8enPasantAA6SquareVSgvp">enPasant</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enPasant</span><span class="p">:</span> <span class="kt"><a href="../Structs/Square.html">Square</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8ChessKit8PositionV14halfMovesCountSivp"></a>
-                    <a name="//apple_ref/swift/Property/halfMovesCount" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit8PositionV14halfMovesCountSivp">halfMovesCount</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">halfMovesCount</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8ChessKit8PositionV14fullMovesCountSivp"></a>
-                    <a name="//apple_ref/swift/Property/fullMovesCount" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit8PositionV14fullMovesCountSivp">fullMovesCount</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">fullMovesCount</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">counter</span><span class="p">:</span> <span class="kt"><a href="../Structs/Position/Counter.html">Counter</a></span></code></pre>
 
                         </div>
                       </div>
@@ -260,7 +255,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-07-12)</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-07-13)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
