@@ -30,4 +30,11 @@ public class StandardRules: Rules {
         return moving.moves(from: square, in: position)
     }
     
+    public func legalMoves(in position: Position) -> [String] {
+        return position
+            .board.enumeratedPieces()
+            .filter { $0.1.color == position.turn }
+            .flatMap { self.movesForPiece(at: $0.0, in: position) }
+    }
+    
 }
