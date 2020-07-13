@@ -23,7 +23,7 @@ class MovesTests: XCTestCase {
         let position = FenSerialization.default.deserialize(fen: fen)
         let testMoves = testMoves.split(separator: " ").map { "\($0)" }
         let legalMoves = StandardRules().legalMoves(in: position)
-        XCTAssertEqual(legalMoves.map({ $0.description }).sorted(), testMoves.sorted())
+        XCTAssertEqual(legalMoves.map({ $0.description }).sorted(), testMoves.sorted(), "Position: \(fen)")
     }
 
 }

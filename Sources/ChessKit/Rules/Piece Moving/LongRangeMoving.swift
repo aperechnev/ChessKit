@@ -14,10 +14,10 @@ class LongRangeMoving: PieceMoving {
         self.translations = translations
     }
     
-    func moves(from square: Square, in position: Position) -> [Move] {
+    func coveredSquares(from square: Square, in position: Position) -> [Square] {
         self.translations
             .flatMap { self.process(translation: $0, for: square, in: position) }
-            .map { Move(from: square, to: Square(coordinate: $0)) }
+            .map { Square(coordinate: $0) }
     }
     
     private func process(translation: (Int, Int), for square: Square, in position: Position) -> [String] {

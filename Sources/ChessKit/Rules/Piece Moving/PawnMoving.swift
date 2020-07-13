@@ -8,13 +8,11 @@
 
 class PawnMoving: PieceMoving {
     
-    func moves(from square: Square, in position: Position) -> [Move] {
-        let destinations: [Square] = self.oneSquareMoves(from: square, in: position) +
+    func coveredSquares(from square: Square, in position: Position) -> [Square] {
+        return self.oneSquareMoves(from: square, in: position) +
             self.twoSquareMoves(from: square, in: position) +
             self.takingMoves(from: square, in: position) +
             self.enPassantMoves(from: square, in: position)
-        
-        return self.promotedMoves(from: square, in: position, destinations: destinations)
     }
     
     private func oneSquareMoves(from square: Square, in position: Position) -> [Square] {
@@ -79,22 +77,22 @@ class PawnMoving: PieceMoving {
         return []
     }
     
-    private func promotedMoves(from square: Square, in position: Position, destinations: [Square]) -> [Move] {
-        let promotionRank = position.turn == .white ? 7 : 0
-        let promotions = destinations.filter { $0.rank == promotionRank }
-        let destinations = destinations.filter { $0.rank != promotionRank }
-        
-        var promotionMoves = promotions.flatMap {
-            ["\(square)\($0)Q",
-             "\(square)\($0)R",
-             "\(square)\($0)B",
-             "\(square)\($0)N"]
-        }
-        if position.turn == .black {
-            promotionMoves = promotionMoves.map { $0.lowercased() }
-        }
-        
-        return destinations.map { Move(from: square, to: $0) } + promotionMoves.map { Move(string: $0) }
-    }
+//    private func promotedMoves(from square: Square, in position: Position, destinations: [Square]) -> [Move] {
+//        let promotionRank = position.turn == .white ? 7 : 0
+//        let promotions = destinations.filter { $0.rank == promotionRank }
+//        let destinations = destinations.filter { $0.rank != promotionRank }
+//        
+//        var promotionMoves = promotions.flatMap {
+//            ["\(square)\($0)Q",
+//             "\(square)\($0)R",
+//             "\(square)\($0)B",
+//             "\(square)\($0)N"]
+//        }
+//        if position.turn == .black {
+//            promotionMoves = promotionMoves.map { $0.lowercased() }
+//        }
+//        
+//        return destinations.map { Move(from: square, to: $0) } + promotionMoves.map { Move(string: $0) }
+//    }
     
 }

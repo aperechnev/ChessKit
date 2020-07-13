@@ -40,7 +40,7 @@ class KingMovesTests: MovesTests {
     }
     
     func testTakingPieces() throws {
-        self.assert(fen: "8/8/8/3PPp2/3pKP2/3PpP2/8/8 w - - 0 1", targets: "f5 d4 e3", at: "e4")
+        self.assert(fen: "8/8/8/3r4/4K3/8/8/8 w - - 0 1", targets: "e3 f3 f4 d5", at: "e4")
     }
     
     func testBehindOppositeKing() throws {
