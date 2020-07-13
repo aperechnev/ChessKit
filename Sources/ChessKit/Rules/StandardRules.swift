@@ -18,9 +18,7 @@ public class StandardRules: Rules {
     ]
     
     public func legalMoves(in position: Position) -> [Move] {
-        return position
-            .board.enumeratedPieces()
-            .filter { $0.1.color == position.turn }
+        return self.enumeratedPieces(for: position)
             .flatMap { self.movesForPiece(at: $0.0, in: position) }
     }
     
@@ -31,9 +29,7 @@ public class StandardRules: Rules {
     }
     
     private func coveredSquares(in position: Position) -> [Square] {
-        return position
-            .board.enumeratedPieces()
-            .filter { $0.1.color == position.turn }
+        return self.enumeratedPieces(for: position)
             .flatMap { self.coveredSquaresForPiece(at: $0.0, in: position) }
     }
     
@@ -66,6 +62,11 @@ public class StandardRules: Rules {
         }
         
         return moves.filter(underCheckFilter)
+    }
+    
+    private func enumeratedPieces(for position: Position) -> [(Square, Piece)] {
+        return position.board.enumeratedPieces()
+            .filter { $0.1.color == position.turn }
     }
     
 }
