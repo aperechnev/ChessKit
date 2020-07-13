@@ -69,7 +69,7 @@ public class Game {
             abs(move.from.file - move.to.file) > 1
         
         let isEnPassant = self.position.board[move.from]?.kind == .pawn &&
-            move.to.file == self.position.state.enPasant?.file
+            move.to == self.position.state.enPasant
         
         if isCastling {
             self.performCastling(move: move)
