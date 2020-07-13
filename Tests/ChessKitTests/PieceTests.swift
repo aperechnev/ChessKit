@@ -11,6 +11,21 @@ import XCTest
 
 class PieceTests: XCTestCase {
 
+    func testEquatability() throws {
+        XCTAssertEqual(
+            Piece(kind: .knight, color: .black),
+            Piece(kind: .knight, color: .black)
+        )
+        XCTAssertNotEqual(
+            Piece(kind: .pawn, color: .white),
+            Piece(kind: .pawn, color: .black)
+        )
+        XCTAssertNotEqual(
+            Piece(kind: .king, color: .white),
+            Piece(kind: .queen, color: .white)
+        )
+    }
+
     func testInitWithCharacter() throws {
         XCTAssertEqual(Piece(character: "K"), Piece(kind: .king, color: .white))
         XCTAssertEqual(Piece(character: "Q"), Piece(kind: .queen, color: .white))

@@ -22,14 +22,16 @@ public class FenSerialization {
     public func deserialize(fen: String) -> Position {
         let parts = fen.split(separator: " ")
         
-        return Position(
-            board: self.board(from: parts[0]),
-            turn: self.turn(from: parts[1]),
-            castlings: self.castlings(from: parts[2]),
-            enPasant: self.enPasant(from: parts[3]),
-            halfMovesCount: self.movesCount(from: parts[4]),
-            fullMovesCount: self.movesCount(from: parts[5])
-        )
+        let state = Position.State(turn: self.turn(from: parts[1]),
+                                   castlings: self.castlings(from: parts[2]),
+                                   enPasant: self.enPasant(from: parts[3]))
+        
+        let counter = Position.Counter(halfMoves: self.movesCount(from: parts[4]),
+                                       fullMoves: self.movesCount(from: parts[5]))
+        
+        return Position(board: self.board(from: parts[0]),
+                        state: state,
+                        counter: counter)
     }
     
     /**
@@ -42,16 +44,19 @@ public class FenSerialization {
      */
     public func serialize(position: Position) -> String {
         let board = self.fen(from: position.board)
-        let turn = position.turn == .white ? "w" : "b"
+        let turn = position.state.turn == .white ? "w" : "b"
         
-        let castling = position.castlings
+        var castling = position.state.castlings
             .map { "\($0)" }
             .reduce("") { $0 + $1 }
+        if castling == "" {
+            castling = "-"
+        }
         
-        let enPasant = position.enPasant != nil ? "\(position.enPasant!)" : "-"
+        let enPasant = position.state.enPasant != nil ? "\(position.state.enPasant!)" : "-"
         
-        let halfmove = "\(position.halfMovesCount)"
-        let fullmove = "\(position.fullMovesCount)"
+        let halfmove = "\(position.counter.halfMoves)"
+        let fullmove = "\(position.counter.fullMoves)"
         
         return [board, turn, castling, enPasant, halfmove, fullmove]
             .joined(separator: " ")
@@ -118,6 +123,9 @@ public class FenSerialization {
     }
     
     private func castlings(from sequence: String.SubSequence) -> [Piece] {
+        if sequence == "-" {
+            return []
+        }
         return sequence.map { Piece(character: $0)! }
     }
     

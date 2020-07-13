@@ -15,4 +15,9 @@ public enum PieceColor {
     /// Black color.
     case black
     
+    /// Negotiates piece color.
+    public var negotiated: PieceColor {
+        return self == .white ? .black : .white
+    }
+    
 }
