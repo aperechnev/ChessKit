@@ -8,8 +8,12 @@
 
 public class Game {
     
-    public init(board: Board, turn: PieceColor, castlings: [Piece], enPasant: Square?, halfMoves: Int, fullMoves: Int) {
-        
+    private let position: Position
+    private let rules: Rules
+    
+    public init(position: Position, rules: Rules) {
+        self.position = position
+        self.rules = rules
     }
     
 }
