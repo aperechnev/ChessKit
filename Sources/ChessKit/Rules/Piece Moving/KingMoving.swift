@@ -13,9 +13,23 @@ class KingMoving: ShortRangeMoving {
     }
     
     override func moves(from square: Square, in position: Position) -> [String] {
-        return super.destinations(from: square, in: position)
+        var destinations = super.destinations(from: square, in: position)
+        destinations = self.filterOppositeKingSquares(destinations: destinations, in: position)
+        
+        return destinations
             .map { "\(square)\($0)" } +
             self.castlingMoves(in: position)
+    }
+    
+    private func filterOppositeKingSquares(destinations: [Square], in position: Position) -> [Square] {
+        guard let (square, _) = position.board.enumeratedPieces()
+            .filter({ $1 == Piece(kind: .king, color: position.turn.negotiated) })
+            .first else {
+                return destinations
+        }
+        
+        return destinations
+            .filter { abs($0.file - square.file) > 1 || abs($0.rank - square.rank) > 1 }
     }
     
     private func castlingMoves(in position: Position) -> [String] {

@@ -53,6 +53,8 @@ class KingMovesTests: MovesTests {
     
     func testBehindOppositeKing() throws {
         self.assert(fen: "8/8/3k4/8/4K3/8/8/8 w - - 0 1", targets: "f5 f4 f3 e3 d3 d4", at: "e4")
+        self.assert(fen: "8/8/3k4/8/3K4/8/8/8 w - - 0 1", targets: "c4 c3 d3 e3 e4", at: "d4")
+        self.assert(fen: "8/8/3k4/8/5K2/8/8/8 w - - 0 1", targets: "f5 g5 g4 g3 f3 e3 e4", at: "f4")
     }
     
     func testKingsideCastling() throws {
