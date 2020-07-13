@@ -61,7 +61,7 @@ public class StandardRules: Rules {
     }
     
     private func filterIllegal(moves: [Move], for position: Position) -> [Move] {
-        let underCheckFilter = { (move: Move) -> Bool in
+        return moves.filter { (move: Move) -> Bool in
             var nextPosition = position.deepCopy()
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
@@ -71,10 +71,30 @@ public class StandardRules: Rules {
                 return true
             }
             
+            if position.board[move.from]?.kind == .king {
+                if abs(move.from.file - move.to.file) > 1 {
+                    var nextPosition = position.deepCopy()
+                    nextPosition.turn = nextPosition.turn.negotiated
+                    if self.coveredSquares(in: nextPosition).contains(move.from) {
+                        return false
+                    }
+                    
+                    let fileTranslation = (move.to.file - move.from.file) / 2
+                    let squareBetween = move.from.translate(file: fileTranslation, rank: 0)
+
+                    nextPosition = position.deepCopy()
+                    nextPosition.board[squareBetween] = nextPosition.board[move.from]
+                    nextPosition.board[move.from] = nil
+                    nextPosition.turn = nextPosition.turn.negotiated
+
+                    if self.coveredSquares(in: nextPosition).contains(squareBetween) {
+                        return false
+                    }
+                }
+            }
+            
             return !self.coveredSquares(in: nextPosition).contains(kingSquare)
         }
-        
-        return moves.filter(underCheckFilter)
     }
     
     private func enumeratedPieces(for position: Position) -> [(Square, Piece)] {
