@@ -7,7 +7,7 @@
 //
 
 /// Standard chess move rules.
-public class StandardRules: Rules {
+class StandardRules: Rules {
     
     private let movings: [PieceKind:PieceMoving] = [
         .king: KingMoving(),
@@ -18,12 +18,12 @@ public class StandardRules: Rules {
         .pawn: PawnMoving()
     ]
     
-    public func legalMoves(in position: Position) -> [Move] {
+    func legalMoves(in position: Position) -> [Move] {
         return self.enumeratedPieces(for: position)
             .flatMap { self.movesForPiece(at: $0.0, in: position) }
     }
     
-    public func movesForPiece(at square: Square, in position: Position) -> [Move] {
+    func movesForPiece(at square: Square, in position: Position) -> [Move] {
         guard let piece = position.board[square] else {
             return []
         }
