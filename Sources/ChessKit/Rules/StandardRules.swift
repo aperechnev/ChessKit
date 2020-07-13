@@ -6,6 +6,7 @@
 //  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
+/// Standard chess move rules.
 public class StandardRules: Rules {
     
     private let movings: [PieceKind:PieceMoving] = [

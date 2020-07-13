@@ -6,16 +6,36 @@
 //  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
+/// Chess game.
 public class Game {
     
     private let rules: Rules
+    
+    /// Current game position.
     public var position: Position
     
+    // MARK: Initialization
+    
+    /**
+     Initialize game with given position and rules.
+     
+     - Parameters:
+        - position: Initial game position.
+        - rules: Game rules.
+     */
     public init(position: Position, rules: Rules) {
         self.position = position
         self.rules = rules
     }
     
+    // MARK: Making moves
+    
+    /**
+     Make move.
+     
+     - Parameters:
+        - move: A move in a long algebraic notation (e.g., `"e2e4"`, `"g1f3"`, `"e7e8Q"`).
+     */
     public func make(move stringMove: String) {
         let move = Move(string: stringMove)
         let enPassant = self.updateEnPassant(for: move)
