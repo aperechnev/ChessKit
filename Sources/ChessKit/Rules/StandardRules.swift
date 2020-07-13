@@ -71,26 +71,8 @@ public class StandardRules: Rules {
                 return true
             }
             
-            if position.board[move.from]?.kind == .king {
-                if abs(move.from.file - move.to.file) > 1 {
-                    var nextPosition = position.deepCopy()
-                    nextPosition.turn = nextPosition.turn.negotiated
-                    if self.coveredSquares(in: nextPosition).contains(move.from) {
-                        return false
-                    }
-                    
-                    let fileTranslation = (move.to.file - move.from.file) / 2
-                    let squareBetween = move.from.translate(file: fileTranslation, rank: 0)
-
-                    nextPosition = position.deepCopy()
-                    nextPosition.board[squareBetween] = nextPosition.board[move.from]
-                    nextPosition.board[move.from] = nil
-                    nextPosition.turn = nextPosition.turn.negotiated
-
-                    if self.coveredSquares(in: nextPosition).contains(squareBetween) {
-                        return false
-                    }
-                }
+            if self.isIllelgalCastling(move: move, position: position) {
+                return false
             }
             
             return !self.coveredSquares(in: nextPosition).contains(kingSquare)
@@ -100,6 +82,47 @@ public class StandardRules: Rules {
     private func enumeratedPieces(for position: Position) -> [(Square, Piece)] {
         return position.board.enumeratedPieces()
             .filter { $0.1.color == position.turn }
+    }
+    
+    private func isIllelgalCastling(move: Move, position: Position) -> Bool {
+        guard position.board[move.from]?.kind == .king else {
+            return false
+        }
+        guard abs(move.from.file - move.to.file) > 1 else {
+            return false
+        }
+        if self.isCatslingToCheck(move: move, position: position) {
+            return true
+        }
+        if self.isCastlingThroughCheck(move: move, position: position) {
+            return true
+        }
+        return false
+    }
+    
+    private func isCastlingThroughCheck(move: Move, position: Position) -> Bool {
+        let fileTranslation = (move.to.file - move.from.file) / 2
+        let squareBetween = move.from.translate(file: fileTranslation, rank: 0)
+
+        var nextPosition = position.deepCopy()
+        nextPosition.board[squareBetween] = nextPosition.board[move.from]
+        nextPosition.board[move.from] = nil
+        nextPosition.turn = nextPosition.turn.negotiated
+
+        if self.coveredSquares(in: nextPosition).contains(squareBetween) {
+            return true
+        }
+        
+        return false
+    }
+    
+    private func isCatslingToCheck(move: Move, position: Position) -> Bool {
+        var nextPosition = position.deepCopy()
+        nextPosition.turn = nextPosition.turn.negotiated
+        if self.coveredSquares(in: nextPosition).contains(move.from) {
+            return true
+        }
+        return false
     }
     
 }
