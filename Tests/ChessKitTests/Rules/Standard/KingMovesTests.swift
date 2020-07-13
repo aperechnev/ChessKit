@@ -55,8 +55,40 @@ class KingMovesTests: MovesTests {
         self.assert(fen: "8/8/3k4/8/4K3/8/8/8 w - - 0 1", targets: "f5 f4 f3 e3 d3 d4", at: "e4")
     }
     
-    func testCastling() throws {
-        XCTFail("Not implemented.")
+    func testKingsideCastling() throws {
+        self.assert(fen: "r1bqkbnr/pppp1ppp/2n5/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4",
+                    targets: "d2 e2",
+                    at: "e1")
+        
+        self.assert(fen: "r1bqk1nr/pppp1ppp/2n5/2b5/2BpP3/5N2/PPP2PPP/RNBQK2R w KQkq - 2 5",
+                    targets: "d2 e2 f1 g1",
+                    at: "e1")
+        
+        self.assert(fen: "r1b1k2r/ppppqppp/2n2n2/2b5/2BpP3/5N2/PPP2PPP/RNBQK2R w kq - 6 7",
+                    targets: "d2 e2 f1",
+                    at: "e1")
+        
+        self.assert(fen: "r1b1k2r/ppppqppp/2n2n2/2b5/2BpP3/2N2N2/PPP2PPP/R1BQK2R b kq - 7 7",
+                    targets: "d8 f8 g8",
+                    at: "e8")
+    }
+    
+    func testQueensideCastling() throws {
+        self.assert(fen: "r1b1kbnr/ppp1qppp/2np4/4p3/3PP3/2N5/PPP1QPPP/R1B1KBNR w KQkq - 4 5",
+                    targets: "d1 d2",
+                    at: "e1")
+        
+        self.assert(fen: "r3kbnr/ppp1qppp/2npb3/4p3/3PP3/2N1B3/PPP1QPPP/R3KBNR w KQkq - 6 6",
+                    targets: "d1 d2 c1",
+                    at: "e1")
+        
+        self.assert(fen: "r3kbnr/ppp1qppp/2npb3/4p3/3PP3/2N1B3/PPP1QPPP/R2K1BNR b kq - 7 6",
+                    targets: "d7 d8 c8",
+                    at: "e8")
+        
+        self.assert(fen: "r2k1bnr/ppp1qppp/2npb3/4p3/3PP3/2N1B3/PPP1QPPP/R2K1BNR w - - 8 7",
+                    targets: "c1 d2 e1",
+                    at: "d1")
     }
 
 }
