@@ -8,10 +8,6 @@
 
 class PawnMoving: PieceMoving {
     
-    private let takingTranslations = [
-        (-1, 1), (1, 1)
-    ]
-    
     func moves(from square: Square, in position: Position) -> [String] {
         let direction = position.turn == .white ? 1 : -1
         
@@ -34,7 +30,7 @@ class PawnMoving: PieceMoving {
         }
         
         // Piece taking
-        for translation in self.takingTranslations {
+        for translation in MovingTranslations.default.pawnTaking {
             let takingSquare = square.translate(file: translation.0, rank: translation.1 * direction)
             if !takingSquare.isValid {
                 continue
@@ -46,7 +42,7 @@ class PawnMoving: PieceMoving {
         
         // En passant
         if let enPasantSquare = position.enPasant {
-            for takingTranslation in self.takingTranslations {
+            for takingTranslation in MovingTranslations.default.pawnTaking {
                 if square.translate(file: takingTranslation.0, rank: takingTranslation.1 * direction) == enPasantSquare {
                     destinations.append(enPasantSquare)
                 }

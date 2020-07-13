@@ -9,10 +9,7 @@
 class QueenMoving: LongRangeMoving {
     
     init() {
-        let translations = [
-            (-1, 0), (0, 1), (1, 0), (0, -1), (-1, -1), (1, 1), (-1, 1), (1, -1)
-        ]
-        super.init(translations: translations)
+        super.init(translations: MovingTranslations.default.crossDiagonal)
     }
     
 }
