@@ -119,5 +119,16 @@ class GameTests: XCTestCase {
         XCTAssertNil(game.position.board["f5"])
         XCTAssertEqual(game.position.board["f6"], Piece(kind: .pawn, color: .white))
     }
+    
+    func testPawnPromotion() throws {
+        let fen = "8/1p3ppk/4p3/3p4/1p6/1K6/6p1/8 b - - 1 48"
+        let position = FenSerialization.default.deserialize(fen: fen)
+        let game = Game(position: position)
+        
+        game.make(move: "g2g1q")
+        let finalFen = FenSerialization.default.serialize(position: game.position)
+        
+        XCTAssertEqual(finalFen, "8/1p3ppk/4p3/3p4/1p6/1K6/8/6q1 w - - 0 49")
+    }
 
 }
