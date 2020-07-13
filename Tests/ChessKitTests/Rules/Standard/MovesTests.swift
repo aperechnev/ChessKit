@@ -18,5 +18,12 @@ class MovesTests: XCTestCase {
         let testMoves = StandardRules().movesForPiece(at: square, in: position)
         XCTAssertEqual(moves.sorted(), testMoves.sorted(), "Position: \(fen)")
     }
+    
+    func assert(fen: String, testMoves: String) {
+        let position = FenSerialization.default.deserialize(fen: fen)
+        let testMoves = testMoves.split(separator: " ").map { "\($0)" }
+        let legalMoves = StandardRules().legalMoves(in: position)
+        XCTAssertEqual(legalMoves.sorted(), testMoves.sorted())
+    }
 
 }

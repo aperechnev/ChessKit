@@ -9,7 +9,7 @@
 import XCTest
 @testable import ChessKit
 
-class StandardRulesTests: XCTestCase {
+class StandardRulesTests: MovesTests {
     
     func testScotchGameLegalMoves() throws {
         self.assert(
@@ -23,13 +23,6 @@ class StandardRulesTests: XCTestCase {
             fen: "rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR b KQkq - 0 3",
             testMoves: "h7h6 h7h5 g7g6 g7g5 f7f6 f7f5 e7e6 c6c5 b7b6 b7b5 a7a6 a7a5 g8h6 g8f6 e8d7 d8d7 d8d6 d8c7 d8b6 d8a5 c8d7 c8e6 c8f5 c8g4 c8h3 b8d7 b8a6"
         )
-    }
-    
-    private func assert(fen: String, testMoves: String) {
-        let position = FenSerialization.default.deserialize(fen: fen)
-        let testMoves = testMoves.split(separator: " ").map { "\($0)" }
-        let legalMoves = StandardRules().legalMoves(in: position)
-        XCTAssertEqual(legalMoves.sorted(), testMoves.sorted())
     }
 
 }
