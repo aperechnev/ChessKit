@@ -1,5 +1,5 @@
 //
-//  FenPosition.swift
+//  Position.swift
 //  ChessKit
 //
 //  Created by Alexander Perechnev on 12.07.2020.
