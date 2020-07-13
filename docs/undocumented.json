@@ -6,41 +6,6 @@
       "symbol": "FenSerialization",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/Rules.swift",
-      "line": 9,
-      "symbol": "Rules",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/Rules.swift",
-      "line": 10,
-      "symbol": "Rules.movesForPiece(at:in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/Rules.swift",
-      "line": 11,
-      "symbol": "Rules.legalMoves(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/StandardRules.swift",
-      "line": 21,
-      "symbol": "StandardRules.legalMoves(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/StandardRules.swift",
-      "line": 26,
-      "symbol": "StandardRules.movesForPiece(at:in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/aperechnev/Projects/ChessKit"

@@ -8,66 +8,38 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Game.swift",
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/Rules.swift",
       "line": 9,
-      "symbol": "Game",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "symbol": "Rules",
+      "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Game.swift",
-      "line": 11,
-      "symbol": "Game.init(board:turn:castlings:enPasant:halfMoves:fullMoves:)",
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/Rules.swift",
+      "line": 10,
+      "symbol": "Rules.movesForPiece(at:in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
-      "line": 9,
-      "symbol": "Position",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/Rules.swift",
       "line": 11,
-      "symbol": "Position.board",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "symbol": "Rules.legalMoves(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
-      "line": 12,
-      "symbol": "Position.turn",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/StandardRules.swift",
+      "line": 21,
+      "symbol": "StandardRules.legalMoves(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
-      "line": 13,
-      "symbol": "Position.castlings",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
-      "line": 14,
-      "symbol": "Position.enPasant",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
-      "line": 15,
-      "symbol": "Position.halfMovesCount",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
-      "line": 16,
-      "symbol": "Position.fullMovesCount",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/StandardRules.swift",
+      "line": 26,
+      "symbol": "StandardRules.movesForPiece(at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
   ],
