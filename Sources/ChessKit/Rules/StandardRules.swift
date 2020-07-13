@@ -61,13 +61,13 @@ public class StandardRules: Rules {
     }
     
     private func filterIllegal(moves: [Move], for position: Position) -> [Move] {
-        return moves.filter { (move: Move) -> Bool in
+        let filter = { (move: Move) -> Bool in
             var nextPosition = position.deepCopy()
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
             nextPosition.turn = nextPosition.turn.negotiated
             
-            guard let kingSquare = nextPosition.board.enumeratedPieces().filter({ $0.1.kind == .king && $0.1.color == position.turn }).first?.0 else {
+            guard let kingSquare = self.kingSquare(in: nextPosition, color: position.turn) else {
                 return true
             }
             
@@ -77,11 +77,19 @@ public class StandardRules: Rules {
             
             return !self.coveredSquares(in: nextPosition).contains(kingSquare)
         }
+        
+        return moves.filter(filter)
     }
     
     private func enumeratedPieces(for position: Position) -> [(Square, Piece)] {
         return position.board.enumeratedPieces()
             .filter { $0.1.color == position.turn }
+    }
+    
+    private func kingSquare(in position: Position, color: PieceColor) -> Square? {
+        return position.board.enumeratedPieces()
+            .filter({ $0.1.kind == .king && $0.1.color == color })
+            .first?.0
     }
     
     private func isIllelgalCastling(move: Move, position: Position) -> Bool {
