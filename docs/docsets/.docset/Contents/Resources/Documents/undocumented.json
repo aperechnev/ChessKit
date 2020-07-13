@@ -1,0 +1,75 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/FenSerialization.swift",
+      "line": 9,
+      "symbol": "FenSerialization",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Game.swift",
+      "line": 9,
+      "symbol": "Game",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Game.swift",
+      "line": 11,
+      "symbol": "Game.init(board:turn:castlings:enPasant:halfMoves:fullMoves:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "line": 9,
+      "symbol": "Position",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "line": 11,
+      "symbol": "Position.board",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "line": 12,
+      "symbol": "Position.turn",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "line": 13,
+      "symbol": "Position.castlings",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "line": 14,
+      "symbol": "Position.enPasant",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "line": 15,
+      "symbol": "Position.halfMovesCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Position.swift",
+      "line": 16,
+      "symbol": "Position.fullMovesCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/aperechnev/Projects/ChessKit"
+}
