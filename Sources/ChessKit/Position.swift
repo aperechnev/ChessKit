@@ -15,4 +15,13 @@ public struct Position {
     public var halfMovesCount: Int
     public var fullMovesCount: Int
     
+    func deepCopy() -> Position {
+        return Position(board: self.board.deepCopy(),
+                        turn: self.turn,
+                        castlings: self.castlings,
+                        enPasant: self.enPasant,
+                        halfMovesCount: self.halfMovesCount,
+                        fullMovesCount: self.fullMovesCount)
+    }
+    
 }
