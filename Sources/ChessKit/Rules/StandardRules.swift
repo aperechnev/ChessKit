@@ -23,11 +23,80 @@ class StandardRules: Rules {
             return false
         }
         
-        var nextMovePosition = position.deepCopy()
-        nextMovePosition.state.turn = nextMovePosition.state.turn.negotiated
-        let coveredSquares = self.coveredSquares(in: nextMovePosition)
+        for translation in MovingTranslations.default.diagonal {
+            for offset in 1..<8 {
+                let destination = kingSquare.translate(file: translation.0 * offset, rank: translation.1 * offset)
+                guard destination.isValid else {
+                    break
+                }
+                guard let piece = position.board[destination] else {
+                    continue
+                }
+                if piece.color == position.state.turn || piece.kind != .queen && piece.kind != .bishop {
+                    break
+                }
+                
+                if piece.kind == .queen || piece.kind == .bishop {
+                    return true
+                }
+            }
+        }
         
-        return coveredSquares.contains(kingSquare)
+        for translation in MovingTranslations.default.cross {
+            for offset in 1..<8 {
+                let destination = kingSquare.translate(file: translation.0 * offset, rank: translation.1 * offset)
+                guard destination.isValid else {
+                    break
+                }
+                guard let piece = position.board[destination] else {
+                    continue
+                }
+                if piece.color == position.state.turn || piece.kind != .queen && piece.kind != .rook {
+                    break
+                }
+                
+                if piece.kind == .queen || piece.kind == .rook {
+                    return true
+                }
+            }
+        }
+        
+        for translation in MovingTranslations.default.knight {
+            let destination = kingSquare.translate(file: translation.0, rank: translation.1)
+            guard destination.isValid else {
+                continue
+            }
+            guard let piece = position.board[destination] else {
+                continue
+            }
+            if piece.color == position.state.turn {
+                continue
+            }
+            
+            if piece.kind == .knight {
+                return true
+            }
+        }
+        
+        for translation in MovingTranslations.default.pawnTaking {
+            let sign = position.state.turn == .white ? 1 : -1
+            let destination = kingSquare.translate(file: translation.0, rank: translation.1 * sign)
+            guard destination.isValid else {
+                continue
+            }
+            guard let piece = position.board[destination] else {
+                continue
+            }
+            if piece.color == position.state.turn {
+                continue
+            }
+            
+            if piece.kind == .pawn {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func isMate(in position: Position) -> Bool {
@@ -85,20 +154,15 @@ class StandardRules: Rules {
     
     private func filterIllegal(moves: [Move], for position: Position) -> [Move] {
         let filter = { (move: Move) -> Bool in
-            var nextPosition = position.deepCopy()
+            let nextPosition = position.deepCopy()
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
-            nextPosition.state.turn = nextPosition.state.turn.negotiated
-            
-            guard let kingSquare = self.kingSquare(in: nextPosition, color: position.state.turn) else {
-                return true
-            }
             
             if self.isIllelgalCastling(move: move, position: position) {
                 return false
             }
             
-            return !self.coveredSquares(in: nextPosition).contains(kingSquare)
+            return !self.isCheck(in: nextPosition)
         }
         
         return moves.filter(filter)
