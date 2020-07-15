@@ -17,11 +17,10 @@ class LongRangeMoving: RangeMoving {
     func coveredSquares(from square: Square, in position: Position) -> [Square] {
         self.translations
             .flatMap { self.process(translation: $0, for: square, in: position) }
-            .map { Square(coordinate: $0) }
     }
     
-    private func process(translation: (Int, Int), for square: Square, in position: Position) -> [String] {
-        var destinations = [String]()
+    private func process(translation: (Int, Int), for square: Square, in position: Position) -> [Square] {
+        var destinations = [Square]()
         
         for offset in 1..<8 {
             let destination = square.translate(file: translation.0 * offset, rank: translation.1 * offset)
@@ -33,10 +32,10 @@ class LongRangeMoving: RangeMoving {
                 break
             }
             if position.board[destination]?.color != nil && position.board[destination]?.color != position.state.turn {
-                destinations.append("\(destination)")
+                destinations.append(destination)
                 break
             }
-            destinations.append("\(destination)")
+            destinations.append(destination)
         }
         
         return destinations
