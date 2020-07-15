@@ -7,37 +7,31 @@
 //
 
 /// Represents a piece kind regardless of it's color.
-public enum PieceKind: CustomStringConvertible {
+public enum PieceKind: String, CustomStringConvertible {
     
     /// King piece.
-    case king
+    case king = "k"
     
     /// Queen piece.
-    case queen
+    case queen = "q"
     
     /// Rook piece.
-    case rook
+    case rook = "r"
     
     /// Bishop piece.
-    case bishop
+    case bishop = "b"
     
     /// Knight piece.
-    case knight
+    case knight = "n"
     
     /// Pawn piece.
-    case pawn
+    case pawn = "p"
     
     // MARK: CustomStringConvertible
     
+    /// Converts itself into human readable character.
     public var description: String {
-        switch self {
-        case .king: return "k"
-        case .queen: return "q"
-        case .rook: return "r"
-        case .bishop: return "b"
-        case .knight: return "n"
-        case .pawn: return "p"
-        }
+        return self.rawValue
     }
     
 }

@@ -9,13 +9,6 @@
 /// Piece on `Board` with it's color.
 public struct Piece: Equatable, CustomStringConvertible {
     
-    private static let kindToCharacterMap: [PieceKind:Character] = [
-        .king: "k", .queen: "q", .rook: "r", .bishop: "b", .knight: "n", .pawn: "p"
-    ]
-    private static let characterToKindMap: [String:PieceKind] = [
-        "k": .king, "q": .queen, "r": .rook, "b": .bishop, "n": .knight, "p": .pawn
-    ]
-    
     /// Piece kind.
     public let kind: PieceKind
     
@@ -45,7 +38,7 @@ public struct Piece: Equatable, CustomStringConvertible {
         - character: Character that represents a piece.
      */
     public init?(character: Character) {
-        guard let kind: PieceKind = Piece.characterToKindMap[character.lowercased()] else {
+        guard let kind = PieceKind(rawValue: character.lowercased()) else {
             return nil
         }
         let color: PieceColor = character.isUppercase ? .white : .black
@@ -60,9 +53,7 @@ public struct Piece: Equatable, CustomStringConvertible {
      Possible values are: `K` for white king, `r` for black rook and so on.
      */
     public var description: String {
-        guard let character = Piece.kindToCharacterMap[self.kind] else {
-            return "<Error>"
-        }
+        let character = self.kind.rawValue
         return self.color == .white ? character.uppercased() : character.lowercased()
     }
     
