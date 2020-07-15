@@ -23,11 +23,80 @@ class StandardRules: Rules {
             return false
         }
         
-        var nextMovePosition = position.deepCopy()
-        nextMovePosition.state.turn = nextMovePosition.state.turn.negotiated
-        let coveredSquares = self.coveredSquares(in: nextMovePosition)
+        for translation in MovingTranslations.default.diagonal {
+            for offset in 1..<8 {
+                let destination = kingSquare.translate(file: translation.0 * offset, rank: translation.1 * offset)
+                guard destination.isValid else {
+                    break
+                }
+                guard let piece = position.board[destination] else {
+                    continue
+                }
+                if piece.color == position.state.turn || piece.kind != .queen && piece.kind != .bishop {
+                    break
+                }
+                
+                if piece.kind == .queen || piece.kind == .bishop {
+                    return true
+                }
+            }
+        }
         
-        return coveredSquares.contains(kingSquare)
+        for translation in MovingTranslations.default.cross {
+            for offset in 1..<8 {
+                let destination = kingSquare.translate(file: translation.0 * offset, rank: translation.1 * offset)
+                guard destination.isValid else {
+                    break
+                }
+                guard let piece = position.board[destination] else {
+                    continue
+                }
+                if piece.color == position.state.turn || piece.kind != .queen && piece.kind != .rook {
+                    break
+                }
+                
+                if piece.kind == .queen || piece.kind == .rook {
+                    return true
+                }
+            }
+        }
+        
+        for translation in MovingTranslations.default.knight {
+            let destination = kingSquare.translate(file: translation.0, rank: translation.1)
+            guard destination.isValid else {
+                continue
+            }
+            guard let piece = position.board[destination] else {
+                continue
+            }
+            if piece.color == position.state.turn {
+                continue
+            }
+            
+            if piece.kind == .knight {
+                return true
+            }
+        }
+        
+        for translation in MovingTranslations.default.pawnTaking {
+            let sign = position.state.turn == .white ? 1 : -1
+            let destination = kingSquare.translate(file: translation.0, rank: translation.1 * sign)
+            guard destination.isValid else {
+                continue
+            }
+            guard let piece = position.board[destination] else {
+                continue
+            }
+            if piece.color == position.state.turn {
+                continue
+            }
+            
+            if piece.kind == .pawn {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func isMate(in position: Position) -> Bool {
