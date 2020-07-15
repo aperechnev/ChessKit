@@ -10,13 +10,13 @@
 public struct Move: CustomStringConvertible {
     
     /// Square where piece goes from.
-    let from: Square
+    public let from: Square
     
     /// Square where piece goes to.
-    let to: Square
+    public let to: Square
     
     /// Indicates if move promotes pawn into piece.
-    let promotion: PieceKind?
+    public let promotion: PieceKind?
     
     // MARK: Initialization
     
