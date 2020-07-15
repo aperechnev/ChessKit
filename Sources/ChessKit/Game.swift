@@ -182,4 +182,15 @@ public class Game {
         }
     }
     
+    // MARK: Utilities
+    
+    /**
+     Creates a deep copy of current game.
+     
+     - Returns: New `Game` object.
+     */
+    public func deepCopy() -> Game {
+        return Game(position: self.position.deepCopy())
+    }
+    
 }
