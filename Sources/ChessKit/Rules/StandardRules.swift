@@ -85,20 +85,15 @@ class StandardRules: Rules {
     
     private func filterIllegal(moves: [Move], for position: Position) -> [Move] {
         let filter = { (move: Move) -> Bool in
-            var nextPosition = position.deepCopy()
+            let nextPosition = position.deepCopy()
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
-            nextPosition.state.turn = nextPosition.state.turn.negotiated
-            
-            guard let kingSquare = self.kingSquare(in: nextPosition, color: position.state.turn) else {
-                return true
-            }
             
             if self.isIllelgalCastling(move: move, position: position) {
                 return false
             }
             
-            return !self.coveredSquares(in: nextPosition).contains(kingSquare)
+            return !self.isCheck(in: nextPosition)
         }
         
         return moves.filter(filter)
