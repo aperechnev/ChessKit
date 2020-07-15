@@ -9,4 +9,6 @@
 protocol Rules {
     func movesForPiece(at square: Square, in position: Position) -> [Move]
     func legalMoves(in position: Position) -> [Move]
+    func isCheck(in position: Position) -> Bool
+    func isMate(in position: Position) -> Bool
 }
