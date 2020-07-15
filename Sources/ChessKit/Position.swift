@@ -48,7 +48,7 @@ public struct Position {
      
      - Returns: Deep copy of current position.
      */
-    func deepCopy() -> Position {
+    public func deepCopy() -> Position {
         return Position(board: self.board.deepCopy(),
                         state: self.state,
                         counter: self.counter)
