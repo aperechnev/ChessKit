@@ -18,6 +18,28 @@ class StandardRules: Rules {
         .pawn: PawnMoving()
     ]
     
+    func isCheck(in position: Position) -> Bool {
+        guard let kingSquare = self.kingSquare(in: position, color: position.state.turn) else {
+            return false
+        }
+        
+        var nextMovePosition = position.deepCopy()
+        nextMovePosition.state.turn = nextMovePosition.state.turn.negotiated
+        let coveredSquares = self.coveredSquares(in: nextMovePosition)
+        
+        return coveredSquares.contains(kingSquare)
+    }
+    
+    func isMate(in position: Position) -> Bool {
+        guard self.isCheck(in: position) else {
+            return false
+        }
+        guard let kingSquare = self.kingSquare(in: position, color: position.state.turn) else {
+            return false
+        }
+        return self.movesForPiece(at: kingSquare, in: position).isEmpty
+    }
+    
     func legalMoves(in position: Position) -> [Move] {
         return self.enumeratedPieces(for: position)
             .flatMap { self.movesForPiece(at: $0.0, in: position) }

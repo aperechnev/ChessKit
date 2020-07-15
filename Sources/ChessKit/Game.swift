@@ -14,6 +14,15 @@ public class Game {
     /// Current game position.
     public var position: Position
     
+    /// Indicates whether it's check in current position.
+    public var isCheck: Bool {
+        return self.rules.isCheck(in: self.position)
+    }
+    /// Indicates whether it's mate in current position.
+    public var isMate: Bool {
+        return self.rules.isMate(in: self.position)
+    }
+    
     // MARK: Initialization
     
     /**

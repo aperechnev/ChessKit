@@ -130,5 +130,24 @@ class GameTests: XCTestCase {
         
         XCTAssertEqual(finalFen, "8/1p3ppk/4p3/3p4/1p6/1K6/8/6q1 w - - 0 49")
     }
+    
+    func testIsCheck() throws {
+        let checkPosition = FenSerialization.default.deserialize(fen: "3k4/8/8/8/5q2/8/8/5K2 w - - 0 1")
+        XCTAssertTrue(StandardRules().isCheck(in: checkPosition), "Position: \(FenSerialization.default.serialize(position: checkPosition))")
+        
+        let notCheckPosition = FenSerialization.default.deserialize(fen: "3k4/8/8/8/8/4q3/8/5K2 w - - 0 1")
+        XCTAssertFalse(StandardRules().isCheck(in: notCheckPosition), "Position: \(FenSerialization.default.serialize(position: notCheckPosition))")
+    }
+    
+    func testIsMate() throws {
+        let matePosition = FenSerialization.default.deserialize(fen: "3k3R/8/3K4/8/8/8/8/8 b - - 0 1")
+        XCTAssertTrue(StandardRules().isMate(in: matePosition), "Position: \(FenSerialization.default.serialize(position: matePosition))")
+        
+        let checkPosition = FenSerialization.default.deserialize(fen: "3k4/8/8/8/5q2/8/8/5K2 w - - 0 1")
+        XCTAssertFalse(StandardRules().isMate(in: checkPosition), "Position: \(FenSerialization.default.serialize(position: checkPosition))")
+        
+        let stalematePosition = FenSerialization.default.deserialize(fen: "8/8/8/8/8/6k1/5q2/7K w - - 0 1")
+        XCTAssertFalse(StandardRules().isMate(in: stalematePosition), "Position: \(FenSerialization.default.serialize(position: stalematePosition))")
+    }
 
 }
