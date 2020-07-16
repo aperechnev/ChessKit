@@ -63,6 +63,16 @@ public class Game {
      */
     public func make(move stringMove: String) {
         let move = Move(string: stringMove)
+        self.make(move: move)
+    }
+    
+    /**
+    Make move.
+    
+    - Parameters:
+       - move: A move to make.
+    */
+    public func make(move: Move) {
         let enPassant = self.updateEnPassant(for: move)
         
         self.updateCounters(for: move)
