@@ -7,7 +7,7 @@
 //
 
 /// A class that represents a chess board with pieces.
-public struct Board {
+public struct Board: Hashable {
     
     /**
      Array of squares on chess board.

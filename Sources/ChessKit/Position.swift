@@ -7,10 +7,10 @@
 //
 
 /// Game position.
-public struct Position {
+public struct Position: Hashable {
     
     /// Position state.
-    public struct State {
+    public struct State: Hashable {
         /// Color that holds current side that should make the next move.
         public var turn: PieceColor
         /// Available castlings in position.
@@ -21,7 +21,7 @@ public struct Position {
     }
     
     /// Position counter.
-    public struct Counter {
+    public struct Counter: Hashable {
         /**
          This is the number of halfmoves since the last capture or pawn advance.
          

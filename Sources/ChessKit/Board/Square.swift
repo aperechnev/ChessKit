@@ -7,7 +7,7 @@
 //
 
 /// Square on `Board`.
-public struct Square {
+public struct Square: Hashable {
     
     /// Index of square in `Board.squares` array.
     internal let index: Int
@@ -88,14 +88,6 @@ public struct Square {
      */
     public func translate(file: Int, rank: Int) -> Square {
         return Square(file: self.file + file, rank: self.rank + rank)
-    }
-    
-}
-
-extension Square: Equatable {
-    
-    public static func == (lhs: Square, rhs: Square) -> Bool {
-        return lhs.index == rhs.index
     }
     
 }
