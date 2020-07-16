@@ -154,7 +154,7 @@ class StandardRules: Rules {
     
     private func filterIllegal(moves: [Move], for position: Position) -> [Move] {
         let filter = { (move: Move) -> Bool in
-            let nextPosition = position.deepCopy()
+            var nextPosition = position.deepCopy()
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
             

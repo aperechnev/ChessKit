@@ -12,7 +12,7 @@ import XCTest
 class BoardTest: XCTestCase {
     
     func testAccessBySquare() throws {
-        let board = Board()
+        var board = Board()
         
         for index in 0..<64 {
             let square = Square(index: index)
@@ -30,7 +30,7 @@ class BoardTest: XCTestCase {
     }
     
     func testAccessByCoordinates() throws {
-        let board = Board()
+        var board = Board()
         
         let whitePawn = Piece(kind: .pawn, color: .white)
         board["e4"] = whitePawn
@@ -39,7 +39,7 @@ class BoardTest: XCTestCase {
     }
     
     func testAccessByIndex() throws {
-        let board = Board()
+        var board = Board()
         
         let whitePawn = Piece(kind: .pawn, color: .white)
         let e4square = Square(coordinate: "e4")
@@ -53,17 +53,17 @@ class BoardTest: XCTestCase {
     func testDeepCopy() throws {
         let whitePawn = Piece(kind: .pawn, color: .white)
         
-        let board = Board()
+        var board = Board()
         board["e4"] = whitePawn
         
-        let boardCopy = board.deepCopy()
+        var boardCopy = board.deepCopy()
         boardCopy["e4"] = nil
         
         XCTAssertEqual(board["e4"], whitePawn)
     }
     
     func testENumeratedPieces() throws {
-        let board = Board()
+        var board = Board()
         board["e4"] = Piece(kind: .pawn, color: .white)
         board["c5"] = Piece(kind: .pawn, color: .black)
         
