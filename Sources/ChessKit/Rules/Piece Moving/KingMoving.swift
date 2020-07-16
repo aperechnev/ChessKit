@@ -33,21 +33,21 @@ class KingMoving: ShortRangeMoving {
         
         var squares = [Square]()
 
-        let rank = position.state.turn == .white ? "1" : "8"
+        let rank = position.state.turn == .white ? 0 : 7
         
-        let shouldBeEmpty: [PieceKind:[String]] = [
-            .king: ["f", "g"],
-            .queen: ["b", "c", "d"]
+        let shouldBeEmpty: [PieceKind:[Int]] = [
+            .king: [5, 6],
+            .queen: [1, 2, 3]
         ]
         
         for castling in castlings {
             let isEmpty = shouldBeEmpty[castling.kind]!
-                .map { position.board[$0 + rank] == nil }
+                .map { position.board[Square(file: $0, rank: rank)] == nil }
                 .reduce(true) { $0 && $1 }
             
             if isEmpty {
-                let file = castling.kind == .queen ? "c" : "g"
-                let square = Square(coordinate: file + rank)
+                let file = castling.kind == .queen ? 2 : 6
+                let square = Square(file: file, rank: rank)
                 squares.append(square)
             }
         }
