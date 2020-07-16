@@ -7,7 +7,7 @@
 //
 
 /// A class that represents a chess board with pieces.
-public class Board {
+public struct Board: Hashable {
     
     /**
      Array of squares on chess board.
@@ -92,7 +92,7 @@ public class Board {
      - Returns: A deep copy of current board.
      */
     public func deepCopy() -> Board {
-        let board = Board()
+        var board = Board()
         board.squares = self.squares.map { $0 }
         return board
     }

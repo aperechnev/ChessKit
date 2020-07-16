@@ -7,7 +7,7 @@
 //
 
 /// Piece on `Board` with it's color.
-public struct Piece: Equatable, CustomStringConvertible {
+public struct Piece: Hashable, CustomStringConvertible {
     
     /// Piece kind.
     public let kind: PieceKind

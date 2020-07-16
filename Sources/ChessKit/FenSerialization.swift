@@ -99,7 +99,7 @@ public class FenSerialization {
     // MARK: Deserialization
     
     private func board(from sequence: String.SubSequence) -> Board {
-        let board = Board()
+        var board = Board()
         var square = Square(file: 0, rank: 7)
         
         for c in sequence {
