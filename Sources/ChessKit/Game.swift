@@ -11,6 +11,8 @@ public class Game {
     
     private let rules: Rules
     
+    public private(set) var movesHistory: [Move]
+    
     /// Current game position.
     public var position: Position
     
@@ -26,12 +28,14 @@ public class Game {
     // MARK: Initialization
     
     /**
-    Initialize game with given position.
-    
-    - Parameters:
-       - position: Initial game position.
+     Initialize game with given position.
+     
+     - Parameters:
+        - position: Initial game position.
+        - moves: List of moves before given position.
     */
-    public init(position: Position) {
+    public init(position: Position, moves: [Move] = []) {
+        self.movesHistory = moves
         self.position = position
         self.rules = StandardRules()
     }
@@ -41,9 +45,11 @@ public class Game {
      
      - Parameters:
         - position: Initial game position.
+        - moves: List of moves before given position.
         - rules: Game rules.
      */
-    internal init(position: Position, rules: Rules) {
+    internal init(position: Position, moves: [Move] = [], rules: Rules) {
+        self.movesHistory = moves
         self.position = position
         self.rules = rules
     }
@@ -73,6 +79,8 @@ public class Game {
        - move: A move to make.
     */
     public func make(move: Move) {
+        self.movesHistory.append(move)
+        
         let enPassant = self.updateEnPassant(for: move)
         
         self.updateCounters(for: move)
@@ -200,7 +208,9 @@ public class Game {
      - Returns: New `Game` object.
      */
     public func deepCopy() -> Game {
-        return Game(position: self.position.deepCopy())
+        let position = self.position.deepCopy()
+        let moves = self.movesHistory.map { $0 }
+        return Game(position: position, moves: moves)
     }
     
 }

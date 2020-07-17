@@ -11,6 +11,24 @@ import XCTest
 
 class GameTests: XCTestCase {
     
+    func testMovesHistory() throws {
+        let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        let position = FenSerialization.default.deserialize(fen: fen)
+        let game = Game(position: position)
+        
+        let moves = ["e2e4", "e7e5", "g1f3", "b8c6", "d2d4", "e5d4"]
+            .map { Move(string: $0) }
+        
+        moves.forEach { game.make(move: $0) }
+        
+        XCTAssertEqual(moves, game.movesHistory)
+        
+        XCTAssertEqual(
+            "r1bqkbnr/pppp1ppp/2n5/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4",
+            FenSerialization.default.serialize(position: game.position)
+        )
+    }
+    
     func testSimpleMove() throws {
         let initialFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
         let position = FenSerialization.default.deserialize(fen: initialFen)
