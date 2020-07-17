@@ -7,7 +7,7 @@
 //
 
 /// Represents move on board.
-public struct Move: CustomStringConvertible {
+public struct Move: CustomStringConvertible, Equatable {
     
     /// Square where piece goes from.
     public let from: Square
