@@ -11,11 +11,13 @@ public class Game {
     
     private let rules: Rules
     
+    /// Number of occurrences of each position in game.
+    public private(set) var positionsCounter: [Board:Int]
+    /// List of moves made before current game position.
     public private(set) var movesHistory: [Move]
     
     /// Current game position.
     public var position: Position
-    
     /// Indicates whether it's check in current position.
     public var isCheck: Bool {
         return self.rules.isCheck(in: self.position)
@@ -35,6 +37,9 @@ public class Game {
         - moves: List of moves before given position.
     */
     public init(position: Position, moves: [Move] = []) {
+        self.positionsCounter = [
+            position.board: 1
+        ]
         self.movesHistory = moves
         self.position = position
         self.rules = StandardRules()
@@ -49,6 +54,9 @@ public class Game {
         - rules: Game rules.
      */
     internal init(position: Position, moves: [Move] = [], rules: Rules) {
+        self.positionsCounter = [
+            position.board: 1
+        ]
         self.movesHistory = moves
         self.position = position
         self.rules = rules
@@ -89,6 +97,11 @@ public class Game {
         
         self.position.state.enPasant = enPassant
         self.toogleTurn()
+        
+        if self.positionsCounter[self.position.board] == nil {
+            self.positionsCounter[self.position.board] = 0
+        }
+        self.positionsCounter[self.position.board]! += 1
     }
     
     private func perform(move: Move) {

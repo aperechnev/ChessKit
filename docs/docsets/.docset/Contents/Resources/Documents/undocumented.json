@@ -6,6 +6,13 @@
       "symbol": "FenSerialization",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Game.swift",
+      "line": 14,
+      "symbol": "Game.movesHistory",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/aperechnev/Projects/ChessKit"
