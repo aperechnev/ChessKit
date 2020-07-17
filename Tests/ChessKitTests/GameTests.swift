@@ -29,6 +29,26 @@ class GameTests: XCTestCase {
         )
     }
     
+    func testPositionsCounter() throws {
+        let fen = "1K2Q3/8/8/6p1/5pk1/8/7P/8 w - - 3 66"
+        let position = FenSerialization.default.deserialize(fen: fen)
+        let game = Game(position: position)
+        
+        XCTAssertEqual(game.positionsCounter[game.position.board], 1)
+        
+        game.make(move: "b8a8")
+        game.make(move: "g4f3")
+        game.make(move: "a8b8")
+        game.make(move: "f3g4")
+        XCTAssertEqual(game.positionsCounter[game.position.board], 2)
+        
+        game.make(move: "b8a8")
+        game.make(move: "g4f3")
+        game.make(move: "a8b8")
+        game.make(move: "f3g4")
+        XCTAssertEqual(game.positionsCounter[game.position.board], 3)
+    }
+    
     func testSimpleMove() throws {
         let initialFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
         let position = FenSerialization.default.deserialize(fen: initialFen)
