@@ -9,14 +9,19 @@
 /// Standard chess move rules.
 public class StandardRules: Rules {
     
-    private let movings: [PieceKind:PieceMoving] = [
-        .king: KingMoving(),
-        .queen: QueenMoving(),
-        .rook: RookMoving(),
-        .bishop: BishopMoving(),
-        .knight: KnightMoving(),
-        .pawn: PawnMoving()
-    ]
+    private let movings: [PieceKind:PieceMoving]
+    
+    /// Initialise a new instance.
+    public init() {
+        self.movings = [
+            .king: KingMoving(),
+            .queen: QueenMoving(),
+            .rook: RookMoving(),
+            .bishop: BishopMoving(),
+            .knight: KnightMoving(),
+            .pawn: PawnMoving()
+        ]
+    }
     
     func isCheck(in position: Position) -> Bool {
         guard let kingSquare = self.kingSquare(in: position, color: position.state.turn) else {
