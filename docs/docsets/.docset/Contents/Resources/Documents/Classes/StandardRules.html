@@ -17,7 +17,7 @@
     <a title="StandardRules Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (90% documented)</p>
+        <p><a href="../index.html"> Docs</a> (98% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -38,9 +38,6 @@
           <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Classes/Board.html">Board</a>
-              </li>
               <li class="nav-group-task">
                 <a href="../Classes/FenSerialization.html">FenSerialization</a>
               </li>
@@ -64,16 +61,11 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Protocols.html">Protocols</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Protocols/Rules.html">Rules</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Board.html">Board</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Structs/Move.html">Move</a>
               </li>
@@ -103,7 +95,7 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">StandardRules</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Rules.html">Rules</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">StandardRules</span> <span class="p">:</span> <span class="kt">Rules</span></code></pre>
 
                 </div>
               </div>
@@ -113,33 +105,6 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8ChessKit13StandardRulesC10legalMoves2inSayAA4MoveVGAA8PositionV_tF"></a>
-                    <a name="//apple_ref/swift/Method/legalMoves(in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit13StandardRulesC10legalMoves2inSayAA4MoveVGAA8PositionV_tF">legalMoves(in:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">legalMoves</span><span class="p">(</span><span class="k">in</span> <span class="nv">position</span><span class="p">:</span> <span class="kt"><a href="../Structs/Position.html">Position</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Move.html">Move</a></span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -153,7 +118,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Generates available moves from square in given position.</p>
 
                       </div>
                       <div class="declaration">
@@ -164,6 +129,41 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>square</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Square of the piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>position</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>List of available moves.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -172,7 +172,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-07-13)</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-07-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
