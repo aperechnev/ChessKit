@@ -11,6 +11,7 @@ public class StandardRules: Rules {
     
     private let movings: [PieceKind:PieceMoving]
     
+    /// Initialise a new instance.
     public init() {
         self.movings = [
             .king: KingMoving(),
