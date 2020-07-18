@@ -29,6 +29,13 @@ public class Game {
     
     // MARK: Initialization
     
+    init(position: Position, moves: [Move], positionsCounter: [Board:Int]) {
+        self.position = position
+        self.movesHistory = moves
+        self.positionsCounter = positionsCounter
+        self.rules = StandardRules()
+    }
+    
     /**
      Initialize game with given position.
      
@@ -223,7 +230,8 @@ public class Game {
     public func deepCopy() -> Game {
         let position = self.position.deepCopy()
         let moves = self.movesHistory.map { $0 }
-        return Game(position: position, moves: moves)
+        let positionsCounter = self.positionsCounter
+        return Game(position: position, moves: moves, positionsCounter: positionsCounter)
     }
     
 }
