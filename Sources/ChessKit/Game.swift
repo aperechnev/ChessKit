@@ -230,8 +230,12 @@ public class Game {
     public func deepCopy() -> Game {
         let position = self.position.deepCopy()
         let moves = self.movesHistory.map { $0 }
-        let positionsCounter = self.positionsCounter
-        return Game(position: position, moves: moves, positionsCounter: positionsCounter)
+        
+        return Game(
+            position: position,
+            moves: moves,
+            positionsCounter: self.positionsCounter
+        )
     }
     
 }
