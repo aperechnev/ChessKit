@@ -143,7 +143,7 @@ public class StandardRules: Rules {
         return self.filterIllegal(moves: moves, for: position)
     }
     
-    private func coveredSquares(in position: Position) -> [Square] {
+    public func coveredSquares(in position: Position) -> [Square] {
         return self.enumeratedPieces(for: position)
             .filter { $0.1.kind != .king }
             .flatMap { self.coveredSquaresForPiece(at: $0.0, in: position) }
