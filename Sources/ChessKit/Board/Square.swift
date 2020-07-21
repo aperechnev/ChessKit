@@ -10,7 +10,7 @@
 public struct Square: Hashable {
     
     private(set) var index: Int
-    let bitboardMask: Int64
+    let bitboardMask: Bitboard
     
     /// Index of file of the square.
     public var file: Int {
@@ -34,7 +34,7 @@ public struct Square: Hashable {
     
     // MARK: Initializers
     
-    init(bitboardMask: Int64) {
+    init(bitboardMask: Bitboard) {
         self.bitboardMask = bitboardMask
         self.index = 0
         self.isValid = bitboardMask > Int64.zero
