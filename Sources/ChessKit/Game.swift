@@ -112,10 +112,10 @@ public class Game {
     }
     
     private func perform(move: Move) {
-        let isCastling = self.position.board[move.from]?.kind == .king &&
+        let isCastling = position.board.bitboards.king & move.from.bitboardMask != Int64.zero &&
             abs(move.from.file - move.to.file) > 1
         
-        let isEnPassant = self.position.board[move.from]?.kind == .pawn &&
+        let isEnPassant = position.board.bitboards.pawn & move.from.bitboardMask != Int64.zero &&
             move.to == self.position.state.enPasant
         
         let isPawnPromotion = move.promotion != nil
@@ -169,8 +169,8 @@ public class Game {
     }
     
     private func updateCounters(for move: Move) {
-        let isTaking = self.position.board[move.to] != nil
-        let isPawnAdvance = self.position.board[move.from]?.kind == .pawn
+        let isTaking = position.board.bitboards.bitboard(for: position.state.turn.negotiated) & move.to.bitboardMask != Int64.zero
+        let isPawnAdvance = position.board.bitboards.pawn & move.from.bitboardMask != Int64.zero
         
         if isTaking || isPawnAdvance {
             self.position.counter.halfMoves = 0
@@ -188,10 +188,7 @@ public class Game {
     }
     
     private func updateEnPassant(for move: Move) -> Square? {
-        guard let piece = self.position.board[move.from] else {
-            return nil
-        }
-        guard piece.kind == .pawn else {
+        if position.board.bitboards.pawn & move.from.bitboardMask == Int64.zero {
             return nil
         }
         guard abs(move.from.rank - move.to.rank) == 2 else {
