@@ -75,23 +75,29 @@ public struct Board: Hashable {
             self.bitboards.knight &= ~squareMask
             self.bitboards.pawn &= ~squareMask
             
-            if piece?.color == .white {
+            guard let piece = piece else {
+                return
+            }
+            
+            switch piece.color {
+            case .white:
                 self.bitboards.white |= squareMask
-            } else if piece?.color == .black {
+            case .black:
                 self.bitboards.black |= squareMask
             }
             
-            if piece?.kind == .king {
+            switch piece.kind {
+            case .king:
                 self.bitboards.king |= squareMask
-            } else if piece?.kind == .queen {
+            case .queen:
                 self.bitboards.queen |= squareMask
-            } else if piece?.kind == .rook {
+            case .rook:
                 self.bitboards.rook |= squareMask
-            } else if piece?.kind == .bishop {
+            case .bishop:
                 self.bitboards.bishop |= squareMask
-            } else if piece?.kind == .knight {
+            case .knight:
                 self.bitboards.knight |= squareMask
-            } else if piece?.kind == .pawn {
+            case .pawn:
                 self.bitboards.pawn |= squareMask
             }
         }
