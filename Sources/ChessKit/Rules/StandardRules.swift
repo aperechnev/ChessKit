@@ -168,7 +168,7 @@ public class StandardRules: Rules {
     
     private func filterIllegal(moves: [Move], for position: Position) -> [Move] {
         let filter = { (move: Move) -> Bool in
-            var nextPosition = position.deepCopy()
+            var nextPosition = position
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
             
@@ -213,7 +213,7 @@ public class StandardRules: Rules {
         let fileTranslation = (move.to.file - move.from.file) / 2
         let squareBetween = move.from.translate(file: fileTranslation, rank: 0)
 
-        var nextPosition = position.deepCopy()
+        var nextPosition = position
         nextPosition.board[squareBetween] = nextPosition.board[move.from]
         nextPosition.board[move.from] = nil
         nextPosition.state.turn = nextPosition.state.turn.negotiated
@@ -226,7 +226,7 @@ public class StandardRules: Rules {
     }
     
     private func isCatslingToCheck(move: Move, position: Position) -> Bool {
-        var nextPosition = position.deepCopy()
+        var nextPosition = position
         nextPosition.state.turn = nextPosition.state.turn.negotiated
         if self.coveredSquares(in: nextPosition).contains(move.from) {
             return true

@@ -9,16 +9,18 @@
 /// A class that represents a chess board with pieces.
 public struct Board: Hashable {
     
-    /**
-     Array of squares on chess board.
-     
-     The first element is `a1` square, the second is `a2` and `h8` is the last.
-     It means that by iterating each element in array you are going through `a1-a8` file first,
-     then throught `b1-b8` file and so on up to `h1-h8` file.
-     
-     The size of array is always equals to its dimensions multiplied by each other.
-     */
-    fileprivate var squares: [Piece?]
+    private struct Bitboards: Hashable {
+        var white = Int64.zero
+        var black = Int64.zero
+        var king = Int64.zero
+        var queen = Int64.zero
+        var rook = Int64.zero
+        var bishop = Int64.zero
+        var knight = Int64.zero
+        var pawn = Int64.zero
+    }
+    
+    private var bitboards: Bitboards
     
     internal static let fileCoordinates: [Character] = ["a", "b", "c", "d", "e", "f", "g", "h"]
     internal static let rankCoordinates: [Character] = ["1", "2", "3", "4", "5", "6", "7", "8"]
@@ -30,7 +32,7 @@ public struct Board: Hashable {
      Initializes board with empty squares.
      */
     public init() {
-        self.squares = [Piece?](repeating: nil, count: Board.squaresCount)
+        self.bitboards = Bitboards()
     }
     
     /**
@@ -43,10 +45,66 @@ public struct Board: Hashable {
      */
     public subscript(index: Int) -> Piece? {
         get {
-            return self.squares[index]
+            let squareMask = Int64(1) << index
+            
+            var color: PieceColor! = nil
+            if self.bitboards.white & squareMask != Int64.zero {
+                color = .white
+            } else if self.bitboards.black & squareMask != Int64.zero {
+                color = .black
+            }
+            guard color != nil else {
+                return nil
+            }
+            
+            var kind: PieceKind! = nil
+            if self.bitboards.king & squareMask != Int64.zero {
+                kind = .king
+            } else if self.bitboards.queen & squareMask != Int64.zero {
+                kind = .queen
+            } else if self.bitboards.rook & squareMask != Int64.zero {
+                kind = .rook
+            } else if self.bitboards.bishop & squareMask != Int64.zero {
+                kind = .bishop
+            } else if self.bitboards.knight & squareMask != Int64.zero {
+                kind = .knight
+            } else if self.bitboards.pawn & squareMask != Int64.zero {
+                kind = .pawn
+            }
+            
+            return Piece(kind: kind, color: color)
         }
         set(piece) {
-            self.squares[index] = piece
+            let squareMask = Int64(1) << index
+            
+            self.bitboards.white &= ~squareMask
+            self.bitboards.black &= ~squareMask
+            self.bitboards.king &= ~squareMask
+            self.bitboards.queen &= ~squareMask
+            self.bitboards.rook &= ~squareMask
+            self.bitboards.bishop &= ~squareMask
+            self.bitboards.knight &= ~squareMask
+            self.bitboards.pawn &= ~squareMask
+            
+            if piece?.color == .white {
+                self.bitboards.white |= squareMask
+            } else if piece?.color == .black {
+                self.bitboards.black |= squareMask
+            }
+            
+            if piece?.kind == .king {
+                self.bitboards.king |= squareMask
+            } else if piece?.kind == .queen {
+                self.bitboards.queen |= squareMask
+            } else if piece?.kind == .rook {
+                self.bitboards.rook |= squareMask
+            } else if piece?.kind == .bishop {
+                self.bitboards.bishop |= squareMask
+            } else if piece?.kind == .knight {
+                self.bitboards.knight |= squareMask
+            } else if piece?.kind == .pawn {
+                self.bitboards.pawn |= squareMask
+            }
         }
     }
     
@@ -60,10 +118,10 @@ public struct Board: Hashable {
      */
     public subscript(square: Square) -> Piece? {
         get {
-            return self.squares[square.index]
+            return self[square.index]
         }
         set(piece) {
-            self.squares[square.index] = piece
+            self[square.index] = piece
         }
     }
     
@@ -78,23 +136,12 @@ public struct Board: Hashable {
     public subscript(coordinate: String) -> Piece? {
         get {
             let square = Square(coordinate: coordinate)
-            return self[square]
+            return self[square.index]
         }
         set(piece) {
             let square = Square(coordinate: coordinate)
-            self[square] = piece
+            self[square.index] = piece
         }
-    }
-    
-    /**
-     Makes a deep copy of board.
-     
-     - Returns: A deep copy of current board.
-     */
-    public func deepCopy() -> Board {
-        var board = Board()
-        board.squares = self.squares.map { $0 }
-        return board
     }
     
     /**
@@ -103,9 +150,16 @@ public struct Board: Hashable {
      - Returns: Array of tupples that contain pieces and their squares.
      */
     public func enumeratedPieces() -> [(Square, Piece)] {
-        self.squares.enumerated()
-            .filter { $0.element != nil }
-            .map { (Square(index: $0.offset), $0.element!) }
+        var pieces = [(Square, Piece)]()
+        
+        for index in 0..<64 {
+            if let piece = self[index] {
+                let square = Square(index: index)
+                pieces.append((square, piece))
+            }
+        }
+        
+        return pieces
     }
     
 }

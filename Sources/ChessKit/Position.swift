@@ -43,15 +43,4 @@ public struct Position: Hashable {
     /// Position counters.
     public var counter: Counter
     
-    /**
-     Make a deep copy of current position.
-     
-     - Returns: Deep copy of current position.
-     */
-    public func deepCopy() -> Position {
-        return Position(board: self.board.deepCopy(),
-                        state: self.state,
-                        counter: self.counter)
-    }
-    
 }

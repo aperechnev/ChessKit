@@ -228,7 +228,7 @@ public class Game {
      - Returns: New `Game` object.
      */
     public func deepCopy() -> Game {
-        let position = self.position.deepCopy()
+        let position = self.position
         let moves = self.movesHistory.map { $0 }
         
         return Game(
