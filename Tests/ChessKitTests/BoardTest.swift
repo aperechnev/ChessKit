@@ -56,7 +56,7 @@ class BoardTest: XCTestCase {
         var board = Board()
         board["e4"] = whitePawn
         
-        var boardCopy = board.deepCopy()
+        var boardCopy = board
         boardCopy["e4"] = nil
         
         XCTAssertEqual(board["e4"], whitePawn)
