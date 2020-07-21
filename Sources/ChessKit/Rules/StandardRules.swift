@@ -28,20 +28,25 @@ public class StandardRules: Rules {
             return false
         }
         
+        let bitboards = position.board.bitboards
+        
         for translation in MovingTranslations.default.diagonal {
             for offset in 1..<8 {
                 let destination = kingSquare.translate(file: translation.0 * offset, rank: translation.1 * offset)
                 guard destination.isValid else {
                     break
                 }
-                guard let piece = position.board[destination] else {
+                
+                if (bitboards.white | bitboards.black) & destination.bitboardMask == Int64.zero {
                     continue
                 }
-                if piece.color == position.state.turn || piece.kind != .queen && piece.kind != .bishop {
+                if bitboards.bitboard(for: position.state.turn) & destination.bitboardMask != Int64.zero {
                     break
                 }
                 
-                if piece.kind == .queen || piece.kind == .bishop {
+                if (bitboards.queen | bitboards.bishop) & destination.bitboardMask == Int64.zero {
+                    break
+                } else {
                     return true
                 }
             }
@@ -53,15 +58,18 @@ public class StandardRules: Rules {
                 guard destination.isValid else {
                     break
                 }
-                guard let piece = position.board[destination] else {
-                    continue
-                }
-                if piece.color == position.state.turn || piece.kind != .queen && piece.kind != .rook {
+                if bitboards.bitboard(for: position.state.turn) & destination.bitboardMask != Int64.zero {
                     break
                 }
                 
-                if piece.kind == .queen || piece.kind == .rook {
+                if (bitboards.white | bitboards.black) & destination.bitboardMask == Int64.zero {
+                    continue
+                }
+                
+                if (bitboards.queen | bitboards.rook) & destination.bitboardMask != Int64.zero {
                     return true
+                } else {
+                    break
                 }
             }
         }
@@ -71,14 +79,7 @@ public class StandardRules: Rules {
             guard destination.isValid else {
                 continue
             }
-            guard let piece = position.board[destination] else {
-                continue
-            }
-            if piece.color == position.state.turn {
-                continue
-            }
-            
-            if piece.kind == .knight {
+            if bitboards.bitboard(for: position.state.turn.negotiated) & bitboards.knight & destination.bitboardMask != Int64.zero {
                 return true
             }
         }
@@ -89,14 +90,7 @@ public class StandardRules: Rules {
             guard destination.isValid else {
                 continue
             }
-            guard let piece = position.board[destination] else {
-                continue
-            }
-            if piece.color == position.state.turn {
-                continue
-            }
-            
-            if piece.kind == .pawn {
+            if bitboards.pawn & bitboards.bitboard(for: position.state.turn.negotiated) & destination.bitboardMask != Int64.zero {
                 return true
             }
         }
@@ -188,13 +182,13 @@ public class StandardRules: Rules {
     }
     
     private func kingSquare(in position: Position, color: PieceColor) -> Square? {
-        return position.board.enumeratedPieces()
-            .filter({ $0.1.kind == .king && $0.1.color == color })
-            .first?.0
+        let mask = position.board.bitboards.king & position.board.bitboards.bitboard(for: color)
+        let square = Square(bitboardMask: mask)
+        return square.isValid ? square : nil
     }
     
     private func isIllelgalCastling(move: Move, position: Position) -> Bool {
-        guard position.board[move.from]?.kind == .king else {
+        guard position.board.bitboards.king & move.from.bitboardMask != Int64.zero else {
             return false
         }
         guard abs(move.from.file - move.to.file) > 1 else {
