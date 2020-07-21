@@ -152,7 +152,7 @@ public struct Board: Hashable {
     public func enumeratedPieces() -> [(Square, Piece)] {
         var pieces = [(Square, Piece)]()
         
-        for index in 0..<64 {
+        for index in Int.zero..<Board.squaresCount {
             if let piece = self[index] {
                 let square = Square(index: index)
                 pieces.append((square, piece))
