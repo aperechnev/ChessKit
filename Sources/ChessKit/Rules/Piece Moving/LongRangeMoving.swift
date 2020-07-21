@@ -28,10 +28,12 @@ class LongRangeMoving: RangeMoving {
                 break
             }
             
-            if position.board[destination]?.color == position.state.turn {
+            // If same color piece
+            if position.board.bitboards.bitboard(for: position.state.turn) & destination.bitboardMask != Int.zero {
                 break
             }
-            if position.board[destination]?.color != nil && position.board[destination]?.color != position.state.turn {
+            // If opposite color piece
+            if position.board.bitboards.bitboard(for: position.state.turn.negotiated) & destination.bitboardMask != Int.zero {
                 destinations.append(destination)
                 break
             }

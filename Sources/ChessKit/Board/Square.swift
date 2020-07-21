@@ -9,8 +9,8 @@
 /// Square on `Board`.
 public struct Square: Hashable {
     
-    /// Index of square in `Board.squares` array.
-    internal let index: Int
+    private(set) var index: Int
+    let bitboardMask: Int64
     
     /// Index of file of the square.
     public var file: Int {
@@ -34,6 +34,18 @@ public struct Square: Hashable {
     
     // MARK: Initializers
     
+    init(bitboardMask: Int64) {
+        self.bitboardMask = bitboardMask
+        self.index = 0
+        self.isValid = bitboardMask > Int64.zero
+        
+        var mask = bitboardMask
+        while mask > 1 {
+            mask = mask >> 1
+            self.index += 1
+        }
+    }
+    
     /**
      Initializes `Square` with its index.
      
@@ -42,6 +54,7 @@ public struct Square: Hashable {
      */
     public init(index: Int) {
         self.index = index
+        self.bitboardMask = 1 << index
         self.isValid = (Int.zero..<Board.squaresCount).contains(self.index)
     }
     
