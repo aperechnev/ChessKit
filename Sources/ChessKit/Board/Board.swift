@@ -9,7 +9,7 @@
 /// A class that represents a chess board with pieces.
 public struct Board: Hashable {
     
-    private struct Bitboards: Hashable {
+    struct Bitboards: Hashable {
         var white = Int64.zero
         var black = Int64.zero
         var king = Int64.zero
@@ -20,7 +20,7 @@ public struct Board: Hashable {
         var pawn = Int64.zero
     }
     
-    private var bitboards: Bitboards
+    var bitboards: Bitboards
     
     internal static let fileCoordinates: [Character] = ["a", "b", "c", "d", "e", "f", "g", "h"]
     internal static let rankCoordinates: [Character] = ["1", "2", "3", "4", "5", "6", "7", "8"]
