@@ -18,11 +18,13 @@ class KingMoving: ShortRangeMoving {
     }
     
     private func filterOppositeKingSquares(destinations: [Square], in position: Position) -> [Square] {
-        guard let (square, _) = position.board.enumeratedPieces()
-            .filter({ $1 == Piece(kind: .king, color: position.state.turn.negotiated) })
-            .first else {
-                return destinations
+        let mask = position.board.bitboards.bitboard(for: position.state.turn.negotiated) & position.board.bitboards.king
+        
+        guard mask != Int64.zero else {
+            return destinations
         }
+        
+        let square = Square(bitboardMask: mask)
         
         return destinations
             .filter { abs($0.file - square.file) > 1 || abs($0.rank - square.rank) > 1 }
@@ -42,7 +44,10 @@ class KingMoving: ShortRangeMoving {
         
         for castling in castlings {
             let isEmpty = shouldBeEmpty[castling.kind]!
-                .map { position.board[Square(file: $0, rank: rank)] == nil }
+                .map {
+                    let square = Square(file: $0, rank: rank)
+                    return (position.board.bitboards.white | position.board.bitboards.black) & square.bitboardMask == Int64.zero
+                }
                 .reduce(true) { $0 && $1 }
             
             if isEmpty {

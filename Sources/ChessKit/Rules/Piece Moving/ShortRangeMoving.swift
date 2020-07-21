@@ -17,8 +17,7 @@ class ShortRangeMoving: RangeMoving {
     func coveredSquares(from square: Square, in position: Position) -> [Square] {
         return self.translations
             .map { square.translate(file: $0.0, rank: $0.1) }
-            .filter { $0.isValid }
-            .filter { position.board[$0]?.color != position.state.turn }
+            .filter { $0.isValid && position.board.bitboards.bitboard(for: position.state.turn) & $0.bitboardMask == 0 }
     }
     
 }

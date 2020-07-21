@@ -24,7 +24,7 @@ class PawnMoving: PieceMoving {
         let direction = position.state.turn == .white ? 1 : -1
         let destination = square.translate(file: 0, rank: direction)
         if destination.isValid {
-            if position.board[destination] == nil {
+            if (position.board.bitboards.white | position.board.bitboards.black) & destination.bitboardMask == Int64.zero {
                 return [destination]
             }
         }
@@ -38,8 +38,7 @@ class PawnMoving: PieceMoving {
         }
         
         let translation = position.state.turn == .white ? 1 : -1
-        let isPathClear = position.board[square.translate(file: 0, rank: translation)] == nil &&
-            position.board[square.translate(file: 0, rank: translation * 2)] == nil
+        let isPathClear = (position.board.bitboards.white | position.board.bitboards.black) & square.translate(file: 0, rank: translation).bitboardMask == Int64.zero && (position.board.bitboards.white | position.board.bitboards.black) & square.translate(file: 0, rank: translation * 2).bitboardMask == Int64.zero
         guard isPathClear else {
             return []
         }
@@ -57,7 +56,7 @@ class PawnMoving: PieceMoving {
             if !takingSquare.isValid {
                 continue
             }
-            if position.board[takingSquare]?.color.negotiated == position.state.turn {
+            if position.board.bitboards.bitboard(for: position.state.turn.negotiated) & takingSquare.bitboardMask != Int64.zero {
                 destinations.append(takingSquare)
             }
         }
