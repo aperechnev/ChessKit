@@ -68,11 +68,12 @@ Lightweight and fast chess framework written in Swift. ChessKit is used as a bas
   # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  # spec.ios.deployment_target = "5.0"
-  # spec.osx.deployment_target = "10.7"
+  spec.ios.deployment_target = "8.0"
+  spec.osx.deployment_target = "10.9"
   # spec.watchos.deployment_target = "2.0"
   # spec.tvos.deployment_target = "9.0"
 
+  spec.swift_version = "5.2"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -91,7 +92,7 @@ Lightweight and fast chess framework written in Swift. ChessKit is used as a bas
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Sources"
+  spec.source_files  = "Sources/**/*.swift"
   spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
