@@ -29,11 +29,11 @@ class LongRangeMoving: RangeMoving {
             }
             
             // If same color piece
-            if position.board.bitboards.bitboard(for: position.state.turn) & destination.bitboardMask != Int.zero {
+            if position.board.bitboards.bitboard(for: position.state.turn) & destination.bitboardMask != UInt64.zero {
                 break
             }
             // If opposite color piece
-            if position.board.bitboards.bitboard(for: position.state.turn.negotiated) & destination.bitboardMask != Int.zero {
+            if position.board.bitboards.bitboard(for: position.state.turn.negotiated) & destination.bitboardMask != UInt64.zero {
                 destinations.append(destination)
                 break
             }

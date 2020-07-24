@@ -34,12 +34,12 @@ public struct Board: Hashable {
      */
     public subscript(index: Int) -> Piece? {
         get {
-            let squareMask = Int64(1) << index
+            let squareMask = Bitboard(1) << index
             
             var color: PieceColor! = nil
-            if self.bitboards.white & squareMask != Int64.zero {
+            if self.bitboards.white & squareMask != Bitboard.zero {
                 color = .white
-            } else if self.bitboards.black & squareMask != Int64.zero {
+            } else if self.bitboards.black & squareMask != Bitboard.zero {
                 color = .black
             }
             guard color != nil else {
@@ -47,24 +47,24 @@ public struct Board: Hashable {
             }
             
             var kind: PieceKind! = nil
-            if self.bitboards.king & squareMask != Int64.zero {
+            if self.bitboards.king & squareMask != Bitboard.zero {
                 kind = .king
-            } else if self.bitboards.queen & squareMask != Int64.zero {
+            } else if self.bitboards.queen & squareMask != Bitboard.zero {
                 kind = .queen
-            } else if self.bitboards.rook & squareMask != Int64.zero {
+            } else if self.bitboards.rook & squareMask != Bitboard.zero {
                 kind = .rook
-            } else if self.bitboards.bishop & squareMask != Int64.zero {
+            } else if self.bitboards.bishop & squareMask != Bitboard.zero {
                 kind = .bishop
-            } else if self.bitboards.knight & squareMask != Int64.zero {
+            } else if self.bitboards.knight & squareMask != Bitboard.zero {
                 kind = .knight
-            } else if self.bitboards.pawn & squareMask != Int64.zero {
+            } else if self.bitboards.pawn & squareMask != Bitboard.zero {
                 kind = .pawn
             }
             
             return Piece(kind: kind, color: color)
         }
         set(piece) {
-            let squareMask = Int64(1) << index
+            let squareMask = Bitboard(1) << index
             
             self.bitboards.white &= ~squareMask
             self.bitboards.black &= ~squareMask
@@ -75,23 +75,29 @@ public struct Board: Hashable {
             self.bitboards.knight &= ~squareMask
             self.bitboards.pawn &= ~squareMask
             
-            if piece?.color == .white {
+            guard let piece = piece else {
+                return
+            }
+            
+            switch piece.color {
+            case .white:
                 self.bitboards.white |= squareMask
-            } else if piece?.color == .black {
+            case .black:
                 self.bitboards.black |= squareMask
             }
             
-            if piece?.kind == .king {
+            switch piece.kind {
+            case .king:
                 self.bitboards.king |= squareMask
-            } else if piece?.kind == .queen {
+            case .queen:
                 self.bitboards.queen |= squareMask
-            } else if piece?.kind == .rook {
+            case .rook:
                 self.bitboards.rook |= squareMask
-            } else if piece?.kind == .bishop {
+            case .bishop:
                 self.bitboards.bishop |= squareMask
-            } else if piece?.kind == .knight {
+            case .knight:
                 self.bitboards.knight |= squareMask
-            } else if piece?.kind == .pawn {
+            case .pawn:
                 self.bitboards.pawn |= squareMask
             }
         }

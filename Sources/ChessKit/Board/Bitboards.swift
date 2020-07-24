@@ -6,7 +6,7 @@
 //  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
-typealias Bitboard = Int64
+typealias Bitboard = UInt64
 
 struct Bitboards: Hashable {
     
