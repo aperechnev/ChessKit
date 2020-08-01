@@ -41,3 +41,19 @@ target 'MyApp' do
   pod 'ChessKit'
 end
 ```
+
+## How To Contribute
+
+Please follow the [git-flow](http://danielkummer.github.io/git-flow-cheatsheet/index.html) notation and make sure that all tests are passing before contributing. Your questions and pull requests are welcome.
+
+## Versioning
+
+We are using [semantic versioning](https://semver.org).
+
+## Support
+
+If you need some help, you can join our [gitter room](https://gitter.im/Ladoga-Engine/ChessKit).
+
+## License
+
+ChessKit is released under the MIT license. See LICENSE for details.
