@@ -1,7 +1,7 @@
 # ChessKit
 
-[![codebeat badge](https://codebeat.co/badges/d0f02d72-ca79-4cd6-a4a1-d4ad3a77ea04)](https://codebeat.co/projects/github-com-perechnev-chesskit-develop)
-[![docs badge](https://raw.githubusercontent.com/aperechnev/ChessKit/develop/docs/badge.svg)](https://aperechnev.github.io/ChessKit/) [![Gitter](https://badges.gitter.im/Ladoga-Engine/ChessKit.svg)](https://gitter.im/Ladoga-Engine/ChessKit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) ![Tests](https://github.com/aperechnev/ChessKit/workflows/Tests/badge.svg) ![](https://img.shields.io/github/license/aperechnev/ChessKit) [![ChessKit pod](https://img.shields.io/cocoapods/v/ChessKit)](https://cocoapods.org/pods/ChessKit)
+[![codebeat badge](https://codebeat.co/badges/8ae1f4df-266c-4441-8bb1-8da25f067b28)](https://codebeat.co/projects/github-com-aperechnev-chesskit-develop)
+[![docs badge](https://raw.githubusercontent.com/aperechnev/ChessKit/develop/docs/badge.svg)](https://aperechnev.github.io/ChessKit/) ![Tests](https://github.com/aperechnev/ChessKit/workflows/Tests/badge.svg) ![](https://img.shields.io/github/license/aperechnev/ChessKit) [![ChessKit pod](https://img.shields.io/cocoapods/v/ChessKit)](https://cocoapods.org/pods/ChessKit)
 
 Lightweight and fast chess framework written in Swift.
 
@@ -74,10 +74,6 @@ Please follow the [git-flow](http://danielkummer.github.io/git-flow-cheatsheet/i
 ## Versioning
 
 We are using [semantic versioning](https://semver.org).
-
-## Support
-
-If you need some help, you can join our [gitter room](https://gitter.im/Ladoga-Engine/ChessKit).
 
 ## License
 
