@@ -8,12 +8,12 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "ChessKit"
-  spec.version      = "1.2.14"
+  spec.version      = "1.2.15"
   spec.summary      = "Lightweight and fast chess framework written in Swift."
   
   spec.description  = "Lightweight and fast chess framework written in Swift. ChessKit is used as a base freamework for Ladoga chess engine."
 
-  spec.homepage     = "https://perechnev.github.io/ChessKit/"
+  spec.homepage     = "https://aperechnev.github.io/ChessKit/"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
   spec.author       = { "Alexander Perechnev" => "alexander@perechnev.com" }
 
@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
   spec.osx.deployment_target = "10.9"
   spec.swift_version = "5.2"
 
-  spec.source       = { :git => "https://github.com/perechnev/ChessKit.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/aperechnev/ChessKit.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/**/*.swift"
   spec.exclude_files = "Classes/Exclude"
 end
