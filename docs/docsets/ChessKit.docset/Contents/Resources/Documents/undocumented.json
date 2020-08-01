@@ -9,7 +9,7 @@
     },
     {
       "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/StandardRules.swift",
-      "line": 146,
+      "line": 140,
       "symbol": "StandardRules.coveredSquares(in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
