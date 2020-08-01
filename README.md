@@ -13,7 +13,7 @@ The ChessKit framework is avalable for installation via Swift Package Manager an
 
 ### Swift Package Manager
 
-Add a dependency via Xcode, linking to `https://github.com/perechnev/ChessKit`, or directly in your `Package.swift` file:
+Add a dependency via Xcode, linking to `https://github.com/aperechnev/ChessKit`, or directly in your `Package.swift` file:
 
 ```Swift
 import PackageDescription
@@ -24,7 +24,7 @@ let package = Package(
         .macOS(.v10_12),
     ],
     dependencies: [
-        .package(url: "https://github.com/perechnev/ChessKit.git", from: "1.2.10"),
+        .package(url: "https://github.com/aperechnev/ChessKit.git", from: "1.2.10"),
     ],
     targets: [
         .target(name: "MyPackage", dependencies: ["ChessKit"]),
@@ -44,7 +44,7 @@ end
 
 ## Gettings Started
 
-ChessKit is well covered by [documentation](https://perechnev.github.io/ChessKit/). But anyway here you can find an example describing how to start working with ChessKit faster.
+ChessKit is well covered by [documentation](https://aperechnev.github.io/ChessKit/). But anyway here you can find an example describing how to start working with ChessKit faster.
 
 ```Swift
 import ChessKit
