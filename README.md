@@ -6,3 +6,38 @@
 Lightweight and fast chess framework written in Swift.
 
 ChessKit is used as a base framework for [Ladoga](https://lichess.org/@/ladoga_engine) chess engine.
+
+## Installation
+
+The ChessKit framework is avalable for installation via Swift Package Manager and CocoaPods.
+
+### Swift Package Manager
+
+Add a dependency via Xcode, linking to `https://github.com/perechnev/ChessKit`, or directly in your `Package.swift` file:
+
+```Swift
+import PackageDescription
+
+let package = Package(
+    name: "MyPackage",
+    platforms: [
+        .macOS(.v10_12),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/perechnev/ChessKit.git", from: "1.2.10"),
+    ],
+    targets: [
+        .target(name: "MyPackage", dependencies: ["ChessKit"]),
+    ]
+)
+```
+
+### CocoaPods
+
+To install ChessKit via CocoaPods, just add a dependencie to your `Podfile`:
+
+```Ruby
+target 'MyApp' do
+  pod 'ChessKit'
+end
+```
