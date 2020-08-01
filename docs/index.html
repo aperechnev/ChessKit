@@ -16,7 +16,7 @@
     <a title="ChessKit  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">ChessKit 1.2.15 Docs</a> (97% documented)</p>
+        <p><a href="index.html">ChessKit 1.2.17 Docs</a> (97% documented)</p>
         <p class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -93,8 +93,8 @@
             
             <h1 id='chesskit' class='heading'>ChessKit</h1>
 
-<p><a href="https://codebeat.co/projects/github-com-perechnev-chesskit-develop"><img src="https://codebeat.co/badges/d0f02d72-ca79-4cd6-a4a1-d4ad3a77ea04" alt="codebeat badge"></a>
-<a href="https://perechnev.github.io/ChessKit/"><img src="https://raw.githubusercontent.com/perechnev/ChessKit/develop/docs/badge.svg" alt="docs badge"></a> <a href="https://gitter.im/Ladoga-Engine/ChessKit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img src="https://badges.gitter.im/Ladoga-Engine/ChessKit.svg" alt="Gitter"></a> <img src="https://github.com/perechnev/ChessKit/workflows/Tests/badge.svg" alt="Tests"> <img src="https://img.shields.io/github/license/perechnev/ChessKit" alt=""> <a href="https://cocoapods.org/pods/ChessKit"><img src="https://img.shields.io/cocoapods/v/ChessKit" alt="ChessKit pod"></a></p>
+<p><a href="https://codebeat.co/projects/github-com-aperechnev-chesskit-develop"><img src="https://codebeat.co/badges/8ae1f4df-266c-4441-8bb1-8da25f067b28" alt="codebeat badge"></a>
+<a href="https://aperechnev.github.io/ChessKit/"><img src="https://raw.githubusercontent.com/aperechnev/ChessKit/develop/docs/badge.svg" alt="docs badge"></a> <img src="https://github.com/aperechnev/ChessKit/workflows/Tests/badge.svg" alt="Tests"> <img src="https://img.shields.io/github/license/aperechnev/ChessKit" alt=""> <a href="https://cocoapods.org/pods/ChessKit"><img src="https://img.shields.io/cocoapods/v/ChessKit" alt="ChessKit pod"></a></p>
 
 <p>Lightweight and fast chess framework written in Swift.</p>
 
@@ -104,7 +104,7 @@
 <p>The ChessKit framework is avalable for installation via Swift Package Manager and CocoaPods.</p>
 <h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
 
-<p>Add a dependency via Xcode, linking to <code>https://github.com/perechnev/ChessKit</code>, or directly in your <code>Package.swift</code> file:</p>
+<p>Add a dependency via Xcode, linking to <code>https://github.com/aperechnev/ChessKit</code>, or directly in your <code>Package.swift</code> file:</p>
 <pre class="highlight plaintext"><code>import PackageDescription
 
 let package = Package(
@@ -113,7 +113,7 @@ let package = Package(
         .macOS(.v10_12),
     ],
     dependencies: [
-        .package(url: "https://github.com/perechnev/ChessKit.git", from: "1.2.10"),
+        .package(url: "https://github.com/aperechnev/ChessKit.git", from: "1.2.10"),
     ],
     targets: [
         .target(name: "MyPackage", dependencies: ["ChessKit"]),
@@ -129,7 +129,7 @@ end
 </code></pre>
 <h2 id='gettings-started' class='heading'>Gettings Started</h2>
 
-<p>ChessKit is well covered by <a href="https://perechnev.github.io/ChessKit/">documentation</a>. But anyway here you can find an example describing how to start working with ChessKit faster.</p>
+<p>ChessKit is well covered by <a href="https://aperechnev.github.io/ChessKit/">documentation</a>. But anyway here you can find an example describing how to start working with ChessKit faster.</p>
 <pre class="highlight plaintext"><code>import ChessKit
 
 let italianGameFen = "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4"
@@ -155,9 +155,6 @@ print("List of pieces on board: \(game.position.board.enumeratedPieces())")
 <h2 id='versioning' class='heading'>Versioning</h2>
 
 <p>We are using <a href="https://semver.org">semantic versioning</a>.</p>
-<h2 id='support' class='heading'>Support</h2>
-
-<p>If you need some help, you can join our <a href="https://gitter.im/Ladoga-Engine/ChessKit">gitter room</a>.</p>
 <h2 id='license' class='heading'>License</h2>
 
 <p>ChessKit is released under the MIT license. See LICENSE for details.</p>
