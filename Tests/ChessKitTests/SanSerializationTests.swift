@@ -28,7 +28,7 @@ class SanSerializationTests: XCTestCase {
         ("Nfxd4", "f3d4", "1n2k1n1/8/8/8/3p4/1N3N2/8/4K3 w - - 0 1"),
         ("N1xf3", "g1f3", "4k3/8/8/6N1/8/5p2/8/4K1N1 w - - 0 1"),
         ("N5xf3", "g5f3", "4k3/8/8/6N1/8/5p2/8/4K1N1 w - - 0 1"),
-        
+
         // Taking by pawn
         ("exd4", "e5d4", "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3"),
         ("exf6", "e5f6", "r1bqkb1r/pppppppp/2n2n2/4P3/8/8/PPPP1PPP/RNBQKBNR w KQkq - 1 3"),
@@ -36,6 +36,11 @@ class SanSerializationTests: XCTestCase {
         // Castling
         ("O-O", "e1g1", "r2q1rk1/ppp1bppp/2np1n2/4p3/2BPP1b1/2N1BN2/PPP1QPPP/R3K2R w KQ - 8 8"),
         ("O-O-O", "e1c1", "r2q1rk1/ppp1bppp/2np1n2/4p3/2BPP1b1/2N1BN2/PPP1QPPP/R3K2R w KQ - 8 8"),
+        
+        // Check
+        ("Qe6+", "f5e6", "rnb1kbnr/ppp1pppp/8/5q2/3P4/5N2/PPP2PPP/RNBQKB1R b KQkq - 2 4"),
+        ("d7+", "d6d7", "4k3/8/3P4/8/8/8/8/4K3 w - - 0 1"),
+        ("O-O-O+", "e1c1", "3k4/8/8/8/8/8/8/R3K3 w Q - 0 1"),
     ]
     
     // MARK: - Serialization

@@ -22,15 +22,31 @@ public class SanSerialization {
         let targetSquare = game.position.board[move.to]
         
         if sourceSquare.kind == .pawn {
-            return targetSquare?.kind != nil ? "\(move.from.coordinate.first!)x\(move.to)" : move.to.coordinate
+            var san = targetSquare?.kind != nil ? "\(move.from.coordinate.first!)x\(move.to)" : move.to.coordinate
+            let gameCopy = game.deepCopy()
+            gameCopy.make(move: move)
+            if gameCopy.isCheck {
+                san += "+"
+            }
+            return san
         } else {
             if sourceSquare.kind == .king {
                 if move.from.file == 4 {
+                    var san = ""
+                    
                     if move.to.file == 6 {
-                        return "O-O"
+                        san = "O-O"
                     } else if move.to.file == 2 {
-                        return "O-O-O"
+                        san = "O-O-O"
                     }
+                    
+                    let gameCopy = game.deepCopy()
+                    gameCopy.make(move: move)
+                    if gameCopy.isCheck {
+                        san += "+"
+                    }
+                    
+                    return san
                 }
             }
             
@@ -53,11 +69,19 @@ public class SanSerialization {
             
             san.append(move.to.coordinate)
             
+            let gameCopy = game.deepCopy()
+            gameCopy.make(move: move)
+            if gameCopy.isCheck {
+                san += "+"
+            }
+            
             return san
         }
     }
     
     public func move(for san: String, in game: Game) -> Move {
+        let san = san.replacingOccurrences(of: "+", with: "")
+        
         if [kCastlingKing, kCastlingQueen].contains(san) {
             let file = san == kCastlingKing ? "g" : "c"
             let rank = game.position.state.turn == .white ? "1" : "8"
