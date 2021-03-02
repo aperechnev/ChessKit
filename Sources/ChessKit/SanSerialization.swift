@@ -107,6 +107,7 @@ public class SanSerialization {
                 return game.legalMoves
                     .filter({ $0.to.description == move })
                     .filter({ game.position.board[$0.from]?.kind == .pawn })
+                    .filter({ $0.from.description.contains(s) })
                     .first!
             }
             
