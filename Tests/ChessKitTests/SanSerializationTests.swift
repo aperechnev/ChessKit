@@ -44,6 +44,9 @@ class SanSerializationTests: XCTestCase {
         ("Qe6+", "f5e6", "rnb1kbnr/ppp1pppp/8/5q2/3P4/5N2/PPP2PPP/RNBQKB1R b KQkq - 2 4"),
         ("d7+", "d6d7", "4k3/8/3P4/8/8/8/8/4K3 w - - 0 1"),
         ("O-O-O+", "e1c1", "3k4/8/8/8/8/8/8/R3K3 w Q - 0 1"),
+        
+        // Mate
+        ("Qxg2#", "g3g2", "r3k3/pb3p2/1pp4p/3p4/N2P2r1/1P1BP1q1/P5Q1/1RR3K1 b q - 1 26"),
     ]
     
     // MARK: - Serialization

@@ -25,7 +25,9 @@ public class SanSerialization {
             var san = targetSquare?.kind != nil ? "\(move.from.coordinate.first!)x\(move.to)" : move.to.coordinate
             let gameCopy = game.deepCopy()
             gameCopy.make(move: move)
-            if gameCopy.isCheck {
+            if gameCopy.isMate {
+                san += "#"
+            } else if gameCopy.isCheck {
                 san += "+"
             }
             return san
@@ -42,7 +44,9 @@ public class SanSerialization {
                     
                     let gameCopy = game.deepCopy()
                     gameCopy.make(move: move)
-                    if gameCopy.isCheck {
+                    if gameCopy.isMate {
+                        san += "#"
+                    } else if gameCopy.isCheck {
                         san += "+"
                     }
                     
@@ -72,7 +76,9 @@ public class SanSerialization {
             
             let gameCopy = game.deepCopy()
             gameCopy.make(move: move)
-            if gameCopy.isCheck {
+            if gameCopy.isMate {
+                san += "#"
+            } else if gameCopy.isCheck {
                 san += "+"
             }
             
@@ -81,7 +87,9 @@ public class SanSerialization {
     }
     
     public func move(for san: String, in game: Game) -> Move {
-        let san = san.replacingOccurrences(of: "+", with: "")
+        let san = san
+            .replacingOccurrences(of: "+", with: "")
+            .replacingOccurrences(of: "#", with: "")
         
         if [kCastlingKing, kCastlingQueen].contains(san) {
             let file = san == kCastlingKing ? "g" : "c"
