@@ -98,7 +98,11 @@ public class SanSerialization {
             move += "\(s.popLast()!)"
             move = "\(s.popLast()!)" + move
             
-            let pieceKind = PieceKind(rawValue: "\(s.lowercased().first!)")
+            var pieceKind: PieceKind? = nil
+            if s.first!.isUppercase {
+                pieceKind = PieceKind(rawValue: "\(s.lowercased().first!)")
+            }
+            
             if pieceKind == nil {
                 return game.legalMoves
                     .filter({ $0.to.description == move })
