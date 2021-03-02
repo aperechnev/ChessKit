@@ -65,12 +65,6 @@ public class SanSerialization {
                 .filter { $0.to == Square(coordinate: san) }
                 .filter { game.position.board[$0.from]?.kind == .pawn }
             return candidates.first!
-        } else if san.count == 3 &&  san.range(of: "[a-z]x[a-z]", options: .regularExpression, range: nil, locale: nil) != nil {
-            return game.legalMoves
-                .filter { game.position.board[$0.from]?.kind == .pawn }
-                .filter { $0.from.description.first == san.first }
-                .filter { $0.to.description.first == san.last }
-                .first!
         } else {
             var move = "", s = san.replacingOccurrences(of: "x", with: "")
             
@@ -78,6 +72,13 @@ public class SanSerialization {
             move = "\(s.popLast()!)" + move
             
             let pieceKind = PieceKind(rawValue: "\(s.lowercased().first!)")
+            if pieceKind == nil {
+                return game.legalMoves
+                    .filter({ $0.to.description == move })
+                    .filter({ game.position.board[$0.from]?.kind == .pawn })
+                    .first!
+            }
+            
             s = "\(s.dropFirst())"
             
             var candidates = game.legalMoves
