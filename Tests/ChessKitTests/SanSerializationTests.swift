@@ -21,6 +21,7 @@ class SanSerializationTests: XCTestCase {
         // Piece moves with variations
         ("Nbd4", "b3d4", "1n2k1n1/8/8/8/8/1N3N2/8/4K3 w - - 0 1"),
         ("Nfd4", "f3d4", "1n2k1n1/8/8/8/8/1N3N2/8/4K3 w - - 0 1"),
+        ("Nbd2", "b1d2", "r1b1kb1r/pppp1pp1/1qn4p/4P3/3p2nB/1B3N2/PPP2PPP/RN1Q1RK1 w kq - 2 10"),
 
         // Taking by piece
         ("Nxe5", "c6e5", "r1bqkbnr/pppp1ppp/2n5/4N3/4P3/8/PPPP1PPP/RNBQKB1R b KQkq - 0 3"),

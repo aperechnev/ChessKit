@@ -58,8 +58,9 @@ public class SanSerialization {
             
             if !candidates.filter({ $0.from.file == move.from.file }).isEmpty {
                 san.append(move.from.coordinate.last!)
-            }
-            if !candidates.filter({ $0.from.rank == move.from.rank }).isEmpty {
+            } else if !candidates.filter({ $0.from.rank == move.from.rank }).isEmpty {
+                san.append(move.from.coordinate.first!)
+            } else if !candidates.isEmpty {
                 san.append(move.from.coordinate.first!)
             }
             
