@@ -36,7 +36,9 @@ public class SanSerialization {
             
             var san = sourceSquare.kind.description.uppercased()
             
-            let candidates = game.legalMoves.filter { $0.to == move.to && $0 != move }
+            let candidates = game.legalMoves
+                .filter { $0.to == move.to && $0 != move }
+                .filter { game.position.board[$0.from]?.kind == sourceSquare.kind }
             
             if !candidates.filter({ $0.from.file == move.from.file }).isEmpty {
                 san.append(move.from.coordinate.last!)
