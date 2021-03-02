@@ -7,12 +7,12 @@
 
 import Foundation
 
-class SanSerialization {
+public class SanSerialization {
     
     /// `SanSerialization` object with default settings.
     public static let `default` = SanSerialization()
     
-    func san(for move: Move, in game: Game) -> String {
+    public func san(for move: Move, in game: Game) -> String {
         guard let piece = game.position.board[move.from] else {
             return ""
         }
@@ -57,7 +57,7 @@ class SanSerialization {
         }
     }
     
-    func move(for san: String, in game: Game) -> Move {
+    public func move(for san: String, in game: Game) -> Move {
         if san == "O-O" {
             if game.position.state.turn == .white {
                 return Move(string: "e1g1")
