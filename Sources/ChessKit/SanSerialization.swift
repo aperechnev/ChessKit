@@ -9,6 +9,9 @@ import Foundation
 
 public class SanSerialization {
     
+    private let kCastlingKing = "O-O"
+    private let kCastlingQueen = "O-O-O"
+    
     /// `SanSerialization` object with default settings.
     public static let `default` = SanSerialization()
     
@@ -19,12 +22,7 @@ public class SanSerialization {
         let targetSquare = game.position.board[move.to]
         
         if sourceSquare.kind == .pawn {
-            if targetSquare?.kind == .pawn {
-                return "\(move.from.coordinate.first!)x\(move.to.coordinate.first!)"
-            } else if targetSquare != nil {
-                return "\(move.from.coordinate.first!)x\(move.to)"
-            }
-            return move.to.coordinate
+            return targetSquare?.kind != nil ? "\(move.from.coordinate.first!)x\(move.to)" : move.to.coordinate
         } else {
             if sourceSquare.kind == .king {
                 if move.from.file == 4 {
@@ -58,18 +56,10 @@ public class SanSerialization {
     }
     
     public func move(for san: String, in game: Game) -> Move {
-        if san == "O-O" {
-            if game.position.state.turn == .white {
-                return Move(string: "e1g1")
-            } else {
-                return Move(string: "e8g8")
-            }
-        } else if san == "O-O-O" {
-            if game.position.state.turn == .white {
-                return Move(string: "e1c1")
-            } else {
-                return Move(string: "e8c8")
-            }
+        if [kCastlingKing, kCastlingQueen].contains(san) {
+            let file = san == kCastlingKing ? "g" : "c"
+            let rank = game.position.state.turn == .white ? "1" : "8"
+            return Move(string: "e\(rank)\(file)\(rank)")
         } else if san.count == 2 {
             let candidates = game.legalMoves
                 .filter { $0.to == Square(coordinate: san) }
