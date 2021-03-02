@@ -13,17 +13,20 @@ public class SanSerialization {
     public static let `default` = SanSerialization()
     
     public func san(for move: Move, in game: Game) -> String {
-        guard let piece = game.position.board[move.from] else {
+        guard let sourceSquare = game.position.board[move.from] else {
             return ""
         }
+        let targetSquare = game.position.board[move.to]
         
-        if piece.kind == .pawn {
-            if game.position.board[move.to] != nil {
+        if sourceSquare.kind == .pawn {
+            if targetSquare?.kind == .pawn {
                 return "\(move.from.coordinate.first!)x\(move.to.coordinate.first!)"
+            } else if targetSquare != nil {
+                return "\(move.from.coordinate.first!)x\(move.to)"
             }
             return move.to.coordinate
         } else {
-            if game.position.board[move.from]?.kind == .king {
+            if sourceSquare.kind == .king {
                 if move.from.file == 4 {
                     if move.to.file == 6 {
                         return "O-O"
@@ -33,12 +36,9 @@ public class SanSerialization {
                 }
             }
             
-            var san = piece.kind.description.uppercased()
+            var san = sourceSquare.kind.description.uppercased()
             
-            let candidates = game.legalMoves
-                .filter { $0.to == move.to }
-                .filter { $0 != move }
-                .filter { game.position.board[$0.from]?.kind == piece.kind }
+            let candidates = game.legalMoves.filter { $0.to == move.to && $0 != move }
             
             if !candidates.filter({ $0.from.file == move.from.file }).isEmpty {
                 san.append(move.from.coordinate.last!)
@@ -47,7 +47,7 @@ public class SanSerialization {
                 san.append(move.from.coordinate.first!)
             }
             
-            if game.position.board[move.to] != nil {
+            if targetSquare != nil {
                 san.append("x")
             }
             
