@@ -51,7 +51,7 @@ class SanSerializationTests: XCTestCase {
         // Pawn promotion
         ("a8=Q", "a7a8q", "8/P4pk1/6p1/6Pp/3b3P/8/8/4K3 w - - 0 1"),
         ("a1=N", "a2a1n", "4k3/8/8/7p/6p1/2N3P1/p4PKP/8 b - - 0 1"),
-//        ("e8=R+", "e7e8r", "r6k/4P3/1R4Q1/8/7p/7P/6PK/8 w - - 1 42"),
+        ("e8=R+", "e7e8r", "r6k/4P3/1R4Q1/8/7p/7P/6PK/8 w - - 1 42"),
     ]
     
     // MARK: - Serialization
