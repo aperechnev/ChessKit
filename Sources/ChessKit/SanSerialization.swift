@@ -23,6 +23,9 @@ public class SanSerialization {
         
         if sourceSquare.kind == .pawn {
             var san = targetSquare?.kind != nil ? "\(move.from.coordinate.first!)x\(move.to)" : move.to.coordinate
+            if let promotion = move.promotion {
+                san += "=\(promotion)".uppercased()
+            }
             let gameCopy = game.deepCopy()
             gameCopy.make(move: move)
             if gameCopy.isMate {
@@ -87,19 +90,28 @@ public class SanSerialization {
     }
     
     public func move(for san: String, in game: Game) -> Move {
+        let promotionRange = san.range(of: "=[QRBN]", options: .regularExpression)
+        
+        var promotion: PieceKind? = nil
+        if let range = promotionRange {
+            promotion = PieceKind(rawValue: san[range].replacingOccurrences(of: "=", with: "").lowercased())
+        }
+        
         let san = san
             .replacingOccurrences(of: "+", with: "")
             .replacingOccurrences(of: "#", with: "")
+            .replacingOccurrences(of: "=[QRBN]", with: "", options: .regularExpression)
         
         if [kCastlingKing, kCastlingQueen].contains(san) {
             let file = san == kCastlingKing ? "g" : "c"
             let rank = game.position.state.turn == .white ? "1" : "8"
             return Move(string: "e\(rank)\(file)\(rank)")
         } else if san.count == 2 {
-            let candidates = game.legalMoves
+            let move = game.legalMoves
                 .filter { $0.to == Square(coordinate: san) }
                 .filter { game.position.board[$0.from]?.kind == .pawn }
-            return candidates.first!
+                .first!
+            return Move(from: move.from, to: move.to, promotion: promotion)
         } else {
             var move = "", s = san.replacingOccurrences(of: "x", with: "")
             
@@ -112,11 +124,12 @@ public class SanSerialization {
             }
             
             if pieceKind == nil {
-                return game.legalMoves
+                let move = game.legalMoves
                     .filter({ $0.to.description == move })
                     .filter({ game.position.board[$0.from]?.kind == .pawn })
                     .filter({ $0.from.description.contains(s) })
                     .first!
+                return Move(from: move.from, to: move.to, promotion: promotion)
             }
             
             s = "\(s.dropFirst())"
