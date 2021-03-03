@@ -102,10 +102,7 @@ public class StandardRules: Rules {
         guard self.isCheck(in: position) else {
             return false
         }
-        guard let kingSquare = self.kingSquare(in: position, color: position.state.turn) else {
-            return false
-        }
-        return self.movesForPiece(at: kingSquare, in: position).isEmpty
+        return Game(position: position).legalMoves.isEmpty
     }
     
     func legalMoves(in position: Position) -> [Move] {
