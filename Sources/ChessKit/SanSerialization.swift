@@ -18,54 +18,64 @@ public class SanSerialization {
     // MARK: - Serialization
     
     public func san(for move: Move, in game: Game) -> String {
-        guard let sourceSquare = game.position.board[move.from] else {
+        switch game.position.board[move.from]?.kind {
+        case .none:
             return ""
+        case .pawn:
+            return self.processPawn(move: move, in: game)
+        default:
+            return self.processPiece(move: move, in: game)
         }
+    }
+    
+    private func processPawn(move: Move, in game: Game) -> String {
+        let targetSquare = game.position.board[move.to]
+        var san = targetSquare?.kind != nil ? "\(move.from.coordinate.first!)x\(move.to)" : move.to.coordinate
+        if let promotion = move.promotion {
+            san += "=\(promotion)".uppercased()
+        }
+        return self.appendCheck(to: san, with: move, in: game)
+    }
+    
+    private func processPiece(move: Move, in game: Game) -> String {
+        let sourceSquare = game.position.board[move.from]!
         let targetSquare = game.position.board[move.to]
         
-        if sourceSquare.kind == .pawn {
-            var san = targetSquare?.kind != nil ? "\(move.from.coordinate.first!)x\(move.to)" : move.to.coordinate
-            if let promotion = move.promotion {
-                san += "=\(promotion)".uppercased()
-            }
-            return self.appendCheck(to: san, with: move, in: game)
-        } else {
-            if sourceSquare.kind == .king {
-                if move.from.file == 4 {
-                    var san = ""
-                    
-                    if move.to.file == 6 {
-                        san = "O-O"
-                    } else if move.to.file == 2 {
-                        san = "O-O-O"
-                    }
-                    
-                    return self.appendCheck(to: san, with: move, in: game)
+        if sourceSquare.kind == .king {
+            if move.from.file == 4 {
+                var san = ""
+                
+                if move.to.file == 6 {
+                    san = "O-O"
+                } else if move.to.file == 2 {
+                    san = "O-O-O"
                 }
+                
+                return self.appendCheck(to: san, with: move, in: game)
             }
-            
-            var san = sourceSquare.kind.description.uppercased()
-            
-            let candidates = game.legalMoves
-                .filter { $0.to == move.to && $0 != move }
-                .filter { game.position.board[$0.from]?.kind == sourceSquare.kind }
-            
-            if !candidates.filter({ $0.from.file == move.from.file }).isEmpty {
-                san.append(move.from.coordinate.last!)
-            } else if !candidates.filter({ $0.from.rank == move.from.rank }).isEmpty {
-                san.append(move.from.coordinate.first!)
-            } else if !candidates.isEmpty {
-                san.append(move.from.coordinate.first!)
-            }
-            
-            if targetSquare != nil {
-                san.append("x")
-            }
-            
-            san.append(move.to.coordinate)
-            
-            return self.appendCheck(to: san, with: move, in: game)
         }
+        
+        var san = sourceSquare.kind.description.uppercased()
+        
+        let candidates = game.legalMoves
+            .filter { $0.to == move.to && $0 != move }
+            .filter { game.position.board[$0.from]?.kind == sourceSquare.kind }
+        
+        if !candidates.filter({ $0.from.file == move.from.file }).isEmpty {
+            san.append(move.from.coordinate.last!)
+        } else if !candidates.filter({ $0.from.rank == move.from.rank }).isEmpty {
+            san.append(move.from.coordinate.first!)
+        } else if !candidates.isEmpty {
+            san.append(move.from.coordinate.first!)
+        }
+        
+        if targetSquare != nil {
+            san.append("x")
+        }
+        
+        san.append(move.to.coordinate)
+        
+        return self.appendCheck(to: san, with: move, in: game)
     }
     
     private func appendCheck(to san: String, with move: Move, in game: Game) -> String {
