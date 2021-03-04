@@ -15,6 +15,8 @@ public class SanSerialization {
     /// `SanSerialization` object with default settings.
     public static let `default` = SanSerialization()
     
+    // MARK: - Serialization
+    
     public func san(for move: Move, in game: Game) -> String {
         guard let sourceSquare = game.position.board[move.from] else {
             return ""
@@ -26,14 +28,7 @@ public class SanSerialization {
             if let promotion = move.promotion {
                 san += "=\(promotion)".uppercased()
             }
-            let gameCopy = game.deepCopy()
-            gameCopy.make(move: move)
-            if gameCopy.isMate {
-                san += "#"
-            } else if gameCopy.isCheck {
-                san += "+"
-            }
-            return san
+            return self.appendCheck(to: san, with: move, in: game)
         } else {
             if sourceSquare.kind == .king {
                 if move.from.file == 4 {
@@ -45,15 +40,7 @@ public class SanSerialization {
                         san = "O-O-O"
                     }
                     
-                    let gameCopy = game.deepCopy()
-                    gameCopy.make(move: move)
-                    if gameCopy.isMate {
-                        san += "#"
-                    } else if gameCopy.isCheck {
-                        san += "+"
-                    }
-                    
-                    return san
+                    return self.appendCheck(to: san, with: move, in: game)
                 }
             }
             
@@ -77,17 +64,22 @@ public class SanSerialization {
             
             san.append(move.to.coordinate)
             
-            let gameCopy = game.deepCopy()
-            gameCopy.make(move: move)
-            if gameCopy.isMate {
-                san += "#"
-            } else if gameCopy.isCheck {
-                san += "+"
-            }
-            
-            return san
+            return self.appendCheck(to: san, with: move, in: game)
         }
     }
+    
+    private func appendCheck(to san: String, with move: Move, in game: Game) -> String {
+        let gameCopy = game.deepCopy()
+        gameCopy.make(move: move)
+        if gameCopy.isMate {
+            return san + "#"
+        } else if gameCopy.isCheck {
+            return san + "+"
+        }
+        return san
+    }
+    
+    // MARK: - Deserialization
     
     public func move(for san: String, in game: Game) -> Move {
         let promotionRange = san.range(of: "=[QRBN]", options: .regularExpression)
