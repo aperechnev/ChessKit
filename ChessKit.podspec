@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "ChessKit"
-  spec.version      = "1.3.1"
+  spec.version      = "1.3.3"
   spec.summary      = "Lightweight and fast chess framework written in Swift."
   
   spec.description  = "Lightweight and fast chess framework written in Swift. ChessKit is used as a base freamework for Ladoga chess engine."
