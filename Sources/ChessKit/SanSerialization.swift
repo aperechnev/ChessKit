@@ -91,12 +91,7 @@ public class SanSerialization {
     // MARK: - Deserialization
     
     public func move(for san: String, in game: Game) -> Move {
-        let promotionRange = san.range(of: "=[QRBN]", options: .regularExpression)
-        
-        var promotion: PieceKind? = nil
-        if let range = promotionRange {
-            promotion = PieceKind(rawValue: san[range].replacingOccurrences(of: "=", with: "").lowercased())
-        }
+        let promotion = self.promotion(in: san)
         
         let san = san
             .replacingOccurrences(of: "+", with: "")
@@ -110,6 +105,16 @@ public class SanSerialization {
         } else {
             return self.process(san: san, promotion: promotion, in: game)
         }
+    }
+    
+    private func promotion(in san: String) -> PieceKind? {
+        if let range = san.range(of: "=[QRBN]", options: .regularExpression) {
+            let piece = san[range]
+                .replacingOccurrences(of: "=", with: "")
+                .lowercased()
+            return PieceKind(rawValue: piece)
+        }
+        return nil
     }
     
     private func processCastling(san: String, in game: Game) -> Move {
