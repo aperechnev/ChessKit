@@ -6,6 +6,7 @@
 //  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
+/// FEN positions serialization and deserialization.
 public class FenSerialization {
     
     /// `FenSerialization` object with default settings.

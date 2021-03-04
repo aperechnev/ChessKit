@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// SAN moves serialization and deserialization.
 public class SanSerialization {
     
     private let kCastlingKing = "O-O"
