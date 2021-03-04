@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>StandardRules Class Reference</title>
+    <title>SanSerialization Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/StandardRules" class="dashAnchor"></a>
-    <a title="StandardRules Class Reference"></a>
+    <a name="//apple_ref/swift/Class/SanSerialization" class="dashAnchor"></a>
+    <a title="SanSerialization Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">ChessKit 1.2.17 Docs</a> (96% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">ChessKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        StandardRules Class Reference
+        SanSerialization Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -94,15 +94,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>StandardRules</h1>
+            <h1>SanSerialization</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">StandardRules</span> <span class="p">:</span> <span class="kt">Rules</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SanSerialization</span></code></pre>
 
                 </div>
               </div>
-            <p>Standard chess move rules.</p>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -111,9 +111,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8ChessKit13StandardRulesCACycfc"></a>
-                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit13StandardRulesCACycfc">init()</a>
+                    <a name="/s:8ChessKit16SanSerializationC7defaultACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/default" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChessKit16SanSerializationC7defaultACvpZ">default</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -121,26 +121,39 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initialise a new instance.</p>
+                        <p><code>SanSerialization</code> object with default settings.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">let</span> <span class="p">`</span><span class="nv">default</span><span class="p">`:</span> <span class="kt">SanSerialization</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Serialization"></a>
+                <a name="//apple_ref/swift/Section/Serialization" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Serialization"></a>
+                  <h3 class="section-name"><p>Serialization</p>
+</h3>
+                </div>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8ChessKit13StandardRulesC13movesForPiece2at2inSayAA4MoveVGAA6SquareV_AA8PositionVtF"></a>
-                    <a name="//apple_ref/swift/Method/movesForPiece(at:in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit13StandardRulesC13movesForPiece2at2inSayAA4MoveVGAA6SquareV_AA8PositionVtF">movesForPiece(at:<wbr>in:<wbr>)</a>
+                    <a name="/s:8ChessKit16SanSerializationC3san3for2inSSAA4MoveV_AA4GameCtF"></a>
+                    <a name="//apple_ref/swift/Method/san(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChessKit16SanSerializationC3san3for2inSSAA4MoveV_AA4GameCtF">san(for:<wbr>in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -148,14 +161,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates available moves from square in given position.</p>
+                        <p>Serialize move to SAN string.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">movesForPiece</span><span class="p">(</span><span class="n">at</span> <span class="nv">square</span><span class="p">:</span> <span class="kt"><a href="../Structs/Square.html">Square</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">position</span><span class="p">:</span> <span class="kt"><a href="../Structs/Position.html">Position</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Move.html">Move</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">san</span><span class="p">(</span><span class="k">for</span> <span class="nv">move</span><span class="p">:</span> <span class="kt"><a href="../Structs/Move.html">Move</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">game</span><span class="p">:</span> <span class="kt"><a href="../Classes/Game.html">Game</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -166,24 +179,24 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>square</em>
+                                <em>move</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Square of the piece.</p>
+                                  <p><code><a href="../Structs/Move.html">Move</a></code> object that sould be serialized.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>position</em>
+                                <em>game</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Position.</p>
+                                  <p>A game which is about to make a given move.</p>
                                 </div>
                               </td>
                             </tr>
@@ -192,17 +205,30 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>List of available moves.</p>
+                        <p>SAN string describing given move.</p>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Deserialization"></a>
+                <a name="//apple_ref/swift/Section/Deserialization" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Deserialization"></a>
+                  <h3 class="section-name"><p>Deserialization</p>
+</h3>
+                </div>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8ChessKit13StandardRulesC14coveredSquares2inSayAA6SquareVGAA8PositionV_tF"></a>
-                    <a name="//apple_ref/swift/Method/coveredSquares(in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8ChessKit13StandardRulesC14coveredSquares2inSayAA6SquareVGAA8PositionV_tF">coveredSquares(in:<wbr>)</a>
+                    <a name="/s:8ChessKit16SanSerializationC4move3for2inAA4MoveVSS_AA4GameCtF"></a>
+                    <a name="//apple_ref/swift/Method/move(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChessKit16SanSerializationC4move3for2inAA4MoveVSS_AA4GameCtF">move(for:<wbr>in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -210,16 +236,51 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Deserialize move from given SAN string.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">coveredSquares</span><span class="p">(</span><span class="k">in</span> <span class="nv">position</span><span class="p">:</span> <span class="kt"><a href="../Structs/Position.html">Position</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Square.html">Square</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">move</span><span class="p">(</span><span class="k">for</span> <span class="nv">san</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">game</span><span class="p">:</span> <span class="kt"><a href="../Classes/Game.html">Game</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Move.html">Move</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>san</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String containing SAN move.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>game</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A game which is about to make a given SAN move.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code><a href="../Structs/Move.html">Move</a></code> object initialized from given SAN string.</p>
                       </div>
                     </section>
                   </div>
