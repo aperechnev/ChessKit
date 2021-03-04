@@ -17,6 +17,7 @@ class SanSerializationTests: XCTestCase {
         // Simple piece moves
         ("Nc6", "b8c6", "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"),
         ("Re1", "f1e1", "r1b1kb1r/ppppqppp/2n5/4P3/2Bpn3/5N2/PPP2PPP/RNBQ1RK1 w kq - 1 7"),
+        ("Ke2", "e1e2", "r1bqk1nr/pppp1ppp/2n5/2b5/2BpP3/5N2/PPP2PPP/RNBQK2R w KQkq - 2 5"),
 
         // Piece moves with variations
         ("Nbd4", "b3d4", "1n2k1n1/8/8/8/8/1N3N2/8/4K3 w - - 0 1"),

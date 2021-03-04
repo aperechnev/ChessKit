@@ -23,6 +23,8 @@ public class SanSerialization {
             return ""
         case .pawn:
             return self.processPawn(move: move, in: game)
+        case .king:
+            return self.processKing(move: move, in: game)
         default:
             return self.processPiece(move: move, in: game)
         }
@@ -37,23 +39,20 @@ public class SanSerialization {
         return self.appendCheck(to: san, with: move, in: game)
     }
     
+    private func processKing(move: Move, in game: Game) -> String {
+        if move.from.file == 4 {
+            if move.to.file == 6 {
+                return self.appendCheck(to: "O-O", with: move, in: game)
+            } else if move.to.file == 2 {
+                return self.appendCheck(to: "O-O-O", with: move, in: game)
+            }
+        }
+        return self.processPiece(move: move, in: game)
+    }
+    
     private func processPiece(move: Move, in game: Game) -> String {
         let sourceSquare = game.position.board[move.from]!
         let targetSquare = game.position.board[move.to]
-        
-        if sourceSquare.kind == .king {
-            if move.from.file == 4 {
-                var san = ""
-                
-                if move.to.file == 6 {
-                    san = "O-O"
-                } else if move.to.file == 2 {
-                    san = "O-O-O"
-                }
-                
-                return self.appendCheck(to: san, with: move, in: game)
-            }
-        }
         
         var san = sourceSquare.kind.description.uppercased()
         
