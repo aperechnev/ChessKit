@@ -9,9 +9,16 @@
     },
     {
       "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/Rules/StandardRules.swift",
-      "line": 140,
+      "line": 137,
       "symbol": "StandardRules.coveredSquares(in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aperechnev/Projects/ChessKit/Sources/ChessKit/SanSerialization.swift",
+      "line": 10,
+      "symbol": "SanSerialization",
+      "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     }
   ],
