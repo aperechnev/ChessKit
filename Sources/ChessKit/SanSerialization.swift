@@ -17,6 +17,15 @@ public class SanSerialization {
     
     // MARK: - Serialization
     
+    /**
+     Serialize move to SAN string.
+     
+     - Parameters:
+        - move: `Move` object that sould be serialized.
+        - game: A game which is about to make a given move.
+     
+     - Returns: SAN string describing given move.
+     */
     public func san(for move: Move, in game: Game) -> String {
         switch game.position.board[move.from]?.kind {
         case .none:
@@ -90,6 +99,15 @@ public class SanSerialization {
     
     // MARK: - Deserialization
     
+    /**
+     Deserialize move from given SAN string.
+     
+     - Parameters:
+        - san: String containing SAN move.
+        - game: A game which is about to make a given SAN move.
+     
+     - Returns: `Move` object initialized from given SAN string.
+     */
     public func move(for san: String, in game: Game) -> Move {
         let promotion = self.promotion(in: san)
         
