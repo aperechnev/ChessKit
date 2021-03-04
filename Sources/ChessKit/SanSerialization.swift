@@ -104,50 +104,62 @@ public class SanSerialization {
             .replacingOccurrences(of: "=[QRBN]", with: "", options: .regularExpression)
         
         if [kCastlingKing, kCastlingQueen].contains(san) {
-            let file = san == kCastlingKing ? "g" : "c"
-            let rank = game.position.state.turn == .white ? "1" : "8"
-            return Move(string: "e\(rank)\(file)\(rank)")
+            return self.processCastling(san: san, in: game)
         } else if san.count == 2 {
+            return self.processPawn(san: san, promotion: promotion, in: game)
+        } else {
+            return self.process(san: san, promotion: promotion, in: game)
+        }
+    }
+    
+    private func processCastling(san: String, in game: Game) -> Move {
+        let file = san == kCastlingKing ? "g" : "c"
+        let rank = game.position.state.turn == .white ? "1" : "8"
+        return Move(string: "e\(rank)\(file)\(rank)")
+    }
+    
+    private func processPawn(san: String, promotion: PieceKind?, in game: Game) -> Move {
+        let move = game.legalMoves
+            .filter { $0.to.description == san }
+            .filter { game.position.board[$0.from]?.kind == .pawn }
+            .first!
+        return Move(from: move.from, to: move.to, promotion: promotion)
+    }
+    
+    private func process(san: String, promotion: PieceKind?, in game: Game) -> Move {
+        var move = "", s = san.replacingOccurrences(of: "x", with: "")
+        
+        move += "\(s.popLast()!)"
+        move = "\(s.popLast()!)" + move
+        
+        var pieceKind: PieceKind? = nil
+        if s.first!.isUppercase {
+            pieceKind = PieceKind(rawValue: "\(s.lowercased().first!)")
+        }
+        
+        if pieceKind == nil {
             let move = game.legalMoves
-                .filter { $0.to == Square(coordinate: san) }
-                .filter { game.position.board[$0.from]?.kind == .pawn }
+                .filter({ $0.to.description == move })
+                .filter({ game.position.board[$0.from]?.kind == .pawn })
+                .filter({ $0.from.description.contains(s) })
                 .first!
             return Move(from: move.from, to: move.to, promotion: promotion)
-        } else {
-            var move = "", s = san.replacingOccurrences(of: "x", with: "")
-            
-            move += "\(s.popLast()!)"
-            move = "\(s.popLast()!)" + move
-            
-            var pieceKind: PieceKind? = nil
-            if s.first!.isUppercase {
-                pieceKind = PieceKind(rawValue: "\(s.lowercased().first!)")
-            }
-            
-            if pieceKind == nil {
-                let move = game.legalMoves
-                    .filter({ $0.to.description == move })
-                    .filter({ game.position.board[$0.from]?.kind == .pawn })
-                    .filter({ $0.from.description.contains(s) })
-                    .first!
-                return Move(from: move.from, to: move.to, promotion: promotion)
-            }
-            
-            s = "\(s.dropFirst())"
-            
-            var candidates = game.legalMoves
-                .filter { game.position.board[$0.from]?.kind == pieceKind }
-                .filter { $0.to.description == move }
-            
-            if !s.isEmpty {
-                candidates = candidates
-                    .filter { $0.from.description.contains(s) }
-            }
-            
-            move = candidates.first!.from.description + move
-            
-            return Move(string: move)
         }
+        
+        s = "\(s.dropFirst())"
+        
+        var candidates = game.legalMoves
+            .filter { game.position.board[$0.from]?.kind == pieceKind }
+            .filter { $0.to.description == move }
+        
+        if !s.isEmpty {
+            candidates = candidates
+                .filter { $0.from.description.contains(s) }
+        }
+        
+        move = candidates.first!.from.description + move
+        
+        return Move(string: move)
     }
     
 }
