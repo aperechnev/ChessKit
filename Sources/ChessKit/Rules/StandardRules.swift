@@ -9,6 +9,7 @@
 /// Standard chess move rules.
 public class StandardRules: Rules {
     
+    private let rays = Rays()
     private let movings: [PieceKind:PieceMoving]
     
     /// Initialise a new instance.
@@ -38,7 +39,9 @@ public class StandardRules: Rules {
             return true
         }
         
-        if self.isLongCheck(kingSquare: kingSquare,
+        let kingRays: Bitboard! = self.rays.cross[kingSquare.bitboardMask]
+        
+        if (kingRays & (bitboards.rook | bitboards.queen) & bitboards.bitboard(for: position.state.turn.negotiated) != Bitboard.zero) && self.isLongCheck(kingSquare: kingSquare,
                             turn: position.state.turn,
                             translations: MovingTranslations.default.cross,
                             bitboards: bitboards,
