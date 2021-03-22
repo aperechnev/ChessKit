@@ -30,48 +30,20 @@ public class StandardRules: Rules {
         
         let bitboards = position.board.bitboards
         
-        for translation in MovingTranslations.default.diagonal {
-            for offset in 1..<8 {
-                let destination = kingSquare.translate(file: translation.0 * offset, rank: translation.1 * offset)
-                guard destination.isValid else {
-                    break
-                }
-                
-                if (bitboards.white | bitboards.black) & destination.bitboardMask == Int64.zero {
-                    continue
-                }
-                if bitboards.bitboard(for: position.state.turn) & destination.bitboardMask != Int64.zero {
-                    break
-                }
-                
-                if (bitboards.queen | bitboards.bishop) & destination.bitboardMask == Int64.zero {
-                    break
-                } else {
-                    return true
-                }
-            }
+        if self.isLongCheck(kingSquare: kingSquare,
+                            turn: position.state.turn,
+                            translations: MovingTranslations.default.diagonal,
+                            bitboards: bitboards,
+                            pieces: bitboards.queen | bitboards.bishop) {
+            return true
         }
         
-        for translation in MovingTranslations.default.cross {
-            for offset in 1..<8 {
-                let destination = kingSquare.translate(file: translation.0 * offset, rank: translation.1 * offset)
-                guard destination.isValid else {
-                    break
-                }
-                if bitboards.bitboard(for: position.state.turn) & destination.bitboardMask != Int64.zero {
-                    break
-                }
-                
-                if (bitboards.white | bitboards.black) & destination.bitboardMask == Int64.zero {
-                    continue
-                }
-                
-                if (bitboards.queen | bitboards.rook) & destination.bitboardMask != Int64.zero {
-                    return true
-                } else {
-                    break
-                }
-            }
+        if self.isLongCheck(kingSquare: kingSquare,
+                            turn: position.state.turn,
+                            translations: MovingTranslations.default.cross,
+                            bitboards: bitboards,
+                            pieces: bitboards.queen | bitboards.rook) {
+            return true
         }
         
         for translation in MovingTranslations.default.knight {
@@ -92,6 +64,37 @@ public class StandardRules: Rules {
             }
             if bitboards.pawn & bitboards.bitboard(for: position.state.turn.negotiated) & destination.bitboardMask != Int64.zero {
                 return true
+            }
+        }
+        
+        return false
+    }
+    
+    private func isLongCheck(kingSquare: Square,
+                             turn: PieceColor,
+                             translations: [(Int, Int)],
+                             bitboards: Bitboards,
+                             pieces: Bitboard) -> Bool {
+        for translation in translations {
+            for offset in 1..<8 {
+                let destination = kingSquare.translate(file: translation.0 * offset,
+                                                       rank: translation.1 * offset)
+                guard destination.isValid else {
+                    break
+                }
+                if bitboards.bitboard(for: turn) & destination.bitboardMask != Int64.zero {
+                    break
+                }
+                
+                if (bitboards.white | bitboards.black) & destination.bitboardMask == Int64.zero {
+                    continue
+                }
+                
+                if pieces & destination.bitboardMask != Int64.zero {
+                    return true
+                } else {
+                    break
+                }
             }
         }
         
