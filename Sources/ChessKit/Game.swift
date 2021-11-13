@@ -215,6 +215,14 @@ public class Game {
             self.position.state.castlings = self.position.state.castlings
                 .filter { $0.color != self.position.state.turn || $0.kind != kind }
         }
+        
+        if let capturedPiece = self.position.board[move.to] {
+            if capturedPiece.kind == .rook {
+                let kind: PieceKind = move.to.file == 0 ? .queen : .king
+                self.position.state.castlings = self.position.state.castlings
+                    .filter { $0.color == self.position.state.turn || $0.kind != kind }
+            }
+        }
     }
     
     // MARK: Utilities
