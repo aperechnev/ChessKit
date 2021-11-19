@@ -169,6 +169,11 @@ public class StandardRules: Rules {
             nextPosition.board[move.to] = nextPosition.board[move.from]
             nextPosition.board[move.from] = nil
             
+            // if move is en passant capture - remove captured pawn from board
+            if let enPassantCapturedPawn = self.squareOfEnPassantCapturedPawn(move: move, position: position) {
+                nextPosition.board[enPassantCapturedPawn] = nil
+            }
+            
             if self.isIllelgalCastling(move: move, position: position) {
                 return false
             }
@@ -177,6 +182,15 @@ public class StandardRules: Rules {
         }
         
         return moves.filter(filter)
+    }
+    
+    private func squareOfEnPassantCapturedPawn(move: Move, position: Position) -> Square? {
+        if let enPassant = position.state.enPasant {
+            if move.to.file == enPassant.file && move.to.rank == enPassant.rank {
+                return Square(file: enPassant.file, rank: enPassant.rank == 2 ? 3 : 4)
+            }
+        }
+        return nil
     }
     
     private func enumeratedPieces(for position: Position) -> [(Square, Piece)] {
