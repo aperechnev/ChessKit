@@ -29,7 +29,7 @@ jobs:
         directory=${PWD##*/}
         pathCoverage=Build/Build/ProfileData/${directory}/Coverage.profdata
         cd ../../../../
-        xcrun llvm-cov export -format="lcov" -instr-profile $pathCoverage Build/Build/Products/Debug-iphonesimulator/ChessKit.app/ChessKit > info.lcov
+        xcrun llvm-cov export -format="lcov" -instr-profile $pathCoverage /Users/runner/work/ChessKit/ChessKit/Build/Logs/Test > info.lcov
         curl -Os https://uploader.codecov.io/latest/macos/codecov
         chmod +x codecov
         ./codecov -t ${CODECOV_TOKEN}
