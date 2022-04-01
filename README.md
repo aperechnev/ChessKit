@@ -42,7 +42,7 @@ target 'MyApp' do
 end
 ```
 
-## Gettings Started
+## Getting Started
 
 ChessKit is well covered by [documentation](https://aperechnev.github.io/ChessKit/). But anyway here you can find an example describing how to start working with ChessKit faster.
 
