@@ -54,6 +54,10 @@ class PawnMovesTests: XCTestCase {
         self.assert(fen: "rnbqkbnr/ppp1pppp/8/8/3pP1P1/7P/PPPP1P2/RNBQKBNR b KQkq e3 0 3",
                     moves: "d4d3 d4e3",
                     coordinate: "d4")
+        
+        self.assert(fen: "8/8/3p2k1/P2Pr1Pp/3R2KP/8/8/8 w - h6 0 2",
+                moves: "g5h6",
+                coordinate: "g5")
     }
     
     private func assert(fen: String, moves: String, coordinate: String) {
