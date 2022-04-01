@@ -12,11 +12,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
-      run: swift test --parallel --enable-code-coverage
+      run: swift test --enable-code-coverage --show-codecov-path
     - name: Swift Coverage Conversion
       uses: sersoft-gmbh/swift-coverage-action@v2.0.1
       with:
         format: lcov
+        search-paths: ./.build
         output: .
     - name: Upload coverage
       run:
