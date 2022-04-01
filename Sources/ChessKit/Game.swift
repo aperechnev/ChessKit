@@ -209,12 +209,43 @@ public class Game {
                 .filter { $0.color != self.position.state.turn }
         }
         
-        if piece.kind == .rook {
-            let kind: PieceKind = move.from.file == 0 ? .queen : .king
-            
-            self.position.state.castlings = self.position.state.castlings
-                .filter { $0.color != self.position.state.turn || $0.kind != kind }
+        self.position.state.castlings = self.position.state.castlings.filter {
+            // filter should return true if we should not exclude
+            // filter should return false if we should exclude current castling
+            // $0 is one of KQkq pieces (white K, white Q, black k, black q)
+            // castlingColorAndSideToExclude returns piece if move from/to is at some of 4 corners
+            // if castlingColorAndSideToExclude returns piece
+            // for either "from" or for "to" square - we have to exclude casling
+            var excludeBecauseOfFrom = false
+            var excludeBecauseOfTo = false
+            if let colorAndSideToExclude = castlingColorAndSideToExclude(square: move.from) {
+                excludeBecauseOfFrom = $0.color == colorAndSideToExclude.color && $0.kind == colorAndSideToExclude.kind
+            }
+            if let colorAndSideToExclude = castlingColorAndSideToExclude(square: move.to) {
+                excludeBecauseOfTo = $0.color == colorAndSideToExclude.color && $0.kind == colorAndSideToExclude.kind
+            }
+            return !(excludeBecauseOfFrom || excludeBecauseOfTo)
         }
+    }
+    
+    private func castlingColorAndSideToExclude(square: Square) -> Piece? {
+        // is A1?
+        if square.file == 0 && square.rank == 0 {
+            return Piece(kind: .queen, color: .white)
+        }
+        // is H1?
+        if square.file == 7 && square.rank == 0 {
+            return Piece(kind: .king, color: .white)
+        }
+        // is A8?
+        if square.file == 0 && square.rank == 7 {
+            return Piece(kind: .queen, color: .black)
+        }
+        // is H8?
+        if square.file == 7 && square.rank == 7 {
+            return Piece(kind: .king, color: .black)
+        }
+        return nil
     }
     
     // MARK: Utilities
