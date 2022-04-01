@@ -14,9 +14,7 @@ jobs:
     
     - name: Run tests
       run:
-        swift test --enable-code-coverage
-        ls .build
-        cp -r .build .build-saved
+        swift test --enable-code-coverage && ls .build && cp -r .build .build-saved
     
     - name: Swift Coverage Conversion
       uses: sersoft-gmbh/swift-coverage-action@v2.0.1
