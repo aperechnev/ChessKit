@@ -186,7 +186,7 @@ public class StandardRules: Rules {
     
     private func squareOfEnPassantCapturedPawn(move: Move, position: Position) -> Square? {
         guard let enPassant = position.state.enPasant else {
-            return
+            return nil
         }
         if move.to.file == enPassant.file && move.to.rank == enPassant.rank {
             return Square(file: enPassant.file, rank: enPassant.rank == 2 ? 3 : 4)
