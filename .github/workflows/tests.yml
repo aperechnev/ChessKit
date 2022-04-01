@@ -11,14 +11,20 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
+    
     - name: Run tests
-      run: swift test --enable-code-coverage --show-codecov-path
+      run:
+        swift test --enable-code-coverage
+        ls .build
+        cp -r .build .build-saved
+    
     - name: Swift Coverage Conversion
       uses: sersoft-gmbh/swift-coverage-action@v2.0.1
       with:
         format: lcov
-        search-paths: ./.build
+        search-paths: ./.build-saved
         output: .
+    
     - name: Upload coverage
       run:
         curl -Os https://uploader.codecov.io/latest/macos/codecov
