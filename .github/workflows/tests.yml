@@ -8,9 +8,9 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
-
+    env:
+      CODECOV_TOKEN: a40ba6bb-c21e-4e2b-8947-12bb0605a008
     steps:
     - uses: actions/checkout@v2
     - name: Build
