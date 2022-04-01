@@ -9,13 +9,16 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    env:
-      CODECOV_TOKEN: a40ba6bb-c21e-4e2b-8947-12bb0605a008
     steps:
     - uses: actions/checkout@v2
     - name: Build
       run: swift build -v
     - name: Run tests
-      run: swift test -v --enable-code-coverage
+      run: swift test --xunit-output .
     - name: Upload code coverage
-      run: curl -Os https://uploader.codecov.io/latest/macos/codecov && chmod +x codecov && ./codecov -f
+      env:
+        CODECOV_TOKEN: a40ba6bb-c21e-4e2b-8947-12bb0605a008
+      run: |
+        curl -Os https://uploader.codecov.io/latest/macos/codecov
+        chmod +x codecov
+        ./codecov
