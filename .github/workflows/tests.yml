@@ -23,13 +23,13 @@ jobs:
       env:
         API_KEY: a40ba6bb-c21e-4e2b-8947-12bb0605a008
       run: |
-        xcodebuild -scheme standard-swift -sdk iphonesimulator -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.4' -enableCodeCoverage YES clean build test
+        xcodebuild -scheme ChessKit -sdk iphonesimulator -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.4' -enableCodeCoverage YES clean build test
         cd Build/Build/ProfileData
         cd $(ls -d */|head -n 1)
         directory=${PWD##*/}
         pathCoverage=Build/Build/ProfileData/${directory}/Coverage.profdata
         cd ../../../../
-        xcrun llvm-cov export -format="lcov" -instr-profile $pathCoverage Build/Build/Products/Debug-iphonesimulator/standard-swift.app/standard-swift > info.lcov
+        xcrun llvm-cov export -format="lcov" -instr-profile $pathCoverage Build/Build/Products/Debug-iphonesimulator/ChessKit.app/ChessKit > info.lcov
         curl -Os https://uploader.codecov.io/latest/macos/codecov
         chmod +x codecov
         ./codecov -t ${CODECOV_TOKEN}
