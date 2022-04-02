@@ -11,18 +11,12 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Run tests
-      run: swift test --enable-code-coverage
-    
-#     - name: Swift Coverage Conversion
-#       uses: sersoft-gmbh/swift-coverage-action@v2.0.1
-#       with:
-#         format: lcov
-#         output: .
-    
-    - name: Upload coverage
-      run: |
+    - run: swift test --enable-code-coverage
+    - uses: sersoft-gmbh/swift-coverage-action@v2.0.1
+      with:
+        format: lcov
+        output: .
+    - run: |
         curl -Os https://uploader.codecov.io/latest/macos/codecov
         chmod +x codecov
         ./codecov -t a40ba6bb-c21e-4e2b-8947-12bb0605a008
