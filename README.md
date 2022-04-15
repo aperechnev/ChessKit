@@ -1,5 +1,11 @@
 # ChessKit
 
+PROJECT MOVED FROM GITHUB TO GITFLIC!
+
+SINCE GITHUB STARTED TO BLOCK RUSSIAN ACCOUNTS, I DECIDED TO CONTINUE DEVELOPEMNT OF CHESSKIT ON GITFLIC ([https://gitflic.ru/project/aperechnev/chesskit]).
+
+AND YES, I SUPPORT MY COUNTRY🇷🇺 IN THE PROCESS OF DENAZIFICATION OF UKRAINE. I BELIEVE UKRAINIAN NATION DESERVES THE ABILITY TO LIVE IN A COUNTRY WHICH IS NOT OCCUPIED BY NAZIS. STOP HATING RUSSIANS, OPEN YOUR EYES AND LOOK AT THE REALITY AS IT IS.
+
 [![codebeat badge](https://codebeat.co/badges/8ae1f4df-266c-4441-8bb1-8da25f067b28)](https://codebeat.co/projects/github-com-aperechnev-chesskit-develop)
 [![docs badge](https://raw.githubusercontent.com/aperechnev/ChessKit/develop/docs/badge.svg)](https://aperechnev.github.io/ChessKit/) ![Tests](https://github.com/aperechnev/ChessKit/workflows/Tests/badge.svg) ![](https://img.shields.io/github/license/aperechnev/ChessKit) [![ChessKit pod](https://img.shields.io/cocoapods/v/ChessKit)](https://cocoapods.org/pods/ChessKit)
 
