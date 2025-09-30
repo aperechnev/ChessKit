@@ -7,14 +7,14 @@
 //
 
 protocol RangeMoving: PieceMoving {
-    
+
 }
 
 extension RangeMoving {
-    
+
     func moves(from square: Square, in position: Position) -> [Move] {
         return self.coveredSquares(from: square, in: position)
             .map { Move(from: square, to: $0) }
     }
-    
+
 }

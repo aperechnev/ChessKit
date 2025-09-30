@@ -7,17 +7,21 @@
 //
 
 class ShortRangeMoving: RangeMoving {
-    
+
     private let translations: [(Int, Int)]
-    
+
     init(translations: [(Int, Int)]) {
         self.translations = translations
     }
-    
+
     func coveredSquares(from square: Square, in position: Position) -> [Square] {
         return self.translations
             .map { square.translate(file: $0.0, rank: $0.1) }
-            .filter { $0.isValid && position.board.bitboards.bitboard(for: position.state.turn) & $0.bitboardMask == 0 }
+            .filter {
+                $0.isValid
+                    && position.board.bitboards.bitboard(for: position.state.turn) & $0.bitboardMask
+                        == 0
+            }
     }
-    
+
 }

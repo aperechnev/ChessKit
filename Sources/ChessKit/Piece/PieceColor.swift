@@ -8,16 +8,16 @@
 
 /// Represents piece and side color.
 public enum PieceColor {
-    
+
     /// White color.
     case white
-    
+
     /// Black color.
     case black
-    
+
     /// Negotiates piece color.
     public var negotiated: PieceColor {
         return self == .white ? .black : .white
     }
-    
+
 }
