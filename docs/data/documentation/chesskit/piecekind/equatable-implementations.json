@@ -1,1 +1,158 @@
-{"identifier":{"url":"doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind\/Equatable-Implementations","interfaceLanguage":"swift"},"metadata":{"role":"collectionGroup","modules":[{"name":"ChessKit"}],"roleHeading":"API Collection","title":"Equatable Implementations"},"topicSections":[{"anchor":"Operators","generated":true,"identifiers":["doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind\/!=(_:_:)"],"title":"Operators"}],"sections":[],"hierarchy":{"paths":[["doc:\/\/ChessKit\/documentation\/ChessKit","doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind"]]},"kind":"article","variants":[{"paths":["\/documentation\/chesskit\/piecekind\/equatable-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":3,"patch":0},"references":{"doc://ChessKit/documentation/ChessKit/PieceKind":{"url":"\/documentation\/chesskit\/piecekind","role":"symbol","title":"PieceKind","type":"topic","kind":"symbol","abstract":[{"text":"Represents a piece kind regardless of it’s color.","type":"text"}],"fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"PieceKind"}],"navigatorTitle":[{"kind":"identifier","text":"PieceKind"}],"identifier":"doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind"},"doc://ChessKit/documentation/ChessKit":{"identifier":"doc:\/\/ChessKit\/documentation\/ChessKit","type":"topic","kind":"symbol","url":"\/documentation\/chesskit","role":"collection","title":"ChessKit","abstract":[]},"doc://ChessKit/documentation/ChessKit/PieceKind/!=(_:_:)":{"url":"\/documentation\/chesskit\/piecekind\/!=(_:_:)","role":"symbol","title":"!=(_:_:)","type":"topic","abstract":[],"kind":"symbol","fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"!="},{"kind":"text","text":" "},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":", "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":") -> "},{"preciseIdentifier":"s:Sb","kind":"typeIdentifier","text":"Bool"}],"identifier":"doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind\/!=(_:_:)"}}}
+{
+    "identifier": {
+        "interfaceLanguage": "swift",
+        "url": "doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind\/Equatable-Implementations"
+    },
+    "sections": [],
+    "metadata": {
+        "roleHeading": "API Collection",
+        "role": "collectionGroup",
+        "title": "Equatable Implementations",
+        "modules": [
+            {
+                "name": "ChessKit"
+            }
+        ]
+    },
+    "variants": [
+        {
+            "paths": [
+                "\/documentation\/chesskit\/piecekind\/equatable-implementations"
+            ],
+            "traits": [
+                {
+                    "interfaceLanguage": "swift"
+                }
+            ]
+        }
+    ],
+    "topicSections": [
+        {
+            "anchor": "Operators",
+            "title": "Operators",
+            "identifiers": [
+                "doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind\/!=(_:_:)"
+            ],
+            "generated": true
+        }
+    ],
+    "hierarchy": {
+        "paths": [
+            [
+                "doc:\/\/ChessKit\/documentation\/ChessKit",
+                "doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind"
+            ]
+        ]
+    },
+    "kind": "article",
+    "schemaVersion": {
+        "patch": 0,
+        "major": 0,
+        "minor": 3
+    },
+    "references": {
+        "doc://ChessKit/documentation/ChessKit": {
+            "title": "ChessKit",
+            "role": "collection",
+            "identifier": "doc:\/\/ChessKit\/documentation\/ChessKit",
+            "kind": "symbol",
+            "abstract": [],
+            "type": "topic",
+            "url": "\/documentation\/chesskit"
+        },
+        "doc://ChessKit/documentation/ChessKit/PieceKind/!=(_:_:)": {
+            "type": "topic",
+            "url": "\/documentation\/chesskit\/piecekind\/!=(_:_:)",
+            "title": "!=(_:_:)",
+            "identifier": "doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind\/!=(_:_:)",
+            "abstract": [],
+            "kind": "symbol",
+            "role": "symbol",
+            "fragments": [
+                {
+                    "text": "static",
+                    "kind": "keyword"
+                },
+                {
+                    "text": " ",
+                    "kind": "text"
+                },
+                {
+                    "text": "func",
+                    "kind": "keyword"
+                },
+                {
+                    "text": " ",
+                    "kind": "text"
+                },
+                {
+                    "text": "!=",
+                    "kind": "identifier"
+                },
+                {
+                    "text": " ",
+                    "kind": "text"
+                },
+                {
+                    "text": "(",
+                    "kind": "text"
+                },
+                {
+                    "text": "Self",
+                    "kind": "typeIdentifier"
+                },
+                {
+                    "text": ", ",
+                    "kind": "text"
+                },
+                {
+                    "text": "Self",
+                    "kind": "typeIdentifier"
+                },
+                {
+                    "text": ") -> ",
+                    "kind": "text"
+                },
+                {
+                    "preciseIdentifier": "s:Sb",
+                    "text": "Bool",
+                    "kind": "typeIdentifier"
+                }
+            ]
+        },
+        "doc://ChessKit/documentation/ChessKit/PieceKind": {
+            "title": "PieceKind",
+            "role": "symbol",
+            "identifier": "doc:\/\/ChessKit\/documentation\/ChessKit\/PieceKind",
+            "fragments": [
+                {
+                    "text": "enum",
+                    "kind": "keyword"
+                },
+                {
+                    "text": " ",
+                    "kind": "text"
+                },
+                {
+                    "text": "PieceKind",
+                    "kind": "identifier"
+                }
+            ],
+            "navigatorTitle": [
+                {
+                    "text": "PieceKind",
+                    "kind": "identifier"
+                }
+            ],
+            "kind": "symbol",
+            "abstract": [
+                {
+                    "text": "Represents a piece kind regardless of it’s color.",
+                    "type": "text"
+                }
+            ],
+            "type": "topic",
+            "url": "\/documentation\/chesskit\/piecekind"
+        }
+    }
+}
