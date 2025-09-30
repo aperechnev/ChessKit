@@ -3,6 +3,7 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev, 2020.
+//  Modified by Nikolay Vorobyev, 2021.
 //  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
