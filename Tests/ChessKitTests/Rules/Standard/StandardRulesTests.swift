@@ -75,7 +75,7 @@ import Testing
         ("8/8/8/8/8/8/2k5/R3K3 w Q - 0 1", "e2 f2 f1", "e1"),  // Castling behind the opposite king
     ])
 func availablePieceMoves(fen: String, targets: String, at coordinate: String) async throws {
-    let position = FenSerialization.default.deserialize(fen: fen)
+    let position = FenSerialization().deserialize(fen: fen)
     let square = Square(coordinate: coordinate)
     let moves = targets.split(separator: " ").map { "\(square)\($0)" }
     let testMoves = StandardRules().movesForPiece(at: square, in: position)
@@ -110,7 +110,7 @@ func availablePieceMoves(fen: String, targets: String, at coordinate: String) as
         ),
     ])
 func availablePositionMoves(fen: String, testMoves: String) {
-    let position = FenSerialization.default.deserialize(fen: fen)
+    let position = FenSerialization().deserialize(fen: fen)
     let testMoves = testMoves.split(separator: " ").map { "\($0)" }
     let legalMoves = StandardRules().legalMoves(in: position)
     let legalMoveStrings = legalMoves.map({ $0.description }).sorted()

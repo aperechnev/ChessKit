@@ -3,7 +3,8 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev on 12.07.2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev on 30.09.2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 /// Standard chess move rules.
@@ -29,11 +30,12 @@ public class StandardRules: Rules {
             return false
         }
         
+        let movingTranslation = MovingTranslations()
         let bitboards = position.board.bitboards
         
         if self.isLongCheck(kingSquare: kingSquare,
                             turn: position.state.turn,
-                            translations: MovingTranslations.default.diagonal,
+            translations: movingTranslation.diagonal,
                             bitboards: bitboards,
                             pieces: bitboards.queen | bitboards.bishop) {
             return true
@@ -43,13 +45,13 @@ public class StandardRules: Rules {
         
         if (kingRays & (bitboards.rook | bitboards.queen) & bitboards.bitboard(for: position.state.turn.negotiated) != Bitboard.zero) && self.isLongCheck(kingSquare: kingSquare,
                             turn: position.state.turn,
-                            translations: MovingTranslations.default.cross,
+                translations: movingTranslation.cross,
                             bitboards: bitboards,
                             pieces: bitboards.queen | bitboards.rook) {
             return true
         }
         
-        for translation in MovingTranslations.default.knight {
+        for translation in movingTranslation.knight {
             let destination = kingSquare.translate(file: translation.0, rank: translation.1)
             guard destination.isValid else {
                 continue
@@ -59,7 +61,7 @@ public class StandardRules: Rules {
             }
         }
         
-        for translation in MovingTranslations.default.pawnTaking {
+        for translation in movingTranslation.pawnTaking {
             let sign = position.state.turn == .white ? 1 : -1
             let destination = kingSquare.translate(file: translation.0, rank: translation.1 * sign)
             guard destination.isValid else {

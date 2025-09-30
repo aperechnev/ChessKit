@@ -11,7 +11,6 @@ import Testing
 
 @testable import ChessKit
 
-
 @Test(
     "Pawn moves test",
     arguments: [
@@ -38,7 +37,7 @@ import Testing
         ("8/8/3p2k1/P2Pr1Pp/3R2KP/8/8/8 w - h6 0 2", "g5h6", "g5"),
     ])
 func assert(fen: String, moves: String, coordinate: String) {
-    let position = FenSerialization.default.deserialize(fen: fen)
+    let position = FenSerialization().deserialize(fen: fen)
     let square = Square(coordinate: coordinate)
     let moves = moves.split(separator: " ").map { "\($0)" }
     let testMoves = StandardRules().movesForPiece(at: square, in: position)

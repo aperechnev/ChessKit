@@ -3,6 +3,8 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev on 01.03.2021.
+//  Modified by Alexander Perechnev on 30.09.2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 import Foundation
@@ -12,9 +14,6 @@ public class SanSerialization {
     
     private let kCastlingKing = "O-O"
     private let kCastlingQueen = "O-O-O"
-    
-    /// `SanSerialization` object with default settings.
-    public static let `default` = SanSerialization()
     
     // MARK: - Serialization
     

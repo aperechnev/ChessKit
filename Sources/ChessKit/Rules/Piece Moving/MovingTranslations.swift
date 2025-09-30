@@ -3,12 +3,11 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev on 13.07.2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev on 30.09.2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 class MovingTranslations {
-    
-    static let `default` = MovingTranslations()
     
     private(set) lazy var diagonal = [
         (-1, -1), (1, 1), (-1, 1), (1, -1)

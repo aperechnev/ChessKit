@@ -3,7 +3,8 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev on 13.07.2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev on 30.09.2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 class PawnMoving: PieceMoving {
@@ -51,8 +52,9 @@ class PawnMoving: PieceMoving {
         
         var destinations = [Square]()
         
-        for translation in MovingTranslations.default.pawnTaking {
-            let takingSquare = square.translate(file: translation.0, rank: translation.1 * direction)
+        for translation in MovingTranslations().pawnTaking {
+            let takingSquare = square.translate(
+                file: translation.0, rank: translation.1 * direction)
             if !takingSquare.isValid {
                 continue
             }
@@ -71,8 +73,9 @@ class PawnMoving: PieceMoving {
         
         let direction = position.state.turn == .white ? 1 : -1
         
-        for takingTranslation in MovingTranslations.default.pawnTaking {
-            let takingSquare = square.translate(file: takingTranslation.0, rank: takingTranslation.1 * direction)
+        for takingTranslation in MovingTranslations().pawnTaking {
+            let takingSquare = square.translate(
+                file: takingTranslation.0, rank: takingTranslation.1 * direction)
             if takingSquare == enPassantSquare {
                 return [enPassantSquare]
             }

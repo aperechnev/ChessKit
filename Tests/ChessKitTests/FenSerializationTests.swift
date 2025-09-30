@@ -21,6 +21,7 @@ import Testing
         "8/8/8/8/4K3/8/8/8 w - - 0 1",
     ])
 func serialization(fen: String) {
-    let position = FenSerialization.default.deserialize(fen: fen)
-    #expect(fen == FenSerialization.default.serialize(position: position))
+    let serializator = FenSerialization()
+    let position = serializator.deserialize(fen: fen)
+    #expect(fen == serializator.serialize(position: position))
 }

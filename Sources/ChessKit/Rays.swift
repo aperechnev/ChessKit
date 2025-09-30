@@ -3,15 +3,15 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev on 22.03.2021.
+//  Modified by Alexander Perechnev on 30.09.2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 import Foundation
 
 class Rays {
     
-    private(set) var cross = [Bitboard:Bitboard]()
-    
-    static let `default` = Rays()
+    private(set) var cross = [Bitboard: Bitboard]()
     
     init() {
         for index in Bitboard.zero ..< 64 {

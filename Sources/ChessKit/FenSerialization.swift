@@ -3,14 +3,12 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev on 12.07.2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev on 30.09.2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 /// FEN positions serialization and deserialization.
 public class FenSerialization {
-    
-    /// `FenSerialization` object with default settings.
-    public static let `default` = FenSerialization()
     
     /**
      Deserialize position from given FEN string.
