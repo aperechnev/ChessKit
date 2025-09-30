@@ -4,7 +4,8 @@
 //
 //  Created by Alexander Perechnev, 2020.
 //  Modified by Nikolay Vorobyev, 2021.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev, 2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 /// Chess game.
@@ -256,6 +257,39 @@ public class Game {
     }
 
     // MARK: Utilities
+
+    /**
+     Returns the current game position with the correct en-passant field.
+    
+     According to the FEN format specification:
+    
+     ```
+     The en passant target square is specified after a double push of a pawn, no matter whether an en passant capture is really possible or not.
+     ```
+    
+     Use this function if you want to obtain a position with the correct en passant field, indicating whether an en passant capture is possible.
+    
+     For further details, refer to issue #11: https://github.com/aperechnev/ChessKit/issues/11.
+    
+     - Returns: A `Position` instance with correct `state.enPasant` field.
+    */
+    public func positionWithCorrectEnPassant() -> Position {
+        var position: Position = self.position
+
+        if position.state.enPasant == nil {
+            return position
+        }
+
+        let moves: [Move] = self.legalMoves.filter {
+            $0.to == position.state.enPasant && position.board[$0.from]?.kind == .pawn
+        }
+
+        if moves.isEmpty {
+            position.state.enPasant = nil
+        }
+
+        return position
+    }
 
     /**
      Creates a deep copy of current game.
