@@ -4,7 +4,7 @@
 //
 //  Created by Alexander Perechnev on 12.07.2020.
 //  Modified by Alexander Perechnev on 30.09.2025.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 import Testing
