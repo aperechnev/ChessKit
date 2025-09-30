@@ -2,9 +2,9 @@
 //  SanSerializationTests.swift
 //  ChessKit
 //
-//  Created by Alexander Perechnev on 02.03.2021.
-//  Modified by Alexander Perechnev on 30.09.2025.
-//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Created by Alexander Perechnev, 2021.
+//  Modified by Alexander Perechnev, 2025.
+//  Copyright © 2021-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
 import Testing
