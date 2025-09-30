@@ -1,6 +1,6 @@
 # ChessKit
 
-[![docs badge](https://raw.githubusercontent.com/aperechnev/ChessKit/develop/docs/badge.svg)](https://aperechnev.github.io/ChessKit/) ![Tests](https://github.com/aperechnev/ChessKit/workflows/Tests/badge.svg) ![](https://img.shields.io/github/license/aperechnev/ChessKit) [![ChessKit pod](https://img.shields.io/cocoapods/v/ChessKit)](https://cocoapods.org/pods/ChessKit)
+![Tests](https://github.com/aperechnev/ChessKit/workflows/Tests/badge.svg) ![](https://img.shields.io/github/license/aperechnev/ChessKit)
 
 A lightweight and fast chess framework written in Swift.
 
@@ -31,7 +31,7 @@ let package = Package(
 
 ## Getting Started
 
-ChessKit is well covered by [documentation](https://aperechnev.github.io/ChessKit/). However, here you can find an example that describes how to start working with ChessKit.
+ChessKit is well covered by [documentation](https://aperechnev.github.io/ChessKit/documentation/chesskit/). However, here you can find an example that describes how to start working with ChessKit.
 
 ```Swift
 import ChessKit
