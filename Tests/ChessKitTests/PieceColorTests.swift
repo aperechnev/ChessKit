@@ -3,17 +3,15 @@
 //  ChessKitTests
 //
 //  Created by Alexander Perechnev on 13.07.2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev on 30.09.2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
-import XCTest
+import Testing
+
 @testable import ChessKit
 
-class PieceColorTests: XCTestCase {
-    
-    func testNegotiation() throws {
-        XCTAssertEqual(PieceColor.white, PieceColor.black.negotiated)
-        XCTAssertEqual(PieceColor.black, PieceColor.white.negotiated)
-    }
-
+@Test func negation() {
+    #expect(PieceColor.white == PieceColor.black.negotiated)
+    #expect(PieceColor.black == PieceColor.white.negotiated)
 }
