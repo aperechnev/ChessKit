@@ -38,6 +38,9 @@ let testables: [(String, String, String)] = [
     ("bxc6", "b7c6", "4kb1r/1p1n1pp1/1qR1p1n1/p2p4/3P3p/1P3N1P/P2N1PPB/3Q1RK1 b k - 0 17"),
     ("exd5", "e6d5", "r1bqkb1r/pp1n1ppp/2p1pn2/3P2B1/3P4/2N1P3/PP3PPP/R2QKBNR b KQkq - 0 6"),
 
+    // En-passant
+    ("exd6", "e5d6", "rnbqkbnr/p1p1pppp/1p6/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 3"),
+
     // Castling
     ("O-O", "e1g1", "r2q1rk1/ppp1bppp/2np1n2/4p3/2BPP1b1/2N1BN2/PPP1QPPP/R3K2R w KQ - 8 8"),
     ("O-O-O", "e1c1", "r2q1rk1/ppp1bppp/2np1n2/4p3/2BPP1b1/2N1BN2/PPP1QPPP/R3K2R w KQ - 8 8"),
@@ -65,7 +68,8 @@ func san(for move: String, in fen: String) -> String {
     return SanSerialization().san(for: move, in: game)
 }
 
-@Test func testSerialization() {
+@Test("SAN serialization")
+func testSerialization() {
     testables.forEach {
         #expect($0.0 == san(for: $0.1, in: $0.2))
     }
@@ -79,7 +83,8 @@ func move(from san: String, in fen: String) -> String {
     return SanSerialization().move(for: san, in: game).description
 }
 
-@Test func testDeserialization() {
+@Test("SAN deserialization")
+func testDeserialization() {
     testables.forEach {
         #expect($0.1 == move(from: $0.0, in: $0.2))
     }
