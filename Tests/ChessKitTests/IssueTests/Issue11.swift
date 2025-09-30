@@ -10,7 +10,7 @@ import Testing
 
 @testable import ChessKit
 
-func makeFen(afterMoves movesString: String) -> String {
+func makePosition(afterMoves movesString: String) -> Position {
     let fenSerializator: FenSerialization = FenSerialization()
     let initialFen: String = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
     let initialPosition: Position = fenSerializator.deserialize(fen: initialFen)
@@ -24,12 +24,12 @@ func makeFen(afterMoves movesString: String) -> String {
 
     moves.forEach { game.make(move: $0) }
 
-    return fenSerializator.serialize(position: game.position)
+    return game.position
 }
 
 @Test("Issue #11")
 func issue11() {
-    let fen1 = makeFen(afterMoves: "e2e4 e7e5 d2d4 d7d5")
-    let fen2 = makeFen(afterMoves: "d2d4 d7d5 e2e4 e7e5")
-    #expect(fen1 == fen2, "\(fen1) != \(fen2)")
+    let position1: Position = makePosition(afterMoves: "e2e4 e7e5 d2d4 d7d5")
+    let position2: Position = makePosition(afterMoves: "d2d4 d7d5 e2e4 e7e5")
+    #expect(position1 == position2, "\(position1) != \(position2)")
 }
