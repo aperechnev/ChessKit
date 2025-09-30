@@ -4,7 +4,12 @@
 
 ### Changed
 
-- Swift Tools updated to version `6.1`.
+- Updated Swift Tools to version `6.1`.
+- Removed the default field from several classes to meet the requirements of Swift 6.0 and higher:
+    - `FenSerialization.default`
+    - `Rays.default`
+    - `MovingTranslations.default`
+    - `SanSerialization.default`
 - Migrated tests from **XCTest** to the modern **Testing** framework.
 - Migrated documentation from **Jazzy** to **DocC**.
 - Removed **CocoaPods** support.
