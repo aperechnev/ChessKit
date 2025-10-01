@@ -25,12 +25,9 @@ class KingMoving: ShortRangeMoving {
         -> [Square]
     {
         var bitboards: bitboard_t = position.board.bitboards
-        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
-            to: &bitboards
-        ) { UnsafeMutablePointer<bitboard_t>($0) }
 
         let mask =
-            bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
+            bitboard_for_side(&bitboards, position.state.turn.negotiated.side)
             & position.board.bitboards.king
 
         guard mask != Int64.zero else {

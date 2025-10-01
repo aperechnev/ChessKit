@@ -68,11 +68,8 @@ class PawnMoving: PieceMoving {
             }
 
             var bitboards: bitboard_t = position.board.bitboards
-            let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
-                to: &bitboards
-            ) { UnsafeMutablePointer<bitboard_t>($0) }
 
-            if bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
+            if bitboard_for_side(&bitboards, position.state.turn.negotiated.side)
                 & takingSquare.bitboardMask != Int64.zero
             {
                 destinations.append(takingSquare)

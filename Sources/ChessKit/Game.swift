@@ -175,14 +175,8 @@ public class Game {
     }
 
     private func updateCounters(for move: Move) {
-        let bitboardPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
-            to: &self.position.board.bitboards
-        ) {
-            UnsafeMutablePointer<bitboard_t>($0)
-        }
-
         let isTaking =
-            bitboard_for_side(bitboardPtr, position.state.turn.negotiated.side)
+            bitboard_for_side(&self.position.board.bitboards, position.state.turn.negotiated.side)
             & move.to.bitboardMask != Int64.zero
         let isPawnAdvance = position.board.bitboards.pawn & move.from.bitboardMask != Int64.zero
 

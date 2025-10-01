@@ -36,12 +36,6 @@ public class StandardRules: Rules {
         let movingTranslation = MovingTranslations()
         var bitboards = position.board.bitboards
 
-        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
-            to: &bitboards
-        ) {
-            UnsafeMutablePointer<bitboard_t>($0)
-        }
-
         if self.isLongCheck(
             kingSquare: kingSquare,
             turn: position.state.turn,
@@ -55,7 +49,7 @@ public class StandardRules: Rules {
         let kingRays: UInt64! = self.rays.cross[kingSquare.bitboardMask]
 
         if (kingRays & (bitboards.rook | bitboards.queen)
-            & bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side) != UInt64.zero)
+            & bitboard_for_side(&bitboards, position.state.turn.negotiated.side) != UInt64.zero)
             && self.isLongCheck(
                 kingSquare: kingSquare,
                 turn: position.state.turn,
@@ -71,7 +65,7 @@ public class StandardRules: Rules {
             guard destination.isValid else {
                 continue
             }
-            if bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
+            if bitboard_for_side(&bitboards, position.state.turn.negotiated.side)
                 & bitboards.knight
                 & destination.bitboardMask != Int64.zero
             {
@@ -86,7 +80,7 @@ public class StandardRules: Rules {
                 continue
             }
             if bitboards.pawn
-                & bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
+                & bitboard_for_side(&bitboards, position.state.turn.negotiated.side)
                 & destination.bitboardMask != Int64.zero
             {
                 return true
@@ -113,13 +107,8 @@ public class StandardRules: Rules {
                 }
 
                 var mutableBitboards: bitboard_t = bitboards
-                let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
-                    to: &mutableBitboards
-                ) {
-                    UnsafeMutablePointer<bitboard_t>($0)
-                }
 
-                if bitboard_for_side(bitboardsPtr, turn.side) & destination.bitboardMask
+                if bitboard_for_side(&mutableBitboards, turn.side) & destination.bitboardMask
                     != Int64.zero
                 {
                     break
@@ -239,11 +228,7 @@ public class StandardRules: Rules {
 
     private func kingSquare(in position: Position, color: PieceColor) -> Square? {
         var bitboards: bitboard_t = position.board.bitboards
-        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
-            to: &bitboards
-        ) { UnsafeMutablePointer<bitboard_t>($0) }
-
-        let mask = position.board.bitboards.king & bitboard_for_side(bitboardsPtr, color.side)
+        let mask = position.board.bitboards.king & bitboard_for_side(&bitboards, color.side)
         let square = Square(bitboardMask: mask)
         return square.isValid ? square : nil
     }

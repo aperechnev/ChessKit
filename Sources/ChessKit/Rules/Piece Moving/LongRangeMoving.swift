@@ -28,9 +28,6 @@ class LongRangeMoving: RangeMoving {
         var destinations = [Square]()
 
         var bitboards: bitboard_t = position.board.bitboards
-        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
-            to: &bitboards
-        ) { UnsafeMutablePointer<bitboard_t>($0) }
 
         for offset in 1..<8 {
             let destination = square.translate(
@@ -40,13 +37,13 @@ class LongRangeMoving: RangeMoving {
             }
 
             // If same color piece
-            if bitboard_for_side(bitboardsPtr, position.state.turn.side)
-                & destination.bitboardMask != UInt64.zero
+            if bitboard_for_side(&bitboards, position.state.turn.side) & destination.bitboardMask
+                != UInt64.zero
             {
                 break
             }
             // If opposite color piece
-            if bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
+            if bitboard_for_side(&bitboards, position.state.turn.negotiated.side)
                 & destination.bitboardMask != UInt64.zero
             {
                 destinations.append(destination)
