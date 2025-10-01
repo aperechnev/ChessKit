@@ -17,11 +17,18 @@ let package = Package(
     targets: [
         .target(
             name: "ChessKit",
-            dependencies: []
+            dependencies: ["libchess"]
         ),
         .testTarget(
             name: "ChessKitTests",
             dependencies: ["ChessKit"]
+        ),
+        .target(
+            name: "libchess"
+        ),
+        .testTarget(
+            name: "libchessTests",
+            dependencies: ["libchess"]
         ),
     ]
 )
