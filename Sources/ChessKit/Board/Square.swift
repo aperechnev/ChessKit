@@ -3,14 +3,17 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev, 2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev, 2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
+
+import libchess
 
 /// Square on `Board`.
 public struct Square: Hashable {
 
     private(set) var index: Int
-    let bitboardMask: Bitboard
+    let bitboardMask: UInt64
 
     /// Index of file of the square.
     public var file: Int {
@@ -34,7 +37,7 @@ public struct Square: Hashable {
 
     // MARK: Initializers
 
-    init(bitboardMask: Bitboard) {
+    init(bitboardMask: UInt64) {
         self.bitboardMask = bitboardMask
         self.index = 0
         self.isValid = bitboardMask > Int64.zero

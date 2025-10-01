@@ -7,6 +7,8 @@
 //  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
+import libchess
+
 class PawnMoving: PieceMoving {
 
     func moves(from square: Square, in position: Position) -> [Move] {
@@ -64,7 +66,13 @@ class PawnMoving: PieceMoving {
             if !takingSquare.isValid {
                 continue
             }
-            if position.board.bitboards.bitboard(for: position.state.turn.negotiated)
+
+            var bitboards: bitboard_t = position.board.bitboards
+            let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
+                to: &bitboards
+            ) { UnsafeMutablePointer<bitboard_t>($0) }
+
+            if bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
                 & takingSquare.bitboardMask != Int64.zero
             {
                 destinations.append(takingSquare)

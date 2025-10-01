@@ -3,8 +3,11 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev, 2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev, 2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
+
+import libchess
 
 class LongRangeMoving: RangeMoving {
 
@@ -24,6 +27,11 @@ class LongRangeMoving: RangeMoving {
     {
         var destinations = [Square]()
 
+        var bitboards: bitboard_t = position.board.bitboards
+        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
+            to: &bitboards
+        ) { UnsafeMutablePointer<bitboard_t>($0) }
+
         for offset in 1..<8 {
             let destination = square.translate(
                 file: translation.0 * offset, rank: translation.1 * offset)
@@ -32,13 +40,13 @@ class LongRangeMoving: RangeMoving {
             }
 
             // If same color piece
-            if position.board.bitboards.bitboard(for: position.state.turn)
+            if bitboard_for_side(bitboardsPtr, position.state.turn.side)
                 & destination.bitboardMask != UInt64.zero
             {
                 break
             }
             // If opposite color piece
-            if position.board.bitboards.bitboard(for: position.state.turn.negotiated)
+            if bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
                 & destination.bitboardMask != UInt64.zero
             {
                 destinations.append(destination)

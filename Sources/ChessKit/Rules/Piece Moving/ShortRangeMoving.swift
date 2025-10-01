@@ -3,8 +3,11 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev, 2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev, 2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
+
+import libchess
 
 class ShortRangeMoving: RangeMoving {
 
@@ -15,11 +18,16 @@ class ShortRangeMoving: RangeMoving {
     }
 
     func coveredSquares(from square: Square, in position: Position) -> [Square] {
+        var bitboards: bitboard_t = position.board.bitboards
+        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
+            to: &bitboards
+        ) { UnsafeMutablePointer<bitboard_t>($0) }
+
         return self.translations
             .map { square.translate(file: $0.0, rank: $0.1) }
             .filter {
                 $0.isValid
-                    && position.board.bitboards.bitboard(for: position.state.turn) & $0.bitboardMask
+                    && bitboard_for_side(bitboardsPtr, position.state.turn.side) & $0.bitboardMask
                         == 0
             }
     }

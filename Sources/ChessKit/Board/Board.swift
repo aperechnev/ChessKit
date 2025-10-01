@@ -3,13 +3,16 @@
 //  ChessKit
 //
 //  Created by Alexander Perechnev, 2020.
-//  Copyright © 2020 Päike Mikrosüsteemid OÜ. All rights reserved.
+//  Modified by Alexander Perechnev, 2025.
+//  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
+
+import libchess
 
 /// A class that represents a chess board with pieces.
 public struct Board: Hashable {
 
-    internal var bitboards: Bitboards
+    internal var bitboards: bitboard_t
 
     internal static let fileCoordinates: [Character] = ["a", "b", "c", "d", "e", "f", "g", "h"]
     internal static let rankCoordinates: [Character] = ["1", "2", "3", "4", "5", "6", "7", "8"]
@@ -21,7 +24,8 @@ public struct Board: Hashable {
      Initializes board with empty squares.
      */
     public init() {
-        self.bitboards = Bitboards()
+        self.bitboards = bitboard_t(
+            white: 0, black: 0, king: 0, queen: 0, rook: 0, bishop: 0, knight: 0, pawn: 0)
     }
 
     /**
@@ -34,12 +38,12 @@ public struct Board: Hashable {
      */
     public subscript(index: Int) -> Piece? {
         get {
-            let squareMask = Bitboard(1) << index
+            let squareMask: UInt64 = 1 << index
 
             var color: PieceColor! = nil
-            if self.bitboards.white & squareMask != Bitboard.zero {
+            if self.bitboards.white & squareMask != UInt64.zero {
                 color = .white
-            } else if self.bitboards.black & squareMask != Bitboard.zero {
+            } else if self.bitboards.black & squareMask != UInt64.zero {
                 color = .black
             }
             guard color != nil else {
@@ -47,24 +51,24 @@ public struct Board: Hashable {
             }
 
             var kind: PieceKind! = nil
-            if self.bitboards.king & squareMask != Bitboard.zero {
+            if self.bitboards.king & squareMask != UInt64.zero {
                 kind = .king
-            } else if self.bitboards.queen & squareMask != Bitboard.zero {
+            } else if self.bitboards.queen & squareMask != UInt64.zero {
                 kind = .queen
-            } else if self.bitboards.rook & squareMask != Bitboard.zero {
+            } else if self.bitboards.rook & squareMask != UInt64.zero {
                 kind = .rook
-            } else if self.bitboards.bishop & squareMask != Bitboard.zero {
+            } else if self.bitboards.bishop & squareMask != UInt64.zero {
                 kind = .bishop
-            } else if self.bitboards.knight & squareMask != Bitboard.zero {
+            } else if self.bitboards.knight & squareMask != UInt64.zero {
                 kind = .knight
-            } else if self.bitboards.pawn & squareMask != Bitboard.zero {
+            } else if self.bitboards.pawn & squareMask != UInt64.zero {
                 kind = .pawn
             }
 
             return Piece(kind: kind, color: color)
         }
         set(piece) {
-            let squareMask = Bitboard(1) << index
+            let squareMask: UInt64 = 1 << index
 
             self.bitboards.white &= ~squareMask
             self.bitboards.black &= ~squareMask
@@ -156,5 +160,30 @@ public struct Board: Hashable {
 
         return pieces
     }
+}
 
+extension bitboard_t: @retroactive Equatable {
+    public static func == (lhs: bitboard_t, rhs: bitboard_t) -> Bool {
+        return lhs.white == rhs.white
+            && lhs.black == rhs.black
+            && lhs.king == rhs.king
+            && lhs.queen == rhs.queen
+            && lhs.rook == rhs.rook
+            && lhs.bishop == rhs.bishop
+            && lhs.knight == rhs.knight
+            && lhs.pawn == rhs.pawn
+    }
+}
+
+extension bitboard_t: @retroactive Hashable {
+    public func hash(into hasher: inout Hasher) {
+        self.white.hash(into: &hasher)
+        self.black.hash(into: &hasher)
+        self.king.hash(into: &hasher)
+        self.queen.hash(into: &hasher)
+        self.rook.hash(into: &hasher)
+        self.bishop.hash(into: &hasher)
+        self.knight.hash(into: &hasher)
+        self.pawn.hash(into: &hasher)
+    }
 }

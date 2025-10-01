@@ -8,6 +8,8 @@
 //  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
+import libchess
+
 /// Standard chess move rules.
 public class StandardRules: Rules {
 
@@ -32,7 +34,13 @@ public class StandardRules: Rules {
         }
 
         let movingTranslation = MovingTranslations()
-        let bitboards = position.board.bitboards
+        var bitboards = position.board.bitboards
+
+        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
+            to: &bitboards
+        ) {
+            UnsafeMutablePointer<bitboard_t>($0)
+        }
 
         if self.isLongCheck(
             kingSquare: kingSquare,
@@ -44,10 +52,10 @@ public class StandardRules: Rules {
             return true
         }
 
-        let kingRays: Bitboard! = self.rays.cross[kingSquare.bitboardMask]
+        let kingRays: UInt64! = self.rays.cross[kingSquare.bitboardMask]
 
         if (kingRays & (bitboards.rook | bitboards.queen)
-            & bitboards.bitboard(for: position.state.turn.negotiated) != Bitboard.zero)
+            & bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side) != UInt64.zero)
             && self.isLongCheck(
                 kingSquare: kingSquare,
                 turn: position.state.turn,
@@ -63,7 +71,8 @@ public class StandardRules: Rules {
             guard destination.isValid else {
                 continue
             }
-            if bitboards.bitboard(for: position.state.turn.negotiated) & bitboards.knight
+            if bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
+                & bitboards.knight
                 & destination.bitboardMask != Int64.zero
             {
                 return true
@@ -76,7 +85,8 @@ public class StandardRules: Rules {
             guard destination.isValid else {
                 continue
             }
-            if bitboards.pawn & bitboards.bitboard(for: position.state.turn.negotiated)
+            if bitboards.pawn
+                & bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
                 & destination.bitboardMask != Int64.zero
             {
                 return true
@@ -90,8 +100,8 @@ public class StandardRules: Rules {
         kingSquare: Square,
         turn: PieceColor,
         translations: [(Int, Int)],
-        bitboards: Bitboards,
-        pieces: Bitboard
+        bitboards: bitboard_t,
+        pieces: UInt64
     ) -> Bool {
         for translation in translations {
             for offset in 1..<8 {
@@ -101,7 +111,17 @@ public class StandardRules: Rules {
                 guard destination.isValid else {
                     break
                 }
-                if bitboards.bitboard(for: turn) & destination.bitboardMask != Int64.zero {
+
+                var mutableBitboards: bitboard_t = bitboards
+                let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
+                    to: &mutableBitboards
+                ) {
+                    UnsafeMutablePointer<bitboard_t>($0)
+                }
+
+                if bitboard_for_side(bitboardsPtr, turn.side) & destination.bitboardMask
+                    != Int64.zero
+                {
                     break
                 }
 
@@ -218,7 +238,12 @@ public class StandardRules: Rules {
     }
 
     private func kingSquare(in position: Position, color: PieceColor) -> Square? {
-        let mask = position.board.bitboards.king & position.board.bitboards.bitboard(for: color)
+        var bitboards: bitboard_t = position.board.bitboards
+        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
+            to: &bitboards
+        ) { UnsafeMutablePointer<bitboard_t>($0) }
+
+        let mask = position.board.bitboards.king & bitboard_for_side(bitboardsPtr, color.side)
         let square = Square(bitboardMask: mask)
         return square.isValid ? square : nil
     }

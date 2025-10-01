@@ -8,15 +8,16 @@
 //
 
 import Testing
+import libchess
 
 @testable import ChessKit
 
 @Test func testCross() {
     let rays = Rays()
-    #expect(rays.cross[0x0001]! == Bitboard(0x0101_0101_0101_01FF))
-    #expect(rays.cross[0x0800]! == Bitboard(0x0808_0808_0808_FF08))
-    #expect(rays.cross[0x8000]! == Bitboard(0x8080_8080_8080_FF80))
-    #expect(rays.cross[0x8000_0000_0000_0000]! == Bitboard(0xFF80_8080_8080_8080))
+    #expect(rays.cross[0x0001]! == UInt64(0x0101_0101_0101_01FF))
+    #expect(rays.cross[0x0800]! == UInt64(0x0808_0808_0808_FF08))
+    #expect(rays.cross[0x8000]! == UInt64(0x8080_8080_8080_FF80))
+    #expect(rays.cross[0x8000_0000_0000_0000]! == UInt64(0xFF80_8080_8080_8080))
 }
 
 @Test func testPathBetween() {

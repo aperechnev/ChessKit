@@ -11,12 +11,12 @@ import Foundation
 
 class Rays {
 
-    private(set) var cross = [Bitboard: Bitboard]()
+    private(set) var cross: [UInt64: UInt64] = [UInt64: UInt64]()
 
     init() {
-        for index in Bitboard.zero..<64 {
-            let key: Bitboard = 0b1 << index
-            let value: Bitboard = 0x0101_0101_0101_0101 << (index % 8) | 0xFF << (index / 8 * 8)
+        for index: UInt64 in UInt64.zero..<64 {
+            let key: UInt64 = 0b1 << index
+            let value: UInt64 = 0x0101_0101_0101_0101 << (index % 8) | 0xFF << (index / 8 * 8)
             self.cross[key] = value
         }
     }

@@ -7,6 +7,8 @@
 //  Copyright © 2020-2025 Päike Mikrosüsteemid OÜ. All rights reserved.
 //
 
+import libchess
+
 class KingMoving: ShortRangeMoving {
 
     init() {
@@ -22,8 +24,13 @@ class KingMoving: ShortRangeMoving {
     private func filterOppositeKingSquares(destinations: [Square], in position: Position)
         -> [Square]
     {
+        var bitboards: bitboard_t = position.board.bitboards
+        let bitboardsPtr: UnsafeMutablePointer<bitboard_t> = withUnsafeMutablePointer(
+            to: &bitboards
+        ) { UnsafeMutablePointer<bitboard_t>($0) }
+
         let mask =
-            position.board.bitboards.bitboard(for: position.state.turn.negotiated)
+            bitboard_for_side(bitboardsPtr, position.state.turn.negotiated.side)
             & position.board.bitboards.king
 
         guard mask != Int64.zero else {
