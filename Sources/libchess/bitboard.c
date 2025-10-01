@@ -26,7 +26,7 @@
 
 #include "bitboard.h"
 
-uint64_t bitboard_for_side(bitboard_t *bitboard, side_t side)
+inline uint64_t bitboard_for_side(bitboard_t bitboard, side_t side)
 {
-    return side == SIDE_WHITE ? bitboard->white : bitboard->black;
+    return side == SIDE_WHITE ? bitboard.white : bitboard.black;
 }

@@ -67,9 +67,7 @@ class PawnMoving: PieceMoving {
                 continue
             }
 
-            var bitboards: bitboard_t = position.board.bitboards
-
-            if bitboard_for_side(&bitboards, position.state.turn.negotiated.side)
+            if bitboard_for_side(position.board.bitboards, position.state.turn.negotiated.side)
                 & takingSquare.bitboardMask != Int64.zero
             {
                 destinations.append(takingSquare)

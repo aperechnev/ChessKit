@@ -42,6 +42,6 @@ typedef struct
     uint64_t pawn;
 } bitboard_t;
 
-uint64_t bitboard_for_side(bitboard_t *bitboard, side_t side);
+uint64_t bitboard_for_side(bitboard_t bitboard, side_t side);
 
 #endif // __BITBOARD_H__

@@ -176,7 +176,7 @@ public class Game {
 
     private func updateCounters(for move: Move) {
         let isTaking =
-            bitboard_for_side(&self.position.board.bitboards, position.state.turn.negotiated.side)
+            bitboard_for_side(self.position.board.bitboards, position.state.turn.negotiated.side)
             & move.to.bitboardMask != Int64.zero
         let isPawnAdvance = position.board.bitboards.pawn & move.from.bitboardMask != Int64.zero
 

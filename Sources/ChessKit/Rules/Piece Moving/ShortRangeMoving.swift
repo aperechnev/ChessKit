@@ -18,14 +18,12 @@ class ShortRangeMoving: RangeMoving {
     }
 
     func coveredSquares(from square: Square, in position: Position) -> [Square] {
-        var bitboards: bitboard_t = position.board.bitboards
-
         return self.translations
             .map { square.translate(file: $0.0, rank: $0.1) }
             .filter {
                 $0.isValid
-                    && bitboard_for_side(&bitboards, position.state.turn.side) & $0.bitboardMask
-                        == 0
+                    && bitboard_for_side(position.board.bitboards, position.state.turn.side)
+                        & $0.bitboardMask == 0
             }
     }
 

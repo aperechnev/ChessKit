@@ -24,10 +24,8 @@ class KingMoving: ShortRangeMoving {
     private func filterOppositeKingSquares(destinations: [Square], in position: Position)
         -> [Square]
     {
-        var bitboards: bitboard_t = position.board.bitboards
-
         let mask =
-            bitboard_for_side(&bitboards, position.state.turn.negotiated.side)
+            bitboard_for_side(position.board.bitboards, position.state.turn.negotiated.side)
             & position.board.bitboards.king
 
         guard mask != Int64.zero else {
